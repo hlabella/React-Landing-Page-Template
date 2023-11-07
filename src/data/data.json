@@ -1,35 +1,41 @@
 {
   "Header": {
     "title": "COBRA AI",
-    "paragraph": "Revolucionando a gestão financeira para psicólogos."
+    "paragraph": "Automatização de cobrança e notas fiscais para psicólogos."
   },
   "About": {
-    "paragraph": "Com nossa tecnologia, os profissionais da psicologia podem se concentrar no que realmente importa: o cuidado com seus pacientes.",
+    "paragraph": "Sabemos que sua hora é valiosa e que todo mês chega aquele momento chato da cobrança e da emissão de notas! A COBRA AI automatiza todo o seu fluxo de cobrança e controle, te economizando de 2h a 4h por mês!",
     "Why": [
-      "Plataforma inovadora",
-      "Cobrança de pacientes"
-      
+      "Calculo customizado do valor por paciente",
+      "Cobrança mensal  por whatsapp",
+      "Validação dos pagamentos"
     ],
     "Why2": [
-      "Controle de pagamentos",
-      "Emissão de notas fiscais"
-    ]
+      "Emissão das NFs",
+      "Geração de relatório"
+    ],
+    "paragraph2": "Tudo isso confidencial, automático, sem secretária e direto na sua conta no fim do mês."
   },
   "Services": [
     {
       "icon": "fa fa-credit-card",
-      "name": "Cobrança de pacientes",
-      "text": "Nossa plataforma simplifica o processo de cobrança para psicólogos, permitindo que você gerencie todas as suas cobranças em um só lugar. Com ferramentas automatizadas e lembretes inteligentes, garantimos que a cobrança de pacientes seja eficiente e livre de estresse, permitindo que você se concentre em fornecer cuidados excepcionais."
+      "name": "Cálculo customizado",
+      "text": "Com base no seu calendário, o COBRA AI entende quantas consultas cada paciente fez e as suas políticas de pagamento individuais."
     },
     {
       "icon": "fa fa-check-square-o ",
-      "name": "Controle de pagamentos",
-      "text": "Mantenha o controle financeiro do seu consultório com nossa solução integrada de controle de pagamentos. Nossa plataforma oferece visibilidade completa sobre transações pendentes e recebidas, facilitando o acompanhamento do fluxo de caixa e a gestão financeira do seu negócio."
+      "name": "Cobrança e controle",
+      "text": "Conforme o seu dia de preferência, o COBRA AI envia as cobranças e sua conta bancária para o Whatsapp dos pacientes e controla se o pagamento foi feito ou não."
     },
     {
       "icon": "fa fa-book",
-      "name": "Emissão de notas fiscais",
-      "text": "Automatize a emissão de notas fiscais com a COBRA AI. Nossa ferramenta é projetada para reduzir a burocracia, emitindo notas fiscais eletrônicas de forma rápida e em conformidade com a legislação. Liberte-se das tarefas administrativas e tenha mais tempo para se dedicar aos seus pacientes."
+      "name": "Emissão de NFs",
+      "text": "Quando cada pagamento cair, o COBRA AI emite a Nota Fiscal seguindo as políticas individuais do paciente e envia para ele por Whatsapp."
+    },
+    {
+      "icon": "fa fa-bar-chart",
+      "name": "Geração de relatório",
+      "text": "Ao final do mês o COBRA AI te envia um relatório consolidado, para que seja enviado para o seu contador."
     }
     ],
   "Testimonials": [
@@ -68,17 +74,12 @@
     {
       "img": "img/team/HENRIQUELABELLA.jpg",
       "name": "Henrique Labella",
-      "job": "CTO"
+      "job": "Co-Fundador Tecnologia"
     },
     {
       "img": "img/team/LEOBOCK.jpg",
       "name": "Leonardo Bock",
-      "job": "CMO"
-    },
-    {
-      "img": "img/team/02.jpg",
-      "name": "Mr. Poopy Butthole",
-      "job": "CCO"
+      "job": "Co-Fundador Negócios"
     }
   ],
   "Contact": {
