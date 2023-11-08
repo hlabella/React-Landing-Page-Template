@@ -18,19 +18,19 @@
   },
   "Services": [
     {
-      "icon": "fa fa-credit-card",
+      "icon": "fa fa-calculator",
       "name": "Cálculo customizado",
       "text": "Com base no seu calendário, o COBRA AI entende quantas consultas cada paciente fez e as suas políticas de pagamento individuais."
     },
     {
-      "icon": "fa fa-check-square-o ",
+      "icon": "fa fa-credit-card ",
       "name": "Cobrança e controle",
       "text": "Conforme o seu dia de preferência, o COBRA AI envia as cobranças e sua conta bancária para o Whatsapp dos pacientes e controla se o pagamento foi feito ou não."
     },
     {
       "icon": "fa fa-book",
       "name": "Emissão de NFs",
-      "text": "Quando cada pagamento cair, o COBRA AI emite a Nota Fiscal seguindo as políticas individuais do paciente e envia para ele por Whatsapp."
+      "text": "Quando cada pagamento cair, o COBRA AI emite a Nota Fiscal em conformidade com a legislação fiscal e envia para o paciente por Whatsapp."
     },
     {
       "icon": "fa fa-bar-chart",
@@ -74,17 +74,49 @@
     {
       "img": "img/team/HENRIQUELABELLA.jpg",
       "name": "Henrique Labella",
-      "job": "Co-Fundador Tecnologia"
+      "job": "Co-Fundador Tecnologia",
+      "linkedin": "https://www.linkedin.com/in/hlabella/"
     },
     {
       "img": "img/team/LEOBOCK.jpg",
       "name": "Leonardo Bock",
-      "job": "Co-Fundador Negócios"
+      "job": "Co-Fundador Negócios",
+      "linkedin": "https://www.linkedin.com/in/leonardo-nardini-bock-693926127/"
     }
   ],
   "Contact": {
     "address": "Rua dos Pinheiros 1057, apto 1712, São Paulo, SP 05422-012 ",
     "phone": "+11 94215-2384",
     "email": "hlabella@umich.edu"
-  }
+  },
+  "FAQ": [
+    {
+      "img": "img/testimonials/01.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+    },
+    {
+      "img": "img/testimonials/02.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+    },
+    {
+      "img": "img/testimonials/03.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "John Doe"
+    },
+    {
+      "img": "img/testimonials/04.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "Johnathan Doe"
+    },
+    {
+      "img": "img/testimonials/05.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "John Doe"
+    },
+    {
+      "img": "img/testimonials/06.jpg",
+      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "name": "Johnathan Doe"
+    }
+  ]
 }

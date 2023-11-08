@@ -10,16 +10,18 @@ export const Team = (props) => {
         <div id="row">
           {props.data
             ? props.data.map((d, i) => (
-                <div key={`${d.name}-${i}`} className="col-md-4 col-sm-6 team">
-                  <div className="thumbnail">
-                    {" "}
-                    <img src={d.img} alt="..." className="team-img" />
-                    <div className="caption">
-                      <h4>{d.name}</h4>
-                      <p>{d.job}</p>
+                <a href={d.linkedin}>
+                  <div key={`${d.name}-${i}`} className="col-md-6 col-sm-6 team">
+                    <div className="thumbnail">
+                      {" "}
+                      <img src={d.img} alt="..." className="team-img" />
+                      <div className="caption">
+                        <h4>{d.name}</h4>
+                        <p>{d.job}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </a>
               ))
             : "loading"}
         </div>

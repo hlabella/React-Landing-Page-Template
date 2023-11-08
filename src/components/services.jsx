@@ -5,15 +5,15 @@ export const Services = (props) => {
     <div id="services" className="text-center">
       <div className="container">
         <div className="section-title">
-          <h2>NOSSOS SERVICOS</h2>
+          <h2>COMO FUNCIONA</h2>
           <p>
-            Simplifique a Gestão Financeira do Seu Consultório com COBRA AI
+            Após assinar o contrato de serviço e privacidade, pagar pelo primeiro mês e preencher os documentos de cadastro, é só deixar com a gente!
           </p>
         </div>
         <div className="row">
           {props.data
             ? props.data.map((d, i) => (
-                <div key={`${d.name}-${i}`} className="col-md-4">
+                <div key={`${d.name}-${i}`} className="col-md-3">
                   {" "}
                   <i className={d.icon}></i>
                   <div className="service-desc">
