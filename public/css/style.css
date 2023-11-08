@@ -610,7 +610,7 @@ label {
 /* FAQ Section */
 #faq {
   padding: 100px 0;
-  background: linear-gradient(to right, #7eb2ae 0%, #a29e8d 120%);
+  background: linear-gradient(to right, #7eb2ae 0%, #a29e8d 100%);
 }
 .faq-answer {
   display: none;
