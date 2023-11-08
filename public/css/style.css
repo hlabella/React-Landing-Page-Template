@@ -603,4 +603,35 @@ label {
   #about img {
     margin: 50px 0;
   }
+  .faq-details-list {
+    width: 60%; /* or any other percentage that fits your design */
+  }
+}
+
+/* FAQ Section */
+#faq {
+  padding: 100px 0;
+  background: linear-gradient(to right, #7eb2ae 0%, #a29e8d 120%);
+}
+.faq-answer {
+  display: none;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-answer.active {
+  display: block;
+  color: #333;
+}
+
+.faq-details-list {
+  /* This will center the UL if it has a defined width */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left; /* Ensures the text within the list items is left-aligned */
+
+  /* Define a width or max-width as per your design requirements */
+  width: max-width; /* or you could use max-width */
+  /* Or if you want the UL to be as wide as its contents: */
+  display: inline-block; /* This will make the width of the UL as wide as its contents */
 }

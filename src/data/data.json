@@ -1,7 +1,7 @@
 {
   "Header": {
     "title": "COBRA AI",
-    "paragraph": "Automatização de cobrança e notas fiscais para psicólogos."
+    "paragraph": "Automatização de cobrança e notas fiscais para psicólogos"
   },
   "About": {
     "paragraph": "Sabemos que sua hora é valiosa e que todo mês chega aquele momento chato da cobrança e da emissão de notas! A COBRA AI automatiza todo o seu fluxo de cobrança e controle, te economizando de 2h a 4h por mês!",
@@ -91,32 +91,61 @@
   },
   "FAQ": [
     {
-      "img": "img/testimonials/01.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "id": 1,
+      "question": "O que são as políticas de pagamento individuais?",
+      "answer": {
+        "introduction": "Nossas políticas de pagamento individuais incluem, por paciente:",
+        "details": [
+          "Preço por consulta.",
+          "Emissão de uma nota por consulta ou uma nota consolidada por mês.",
+          "Carimbo e assinatura na nota.",
+          "Política de retorno (Divisão de NFs).",
+          "Consulta cortesia (Sem NF).",
+          "Regras de cancelamento.",
+          "Data de cobrança.",
+          "Frequência de cobrança (semanal, pós sessão ou mensal)."
+        ]
+      }
     },
     {
-      "img": "img/testimonials/02.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "id": 2,
+      "question": "Como é a segurança dos dados dos meus pacientes?",
+      "answer": "Todas as informações são armazenadas de acordo com a LGPD e não são compartilhadas fora do ambiente do Contratante e prestador."
     },
     {
-      "img": "img/testimonials/03.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "John Doe"
+      "id": 3,
+      "question": "Que dados vocês pedem para começar o serviço?",
+      "answer": {
+        "introduction": "Para iniciar o serviço, necessitamos dos seguintes dados:",
+        "details": [
+          "Acesso ao calendário.",
+          "Login do site Nota do Milhão.",
+          "Acesso ao certificado no site Nota do Milhão.",
+          "Políticas de pagamento individuais dos pacientes.",
+          "Dados necessários para a emissão de nota de cada paciente.",
+          "Número de WhatsApp de cada paciente."
+        ]
+      }
     },
     {
-      "img": "img/testimonials/04.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "Johnathan Doe"
+      "id": 4,
+      "question": "Como eu sei que o cálculo de valores por mês está correto?",
+      "answer": "É essencial que o calendário contenha todas as consultas realizadas. Além disso, é importante que as consultas canceladas sem cobrança sejam removidas do calendário. Se o calendário seguir o procedimento descrito e todos os pacientes estiverem cadastrados propriamente, os valores estarão corretos!"
     },
     {
-      "img": "img/testimonials/05.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "John Doe"
+      "id": 5,
+      "question": "Vocês estão disponíveis em que região?",
+      "answer": "Atualmente, nossos serviços estão disponíveis apenas para profissionais que emitem notas no município de São Paulo (SP)."
     },
     {
-      "img": "img/testimonials/06.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "Johnathan Doe"
+      "id": 6,
+      "question": "E se eu não gostar? O que eu faço?",
+      "answer": "Se você não estiver satisfeito com o serviço, basta solicitar o cancelamento e não será necessário pagar pelo mês seguinte."
+    },
+    {
+      "id": 7,
+      "question": "Eu cobro o mês adiantado. Vocês trabalham dessa forma?",
+      "answer": "Atualmente, não cobramos o mês adiantado. Trabalhamos apenas com cobranças após a realização das consultas."
     }
   ]
 }
