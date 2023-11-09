@@ -30,7 +30,7 @@
     {
       "icon": "fa fa-book",
       "name": "Emissão de NFs",
-      "text": "Quando cada pagamento cair, o COBRA AI emite a Nota Fiscal em conformidade com a legislação fiscal e envia para o paciente por Whatsapp."
+      "text": "Quando cada pagamento cair, o COBRA AI emite a Nota Fiscal seguindo as políticas de pagamento individuais e envia para o paciente por Whatsapp."
     },
     {
       "icon": "fa fa-bar-chart",
@@ -85,9 +85,9 @@
     }
   ],
   "Contact": {
-    "address": "Rua dos Pinheiros 1057, apto 1712, São Paulo, SP 05422-012 ",
+    "address": "Rua dos Pinheiros 1057, ap 1712, São Paulo, SP 05422-012 ",
     "phone": "+11 94215-2384",
-    "email": "hlabella@umich.edu"
+    "email": "contato@cobraai.me"
   },
   "FAQ": [
     {
@@ -96,14 +96,14 @@
       "answer": {
         "introduction": "Nossas políticas de pagamento individuais incluem, por paciente:",
         "details": [
-          "Preço por consulta.",
-          "Emissão de uma nota por consulta ou uma nota consolidada por mês.",
-          "Carimbo e assinatura na nota.",
-          "Política de retorno (Divisão de NFs).",
-          "Consulta cortesia (Sem NF).",
-          "Regras de cancelamento.",
-          "Data de cobrança.",
-          "Frequência de cobrança (semanal, pós sessão ou mensal)."
+          "Preço por consulta",
+          "Emissão de uma nota por consulta ou uma nota consolidada por mês",
+          "Carimbo e assinatura na nota",
+          "Política de retorno (Divisão de NFs)",
+          "Consulta cortesia (Sem NF)",
+          "Regras de cancelamento",
+          "Data de cobrança",
+          "Frequência de cobrança (semanal, pós sessão ou mensal)"
         ]
       }
     },
