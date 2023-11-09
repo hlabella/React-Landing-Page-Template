@@ -25,6 +25,7 @@ export const Contact = (props) => {
         (result) => {
           console.log(result.text);
           clearState();
+          e.target.reset(); // Reset form fields after successful submission
         },
         (error) => {
           console.log(error.text);
