@@ -47,7 +47,7 @@ const SignUp = () => {
         if (!validateInputs()) return;
 
         setLoading(true);
-        fetch('http://18.208.212.210:8000/api/signup/', {
+        fetch('https://apissl.cobraai.me/api/signup/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

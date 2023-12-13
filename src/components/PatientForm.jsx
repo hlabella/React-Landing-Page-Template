@@ -42,7 +42,7 @@ const PatientForm = () => {
         }
 
         if (isEditing) {
-            fetch(`http://18.208.212.210:8000/api/user-patients/${patientId}/`, {
+            fetch(`https://apissl.cobraai.me/api/user-patients/${patientId}/`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -71,7 +71,7 @@ const PatientForm = () => {
         }
     
         const method = isEditing ? 'PUT' : 'POST';
-        const url = isEditing ? `http://18.208.212.210:8000/api/user-patients/${patientId}/` : 'http://18.208.212.210:8000/api/user-patients/';
+        const url = isEditing ? `https://apissl.cobraai.me/api/user-patients/${patientId}/` : 'https://apissl.cobraai.me/api/user-patients/';
     
         fetch(url, {
             method: method,
