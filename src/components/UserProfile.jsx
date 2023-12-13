@@ -19,7 +19,7 @@ const UserProfile = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        fetch('http://18.208.212.210:8000/api/profile/', {
+        fetch('https://apissl.cobraai.me/api/profile/', {
             headers: {
                 'Authorization': `Token ${token}`
             }
@@ -37,7 +37,7 @@ const UserProfile = () => {
 
     const handleSubmit = () => {
         const token = localStorage.getItem('token');
-        fetch('http://18.208.212.210:8000/api/profile/', {
+        fetch('https://apissl.cobraai.me/api/profile/', {
             method: 'PUT',
             headers: {
                 'Authorization': `Token ${token}`,

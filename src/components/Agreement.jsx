@@ -10,7 +10,7 @@ const Agreement = () => {
     useEffect(() => {
 
         const token = localStorage.getItem('token');
-        fetch('http://18.208.212.210:8000/api/profile/', {
+        fetch('https://apissl.cobraai.me/api/profile/', {
             headers: {
                 'Authorization': `Token ${token}`
             }
@@ -34,7 +34,7 @@ const Agreement = () => {
             return;
         }
         console.log('Token used for request:', token);
-        fetch('http://18.208.212.210:8000/api/delete_user/', {
+        fetch('https://apissl.cobraai.me/api/delete_user/', {
             method: 'DELETE',
             headers: {
                 'Authorization': `Token ${token}`,

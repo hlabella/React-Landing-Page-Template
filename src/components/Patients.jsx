@@ -12,7 +12,7 @@ const Patients = () => {
             return;
         }
 
-        fetch('http://127.0.0.1:8000/api/user-patients/', {
+        fetch('https://apissl.cobraai.me/api/user-patients/', {
             method: 'GET',
             headers: {
                 'Authorization': `Token ${token}`,
@@ -37,7 +37,7 @@ const Patients = () => {
     
         const confirmDelete = window.confirm("Tem certeza que gostaria de apagar esse paciente?");
         if (confirmDelete) {
-            fetch(`http://127.0.0.1:8000/api/user-patients/${patientId}/`, {
+            fetch(`https://apissl.cobraai.me/api/user-patients/${patientId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Token ${token}`,
