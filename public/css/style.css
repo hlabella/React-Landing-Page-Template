@@ -7,6 +7,7 @@ html {
   font-weight: 400;
   width: 100% !important;
   height: 100% !important;
+
 }
 h2,
 h3,
@@ -457,6 +458,8 @@ header .intro-text {
   padding: 10px 0 0;
   color: #888;
 }
+
+
 /* Contact Section */
 #contact {
   padding: 100px 0 60px;
@@ -634,3 +637,538 @@ label {
   /* Or if you want the UL to be as wide as its contents: */
   display: inline-block; /* This will make the width of the UL as wide as its contents */
 }
+
+/* Navigation.css */
+
+/* General button styling */
+.navbar-btn {
+  margin-left: 10px; /* Adds spacing between buttons */
+  border: none; /* Removes the default border */
+  outline: none; /* Removes the outline */
+  padding: 8px 15px; /* Adds some padding around the text */
+  border-radius: 5px; /* Rounds the corners of the buttons */
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
+
+/* Style for the login button */
+.btn-default {
+  background-color: #d3d7db; /* Light grey background */
+  color: #333; /* Dark text for contrast */
+}
+
+.btn-default:hover {
+  background-color: #b1b2b4; /* Slightly darker background on hover */
+}
+
+/* Style for the signup button */
+.btn-primary {
+  background-color: #0E131F; /* Blue background for a primary button */
+  color: #fff; /* White text for contrast */
+}
+
+.btn-primary:hover {
+  background-color: #38405F; /* Darker blue background on hover */
+}
+
+/* Add some space to the right of the last button */
+.navbar-nav > li:last-child {
+  margin-right: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar-btn {
+    width: 100%; /* Full width for small screens */
+    margin: 5px 0; /* Adds margin to the top and bottom */
+  }
+  .navbar-nav > li:last-child {
+    margin-right:0px;
+  }
+  
+}
+
+
+/* Login Section */
+
+#login {
+  background: linear-gradient(to right, #7eb2ae 0%, #a29e8d 100%);
+  padding: 150px 0;
+  
+}
+
+#login .container {
+  max-width: 400px; /* Constrain the width of the form */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+
+#login form {
+  display: flex;
+  flex-direction: column;
+}
+
+#login form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#login form input[type="text"],
+#login form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
+/* Signup Section */
+
+#signup {
+  background: linear-gradient(to right, #7eb2ae 0%, #a29e8d 100%);
+  padding: 100px 0;
+  padding-top: 120px 0;
+}
+
+#signup .container {
+  max-width: 400px; /* Constrain the width of the form */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+
+#signup form {
+  display: flex;
+  flex-direction: column;
+}
+
+#signup form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#signup form input[type="text"],
+#signup form input[type="email"],
+#signup form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+
+/* dashboard */
+
+#dash .container {
+  height: 100vh; /* Full height of the viewport */
+  justify-content: center; /* Horizontal center alignment */
+  padding: 20px;
+  padding-top: 120px;
+}
+
+#dash .container .row {
+  width: 100%;
+
+}
+
+#dash h1 {
+  font-size: 3rem; /* Larger font size */
+  font-weight: 700; /* Bold font weight */
+}
+
+#dash .container .col-md-12 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-right: 1px solid #ddd; /* Border for the left column */
+}
+
+#dash .container .col-md-12:last-child {
+  border-right: none;
+}
+
+#dash h2 {
+  font-size: 2.5rem; /* Larger font size for the headings */
+  margin-bottom: 1rem;
+}
+
+#dash .btn-primary {
+  font-size: 1.2rem; /* Larger font size for buttons */
+  padding: 10px 20px; /* Larger padding for buttons */
+}
+
+#dash h1 {
+  color: #333; /* Title color */
+  margin-bottom: 30px; /* Space below the title */
+}
+
+.card {
+  background-color: #ffffff; /* White background for cards */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: all 0.1s ease-in-out; /* Smooth transition for hover effects */
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+  text-align: center; /* Align text to the center */
+  height: 200px; /* Set a fixed height for your cards */
+}
+
+.card-body {
+  padding: 20px; /* Padding inside the card */
+}
+
+.card-title {
+  margin-bottom: 10px; /* Space below title */
+  font-size: 1.5rem; /* Larger font size for titles */
+  font-weight: bold; /* Bolder font for emphasis */
+  margin-bottom: 10px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+  transform: translateY(-5px); /* Slight raise effect */
+}
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.row > [class^="col-"] {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-bottom: 30px; /* Space between columns */
+}
+
+@media (max-width: 767px) {
+  .row > [class^="col-"] {
+      margin-bottom: 20px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* UserProfile.css */
+
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 1000px;
+  margin: 20px auto;
+  overflow: hidden;
+  margin-top:130px;
+}
+
+.user-profile-container h4 {
+  margin-top: 20px;
+  color: #333;
+  font-weight: normal;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.input-group input,
+.input-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+.input-group .value-display {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  word-break: break-word; /* Ensures text wraps inside the container */
+}
+
+.save-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .user-profile-container {
+    width: 100%; /* Use full width for smaller screens */
+    height: auto; /* Allow the height to adjust to the content */
+    padding: 10px; /* Reduce padding */
+    margin-top: 80px; /* Adjust top margin */
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  .input-group input,
+  .input-group textarea {
+    padding: 8px; /* Adjust padding for inputs and textareas */
+  }
+
+  .input-group .value-display {
+    margin-top: 10px;
+  }
+
+  .save-button {
+    padding: 8px 16px; /* Adjust padding for the save button */
+  }
+}
+
+
+/* Patients.css */
+
+.patients-table {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 1000px;
+  margin: 20px auto;
+  overflow-x: auto;
+  margin-top:120px;
+}
+
+.patients-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.patients-table th,
+.patients-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.patients-table th {
+  background-color: #f4f4f4;
+}
+
+.patients-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+
+
+.patients-table button {
+  
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, opacity 0.3s;
+  color: white;
+  font-weight: 600;
+}
+
+
+/* Style for the add patient button */
+.patients-table .add-patient-btn {
+  background-color: rgb(170, 240, 165);
+  color: white;
+  padding: 10px;
+  width: 200px;
+  margin-top:10px;
+  margin-bottom: 10px;
+}
+
+/* Hover effect for buttons */
+.patients-table button:hover {
+  opacity: 0.8;
+}
+
+/* Style for the edit button */
+.patients-table .edit-btn {
+  background-color: #ffda6af4;
+  color: white;
+  padding: 8px 15px;
+  margin: 5px;
+}
+
+/* Style for the edit button */
+.patients-table .delete-btn {
+  background-color: #fc6060bc;
+  color: white;
+  padding: 8px 15px;
+  margin: 5px;
+}
+
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .patients-table {
+    width: 100%;
+    overflow-x: scroll;
+  }
+}
+
+
+
+/* patient form */
+
+.patient-form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+  overflow: hidden;
+  margin-top:100px;
+}
+
+.patient-form-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.patient-form-container form {
+  width: 100%;
+}
+
+.patient-form-container input[type="text"],
+.patient-form-container input[type="date"],
+.patient-form-container input[type="number"],
+.patient-form-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.patient-form-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.patient-form-container button:hover {
+  background-color: #0056b3;
+}
+
+.return-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: #6c757d; /* A grey color for the return button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.return-button:hover {
+  background-color: #5a6268; /* Darker shade for hover */
+}
+
+.success-message {
+  color: green;
+  padding: 10px;
+  margin: 10px 0;
+  /* other styles as needed */
+}
+
+.error-message {
+  color: red;
+  padding: 10px;
+  margin: 10px 0;
+  /* other styles as needed */
+}
+
+
+@media (max-width: 768px) {
+  .patient-form-container {
+      width: 90%;
+  }
+}
+
+
+
+/*agreement stuff*/
+
+.agreement {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 120px;
+  text-align: center;
+}
+
+.agreement h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.agreement-text {
+  text-align: left;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  overflow-y: auto;
+  height: 300px; /* Adjust as needed */
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.agreement-text p {
+  margin-bottom: 10px;
+}
+
+
