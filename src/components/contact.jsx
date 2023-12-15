@@ -121,6 +121,14 @@ export const Contact = (props) => {
                 {props.data ? props.data.email : "loading"}
               </p>
             </div>
+            <div className="contact-item">
+              <p>
+                <span>
+                  <i className="fa fa-building-o"></i> CNPJ
+                </span>{" "}
+                53.140.952/0001-77
+              </p>
+            </div>
           </div>
           
         </div>
