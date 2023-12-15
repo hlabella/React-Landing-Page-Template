@@ -10,7 +10,7 @@ const SignUp = () => {
     const [firstName, setFirstName] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate(); // Initialize useNavigate
 
     const validateInputs = () => {
@@ -47,7 +47,7 @@ const SignUp = () => {
         if (!validateInputs()) return;
 
         setLoading(true);
-        fetch('https://apissl.cobraai.me/api/signup/', {
+        fetch(`${apiUrl}/api/signup/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

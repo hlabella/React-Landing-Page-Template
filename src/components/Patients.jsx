@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Patients = () => {
     const [patients, setPatients] = useState([]);
     const navigate = useNavigate();
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -12,7 +13,7 @@ const Patients = () => {
             return;
         }
 
-        fetch('https://apissl.cobraai.me/api/user-patients/', {
+        fetch(`${apiUrl}/api/user-patients/`, {
             method: 'GET',
             headers: {
                 'Authorization': `Token ${token}`,
@@ -37,7 +38,7 @@ const Patients = () => {
     
         const confirmDelete = window.confirm("Tem certeza que gostaria de apagar esse paciente?");
         if (confirmDelete) {
-            fetch(`https://apissl.cobraai.me/api/user-patients/${patientId}/`, {
+            fetch(`${apiUrl}/api/user-patients/${patientId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Token ${token}`,

@@ -28,6 +28,7 @@ const PatientForm = () => {
     const [patient, setPatient] = useState(initialPatientState);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const apiUrl = process.env.REACT_APP_API_URL;
     
     const { patientId } = useParams();
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ const PatientForm = () => {
         }
 
         if (isEditing) {
-            fetch(`https://apissl.cobraai.me/api/user-patients/${patientId}/`, {
+            fetch(`${apiUrl}/api/user-patients/${patientId}/`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -71,7 +72,7 @@ const PatientForm = () => {
         }
     
         const method = isEditing ? 'PUT' : 'POST';
-        const url = isEditing ? `https://apissl.cobraai.me/api/user-patients/${patientId}/` : 'https://apissl.cobraai.me/api/user-patients/';
+        const url = isEditing ? `${apiUrl}/api/user-patients/${patientId}/` : `${apiUrl}/api/user-patients/`;
     
         fetch(url, {
             method: method,
