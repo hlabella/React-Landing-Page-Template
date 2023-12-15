@@ -124,9 +124,10 @@ export const Contact = (props) => {
             <div className="contact-item">
               <p>
                 <span>
-                  <i className="fa fa-building-o"></i> CNPJ
+                  <i className="fa fa-building-o"></i> CNPJ e Razão Social
                 </span>{" "}
-                53.140.952/0001-77
+                <div>53.140.952/0001-77</div>
+                <div>53.140.952 LEONARDO NARDINI BOCK</div>
               </p>
             </div>
           </div>
