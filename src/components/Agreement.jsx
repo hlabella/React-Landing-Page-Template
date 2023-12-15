@@ -6,11 +6,13 @@ const Agreement = () => {
     const navigate = useNavigate();
 
     const [userInfo, setUserInfo] = useState({});
+    
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
 
         const token = localStorage.getItem('token');
-        fetch('https://apissl.cobraai.me/api/profile/', {
+        fetch(`${apiUrl}/api/profile/`, {
             headers: {
                 'Authorization': `Token ${token}`
             }
@@ -34,7 +36,7 @@ const Agreement = () => {
             return;
         }
         console.log('Token used for request:', token);
-        fetch('https://apissl.cobraai.me/api/delete_user/', {
+        fetch(`${apiUrl}/api/delete_user/`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Token ${token}`,

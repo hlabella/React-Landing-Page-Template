@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 const UserProfile = () => {
     
+    const apiUrl = process.env.REACT_APP_API_URL;
+    
     const [profile, setProfile] = useState({
         user: {
             first_name: ''
@@ -19,7 +21,7 @@ const UserProfile = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        fetch('https://apissl.cobraai.me/api/profile/', {
+        fetch(`${apiUrl}/api/profile/`, {
             headers: {
                 'Authorization': `Token ${token}`
             }
@@ -37,7 +39,7 @@ const UserProfile = () => {
 
     const handleSubmit = () => {
         const token = localStorage.getItem('token');
-        fetch('https://apissl.cobraai.me/api/profile/', {
+        fetch(`${apiUrl}/api/profile/`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Token ${token}`,
