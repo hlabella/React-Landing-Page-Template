@@ -830,7 +830,11 @@ label {
   justify-content: center; /* Center children vertically */
   align-items: center; /* Center children horizontally */
   text-align: center; /* Align text to the center */
-  height: 200px; /* Set a fixed height for your cards */
+  height: 130px; /* Set a fixed height for your cards */
+}
+
+.cardcobranca {
+  background-color: #2be6b41c;
 }
 
 .card-body {
@@ -1208,16 +1212,35 @@ label {
   width: 400px; /* Adjust width as needed */
   max-width: 100%; /* Ensure responsiveness */
   box-sizing: border-box;
+  height: fit-content;
 }
 
 .addpatientmodal {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start; /* Align items to the start for better structure */
+  padding: 20px;
+  width: 100%; /* Use full width of the modal */
 }
 
-.addpatientmodal select,
+.addpatientmodal label {
+  margin-bottom: 15px; /* Spacing between each label */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.addpatientmodal label strong {
+  margin-bottom: 5px; /* Spacing between label text and input */
+}
+
+.addpatientmodal select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Ensure inputs take full width */
+}
+
 .addpatientmodal button {
   width: 100%; /* Full-width elements */
   padding: 10px;
@@ -1226,6 +1249,7 @@ label {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 
 .addpatientmodal button {
   background-color: #007bff; /* Bootstrap primary color */
@@ -1238,10 +1262,76 @@ label {
   background-color: #0056b3; /* Darken button on hover */
 }
 
+
+
+.day-selection label {
+  margin-right: 10px;
+  /* additional styling */
+  width: auto;
+}
+
+.day-selection {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.days-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: start;
+}
+
+.day-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.day-name {
+  margin-bottom: 4px; /* Spacing between day name and checkbox */
+}
+
 @media (max-width: 600px) {
   .modal {
       width: 100%;
       height: 100%;
       border-radius: 0;
   }
+}
+
+
+
+/* Cobranca.css */
+.cobranca-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cobranca-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cobranca-row:last-child {
+  border-bottom: none;
+}
+
+.cobranca-row > p {
+  margin: 0;
+  padding: 5px;
+  flex: 1;
+  text-align: center;
+}
+
+.cobranca-row-header {
+  font-weight: bold;
+  background-color: #f4f4f4;
 }

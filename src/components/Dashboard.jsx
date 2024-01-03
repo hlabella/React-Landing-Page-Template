@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding, faCalendar, faUser, faReceipt, faChartLine, faCreditCard } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faCalendar, faUser, faReceipt, faChartLine, faCreditCard, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
 
@@ -68,6 +68,16 @@ const Dashboard = () => {
                         <div className="card-body">
                             <FontAwesomeIcon icon={faCreditCard} size="3x" />
                             <h5 className="card-title">Assinatura</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-12 mb-3" onClick={() => handleNavigation('./cobranca')}>
+                    <div className="card cardcobranca">
+                        <div className="card-body">
+                            <FontAwesomeIcon icon={faDollarSign} size="3x" />
+                            <h5 className="card-title">Cobrança</h5>
                         </div>
                     </div>
                 </div>
