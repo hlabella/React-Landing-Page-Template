@@ -55,17 +55,23 @@ const SignUp = () => {
             body: JSON.stringify({ username, password1, password2, email, cpf_cnpj: cpfCnpj, first_name: firstName})
         })
         .then(response => {
-            if (response.ok) {
-                return response.json();
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
             }
-            throw new Error('Network response was not ok.');
+            return response.json();
         })
         .then(data => {
             localStorage.setItem('token', data.token);
             navigate('/agreement');
         })
         .catch(error => {
-            setError('Erro durante cadastro: ' + error.message);
+            try {
+                const errorHTML = new DOMParser().parseFromString(error.message, 'text/html');
+                const errorMessage = errorHTML.body.textContent || error.message;
+                setError('Erro durante cadastro: ' + errorMessage);
+            } catch (parseError) {
+                setError('Erro durante cadastro: ' + error.message);
+            }
         })
         .finally(() => {
             setLoading(false);

@@ -22,7 +22,7 @@ import Agenda from './components/Agenda';
 import Recibos from './components/Recibos';
 import Relatorios from './components/Relatorios';
 import Assinatura from './components/Assinatura';
-  
+import Cobranca from './components/Cobranca';
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -62,6 +62,7 @@ const App = () => {
         <Route path="/dashboard/meus-recibos" element={<ProtectedRoute component={Recibos} />} />
         <Route path="/dashboard/relatorios" element={<ProtectedRoute component={Relatorios} />} />
         <Route path="/dashboard/assinatura" element={<ProtectedRoute component={Assinatura} />} />
+        <Route path="/dashboard/cobranca" element={<ProtectedRoute component={Cobranca} />} />
       </Routes>
     </Router>
   );

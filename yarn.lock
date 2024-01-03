@@ -1232,7 +1232,7 @@
 
 "@fullcalendar/core@^6.1.10":
   version "6.1.10"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/core/-/core-6.1.10.tgz#54eca62345243ec5b2f853102086da7200cd6f03"
+  resolved "https://registry.npmjs.org/@fullcalendar/core/-/core-6.1.10.tgz"
   integrity sha512-oTXGJSAGpCf1oY+CKp5qYjMHkJCPBkJ3SHitl63n8Q6xKeiwQ4EF6Au451euUovREwJpLmD1AyZrCnWmtB9AVg==
   dependencies:
     preact "~10.12.1"
@@ -1251,6 +1251,11 @@
   version "6.1.10"
   resolved "https://registry.npmjs.org/@fullcalendar/react/-/react-6.1.10.tgz"
   integrity sha512-RVYevo5T4RUZzR8omlbnBwRCqVNJWKryzI0ZrFULyqIYggN6uPmMuB9GvbrTjDfKhsm438KQwwhJerg2lGh3xA==
+
+"@fullcalendar/rrule@^6.1.10":
+  version "6.1.10"
+  resolved "https://registry.npmjs.org/@fullcalendar/rrule/-/rrule-6.1.10.tgz"
+  integrity sha512-9szGIEXRVmfTxJTVR3fY1tprQFkKA8fFJI8Eo8loOFokfrAu/sZTTcyzCSRuniyfhCoa+GFUweiM3s8N94iXcA==
 
 "@fullcalendar/timegrid@^6.1.10":
   version "6.1.10"
@@ -8004,6 +8009,13 @@ rollup@^2.43.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
+rrule@^2.8.1:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/rrule/-/rrule-2.8.1.tgz#e8341a9ce3e68ce5b8da4d502e893cd9f286805e"
+  integrity sha512-hM3dHSBMeaJ0Ktp7W38BJZ7O1zOgaFEsn41PDk+yHoEtfLV+PoJt9E9xAlZiWgf/iqEqionN0ebHFZIDAp+iGw==
+  dependencies:
+    tslib "^2.4.0"
+
 run-parallel@^1.1.9:
   version "1.2.0"
   resolved "https://registry.npmjs.org/run-parallel/-/run-parallel-1.2.0.tgz"
@@ -8775,7 +8787,7 @@ tslib@^1.8.1:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.3:
+tslib@^2.0.3, tslib@^2.4.0:
   version "2.4.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.4.1.tgz"
   integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==

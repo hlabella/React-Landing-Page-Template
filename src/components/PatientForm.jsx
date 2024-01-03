@@ -50,11 +50,10 @@ const PatientForm = () => {
                     'Content-Type': 'application/json'
                 }
             })
-                .then(response => response.json())
-                .then(data => {
-                    setPatient(data);
-                });
-                
+            .then(response => response.json())
+            .then(data => {
+                setPatient(data);
+            });       
         }
     }, [patientId, isEditing, navigate]);
 

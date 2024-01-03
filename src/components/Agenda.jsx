@@ -3,48 +3,10 @@ import { useNavigate } from "react-router-dom";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import rrulePlugin from '@fullcalendar/rrule';
 import interactionPlugin from "@fullcalendar/interaction"; // for selectable
-
-function EventCreationModal({ isOpen, onClose, onSubmit, patients, selectInfo }) {
-    const [selectedPatient, setSelectedPatient] = useState('');
-
-    // Update selectedPatient when the modal opens
-    useEffect(() => {
-        if (isOpen && patients.length > 0) {
-            setSelectedPatient(patients[0].nome_paciente);
-        }
-    }, [isOpen, patients]);
-
-    const handleSubmit = () => {
-        onSubmit({
-            title: selectedPatient,
-            start: selectInfo.startStr,
-            end: selectInfo.endStr
-        });
-        onClose();
-    };
-
-    return (
-        isOpen && (
-            <div className="modal">
-                <div className="addpatientmodal">
-                    <select value={selectedPatient} onChange={e => setSelectedPatient(e.target.value)}>
-                        {patients.map(patient => (
-                            <option key={patient.id} value={patient.nome_paciente}>
-                                {patient.nome_paciente}
-                            </option>
-                        ))}
-                    </select>
-                    
-                    <button onClick={handleSubmit}>Criar Evento</button>
-                    <button onClick={onClose}>Cancelar</button>
-                </div>
-            </div>
-        )
-    );
-}
-
-
+import DeleteConfirmationModal from './DeleteConfirmationModal'; // Adjust the path as necessary
+import EventCreationModal from './EventCreationModal'; // Adjust the path as necessary
 
 const Agenda = () => {
     const navigate = useNavigate();
@@ -52,6 +14,8 @@ const Agenda = () => {
     const [patients, setPatients] = useState([]);
     const apiUrl = process.env.REACT_APP_API_URL;
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [eventToDelete, setEventToDelete] = useState(null);
     const [currentSelectInfo, setCurrentSelectInfo] = useState(null);
     
     useEffect(() => {
@@ -78,11 +42,23 @@ const Agenda = () => {
                 });
                 if (!response.ok) throw new Error('Error fetching events');
                 const data = await response.json();
-                const parsedEvents = data.map(event => ({
-                    ...event,
-                    start: new Date(event.start),
-                    end: new Date(event.end)
-                }));
+                const parsedEvents = data.map(event => {
+                    const start = new Date(event.start);
+                    const end = new Date(event.end);
+
+                    // Determine if the event is an all-day event
+                    const isAllDayEvent = start.getHours() === 0 && start.getMinutes() === 0 && 
+                                        end.getHours() === 0 && end.getMinutes() === 0 &&
+                                        (end.getDate() - start.getDate() === 1 || end.getTime() - start.getTime() === 24 * 60 * 60 * 1000);
+                    
+                    return {
+                        ...event,
+                        start,
+                        end,
+                        allDay: isAllDayEvent
+                    };
+                });
+
     
                 setEvents(parsedEvents);
                 console.log("useeffect fetching events: ", parsedEvents)
@@ -127,7 +103,7 @@ const Agenda = () => {
             navigate('/login');
             return;
         }
-        console.log("Submitting new event:", newEvent);  // Log the new event details
+        //console.log("Submitting new event:", newEvent);  // Log the new event details
 
         try {
             const response = await fetch(`${apiUrl}/api/add_event/`, {
@@ -145,15 +121,15 @@ const Agenda = () => {
             const responseData = await response.json();
             const createdEventId = responseData.id;
 
-            console.log("Created event ID:", createdEventId);  // Log the ID of the created event
+            //console.log("Created event ID:", createdEventId);  // Log the ID of the created event
 
             // Update the events state with the new event, including the ID
             const newEventWithId = { ...newEvent, id: createdEventId };
-            console.log("New event with ID:", newEventWithId);  // Log the new event with the ID
+            //console.log("New event with ID:", newEventWithId);  // Log the new event with the ID
 
             setEvents(prevEvents => {
                 const updatedEvents = [...prevEvents, newEventWithId];
-                console.log("Updated events array:", updatedEvents);  // Log the updated events array
+                //console.log("Updated events array:", updatedEvents);  // Log the updated events array
                 return updatedEvents;
             });
 
@@ -163,46 +139,112 @@ const Agenda = () => {
     };
 
     const handleEventClick = async (clickInfo) => {
-        console.log("Attempting to delete event:", clickInfo.event.title, "with ID:", clickInfo.event.id);
-    
-        const token = localStorage.getItem('token');
-        
-        // Confirm before deleting the event
-        if (window.confirm(`Quer deletar o evento: '${clickInfo.event.title}'?`)) {
-            // Call API to delete the event
-            try {
-                const response = await fetch(`${apiUrl}/api/remove/`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Token ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: clickInfo.event.id })
-                });
-    
-                if (!response.ok) throw new Error('Event deletion failed');
-    
-                // Log response status
-                console.log("Event deletion response:", response.status);
-    
-                // Remove event from calendar
-                clickInfo.event.remove(); 
-    
-                // Update the local state to reflect the deletion
-                setEvents(prevEvents => {
-                    const updatedEvents = prevEvents.filter(event => {
-                        console.log("Comparing:", event.id, typeof event.id, "with", clickInfo.event.id);
-                        return event.id.toString() !== clickInfo.event.id;
-                    });
-                    console.log("Updated events after deletion:", updatedEvents);
-                    return updatedEvents;
-                });
-                
-            } catch (error) {
-                console.error('Error deleting event:', error);
-            }
-        }
+        setEventToDelete(clickInfo.event);
+        setIsDeleteModalOpen(true);
     };
+
+    const handleCloseModal = () => {
+        setIsDeleteModalOpen(false);
+        setEventToDelete(null);
+    };
+
+    
+    //aqui falta tudo - atualmente é igual ao deleteall
+    const handleDeleteSingle = async () => {
+        const token = localStorage.getItem('token');
+        if (!eventToDelete) {
+            console.error('No event selected for deletion');
+            return;
+        }
+    
+        try {
+            const response = await fetch(`${apiUrl}/api/remove/`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: eventToDelete.id })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Event deletion failed');
+            }
+    
+            // Remove the event from the local state
+            setEvents(prevEvents => {
+                const updatedEvents = prevEvents.filter(event => {
+                    //console.log("Comparing:", event.id, typeof event.id, "with", clickInfo.event.id);
+                    return event.id.toString() !== eventToDelete.id;
+                });
+                //console.log("Updated events after deletion:", updatedEvents);
+                return updatedEvents;
+            });
+            
+            // Close the modal
+            setIsDeleteModalOpen(false);
+        } catch (error) {
+            console.error('Error deleting event:', error);
+            // You might want to display an error message to the user here
+        }
+    
+        // Reset the eventToDelete state
+        setEventToDelete(null);
+    };
+
+    const handleDeleteFuture = async () => {
+        // Logic to modify the rrule to stop recurrence from this event onward
+        // ...
+    };
+
+    const handleDeleteAll = async () => {
+        
+        const token = localStorage.getItem('token');
+        if (!eventToDelete) {
+            console.error('No event selected for deletion');
+            return;
+        }
+    
+        try {
+            const response = await fetch(`${apiUrl}/api/remove/`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: eventToDelete.id })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Event deletion failed');
+            }
+    
+            // Remove the event from the local state
+            setEvents(prevEvents => {
+                const updatedEvents = prevEvents.filter(event => {
+                    //console.log("Comparing:", event.id, typeof event.id, "with", clickInfo.event.id);
+                    return event.id.toString() !== eventToDelete.id;
+                });
+                //console.log("Updated events after deletion:", updatedEvents);
+                return updatedEvents;
+            });
+            
+            // Close the modal
+            setIsDeleteModalOpen(false);
+        } catch (error) {
+            console.error('Error deleting event:', error);
+            // You might want to display an error message to the user here
+        }
+    
+        // Reset the eventToDelete state
+        setEventToDelete(null);
+    };
+
+    const handleCancelByPatient = async () => {
+        // Logic to mark a specific occurrence as cancelled using EventCancellation model
+        // ...
+    };
+
     
     const handleEventDrop = async (info) => {
         const token = localStorage.getItem('token');
@@ -226,13 +268,20 @@ const Agenda = () => {
     
             if (!response.ok) {
                 throw new Error('Failed to update event time');
+            } else {
+                setEvents(prevEvents => {
+                    return prevEvents.map(event => {
+                        if (event.id.toString() === eventId) {
+                            // Update the start and end time of the moved event
+                            return {...event, start: newStart.toISOString(), end: newEnd.toISOString()};
+                        }
+                        return event;
+                    });
+                });
             }
-    
-            // Optionally, you can fetch and refresh events here if needed
         } catch (error) {
             console.error('Error updating event:', error);
-            // Optionally, revert the event drag if the update fails
-            info.revert();
+            info.revert(); // Revert the event drag on catch
         }
     };
 
@@ -243,19 +292,29 @@ const Agenda = () => {
 
             <FullCalendar
                 editable
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                plugins={[rrulePlugin, dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
                 headerToolbar={{
                     left: 'prev,next today',
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 }}
+                locale="pt-br"
                 events={events}
                 selectable={true}
                 weekends={true}
+                timeZone='local'
                 select={handleDateSelect}
                 eventClick={handleEventClick}
                 eventDrop={handleEventDrop}
+                height="700px"
+                buttonText={{
+                    today: "Hoje",
+                    month: "Mês",
+                    week: "Semana",
+                    day: "Dia",
+                    list: "Lista",
+                  }}
             />
 
             <EventCreationModal 
@@ -265,7 +324,18 @@ const Agenda = () => {
                 patients={patients} 
                 selectInfo={currentSelectInfo} 
             />
-            
+
+            <DeleteConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onClose={handleCloseModal}
+                eventName={eventToDelete?.title}
+                hasRecurrence={eventToDelete?.rrule && eventToDelete.rrule.trim() !== ''}
+                onDeleteSingle={handleDeleteSingle}
+                onDeleteFuture={handleDeleteFuture}
+                onDeleteAll={handleDeleteAll}
+                onCancelByPatient={handleCancelByPatient}
+            />
+                
         </div>
     );
 };
