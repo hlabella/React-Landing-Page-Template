@@ -77,17 +77,13 @@ export const Navigation = (props) => {
                 Time
               </a>
             </li>
-            <li>
-              <a href="#contact" className="page-scroll" onClick={(e) => handleAnchorClick(e, '#contact')}>
-                Orçamento
-              </a>
-            </li>
+            
             
             {isAuthenticated ? (
             <>
               <li>
                 <button onClick={handleDashboard} className="btn btn-default navbar-btn">
-                  Dashboard
+                  Área do Profissional
                 </button>
               </li>
               <li>

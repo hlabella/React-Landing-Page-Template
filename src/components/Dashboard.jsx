@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCalendar, faUser, faReceipt, faChartLine, faCreditCard, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 
+//whatsapp stuff
+import { WhatsAppWidget } from 'react-whatsapp-widget';
+import 'react-whatsapp-widget/dist/index.css';
+
 const Dashboard = () => {
 
     const navigate = useNavigate();
@@ -21,7 +25,7 @@ const Dashboard = () => {
   
     return (
       <div id="dash" className="container mt-5 dashboard" style={{ paddingTop: "120px" }}>
-            <h1 className="text-center">DASHBOARD</h1>
+            <h1 className="text-center">ÁREA DO PROFISSIONAL</h1>
             <div className="row">
                 <div className="col-md-4 mb-3" onClick={() => handleNavigation('./meu-consultorio')}>
                     <div className="card">
@@ -82,8 +86,16 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            <WhatsAppWidget 
+                companyName="COBRA AI" 
+                message="Olá! Qual é sua dúvida?" 
+                phoneNumber="5511982646000" 
+                sendButtonText="Enviar"
+                inputPlaceHolder="Escreva uma mensagem"
+                replyTimeText="Responde típicamente em menos de 1 dia"
+            />
         </div>  
-      
+        
     );
   };
   

@@ -63,105 +63,41 @@ const Agreement = () => {
             <h2>Contrato</h2>
             <div className="agreement-text">
                 {/* Agreement text goes here */}
-                <p>
-CONTRATO DE PRESTAÇÃO DE SERVIÇOS.
-São partes no presente instrumento particular:
-(a) {userInfo.user?.first_name}, inscrito no CNPJ sob o n. {userInfo.cpf_cnpj}, responsável pelo e-mail {userInfo.user?.email}, doravante denominado “CONTRATANTE”; e
-(b) HENRIQUE MARTINS LABELLA COSTA, brasileiro, solteiro, engenheiro, portador da
-cédula de identidade RG n. 38.512.512-4, inscrito no CPF/MF sob o n. 378.738.638-67, residente
-e domiciliado à Rua dos Pinheiros, n. 1057, apartamento 1712, no Município de São Paulo, no
-Estado de São Paulo, CEP 05422-012, responsável pelo e-mail hlabella@umich.edu; e
-LEONARDO NARDINI BOCK, brasileiro, solteiro, administrador de empresas, portador da
-cédula de identidade RG n. 37.614.861-5 SSP/SP, inscrito no CPF/MF sob o n. 386.678618-20,
-residente e domiciliado à Rua Afonso Brás, n. 155, apartamento 81, no Município de São Paulo,
-no Estado de São Paulo, CEP 04511-010, responsável pelo e-mail leobock95@gmail.com, em
-conjunto denominados como “CONTRATADOS”
-CONTRATANTE e CONTRATADOS, doravante denominados conjuntamente como "Partes"
-e individualmente "Parte";
-OBJETO
-Cláusula 1. O presente Contrato tem como objeto a prestação de serviços de intermediação de
-cobrança, recebimento, emissão de Nota Fiscal (“NF”) e confecção de relatório referente às
-consultas de psicologia prestadas pelo CONTRATANTE a seus pacientes.
-Cláusula 1.1. Os serviços acima mencionados serão executados pelos CONTRATADOS,
-utilizando o nome fantasia “COBRA AI”, que declaram ser devidamente habilitado para
-realização de todas as atividades objeto deste contrato.
-Cláusula 1.2. Os serviços acima mencionados observarão em sua execução as “políticas
-de pagamento individuais” dos pacientes do CONTRATANTE, ou seja, preço por
-consulta, emissão de uma NF por consulta ou uma NF consolidada por mês, carimbo e
-assinatura na NF, política de retorno (divisão de NFs), consulta cortesia (sem NF), regras
-de cancelamento, data de cobrança e frequência de cobrança (pacote, semanal, pós sessão
-ou mensal).
-OBRIGAÇÕES DO CONTRATANTE
-Cláusula 2. O CONTRATANTE deverá fornecer aos CONTRATADOS, em até 05 dias corridos
-após o pagamento de cada mensalidade, todas as informações necessárias à prestação e realização
-do serviço contratado, em especial, a tabela de cadastro dos clientes, o acesso ao calendário, bem
-como conceder acesso ao site Nota do Milhão.
-Cláusula 2.2. O CONTRATANTE deverá estar e se manter com o cadastro regular
-perante os sistemas acima mencionados, sendo de sua responsabilidade o pagamento de
-taxas, mensalidades ou demais tarifas de acesso.
-Cláusula 3. O CONTRATANTE deverá efetuar o pagamento na forma e condições estabelecidas
-na Cláusula 8.
-OBRIGAÇÕES DOS CONTRATADOS
-Cláusula 4. Os CONTRATADOS deverão prestar o serviço conforme descritivo, especificações
-e prazos acordados neste contrato.
-Cláusula 5. OS CONTRATADOS obrigam-se a manter o sigilo de informações, documentos e
-dados pessoais coletados durante e após a realização do serviço, comprometendo-se a eliminá-los
-ao término da contratação, observadas as Cláusulas 11, 12 e 13.
-FORMA DE EXECUÇÃO DOS SERVIÇOS
-Cláusula 6. Os serviços serão prestados pelos CONTRATADOS em até 40 (quarenta) dias
-corridos após o pagamento de cada mensalidade.
-Cláusula 6.1. Os serviços prestados pelos CONTRATADOS consideram apenas as
-consultas que ocorreram dentro do período de 30 (trinta) dias corridos após o pagamento
-de cada mensalidade.
-Cláusula 6.2. Em caso de impossibilidade de cumprimento no prazo estabelecido, os
-CONTRATADOS deverão comunicar de imediato o CONTRATANTE que dirá se deseja
-manter o contrato, caso em que será estabelecida uma data para entrega do serviço.
-Cláusula 7. As Partes declaram não manter qualquer vínculo empregatício com empregados,
-dirigente e/ou prepostos uma das outras, e não se estabelecerá entre as Partes, por força deste
-Contrato, qualquer forma de associação, solidariedade ou vínculo societário ou trabalhista
-competindo, portanto, a cada uma delas o cumprimento de suas respectivas obrigações ficais,
-trabalhistas, sociais e previdenciárias, entre outras, na forma de legislação em vigor.
-PREÇO E CONDIÇÕES DE PAGAMENTO
-Cláusula 8. O CONTRATANTE deverá pagar aos CONTRATADOS, em até 5 (cinco) dias úteis
-da assinatura deste contrato, a quantia integral de R$ 199,00 (cento e noventa e nove reais),
-realizada por meio de PIX ou transferência bancária, conforme dados bancários fornecidos pelos
-CONTRATADOS.
-Cláusula 8.1. O não pagamento no prazo estabelecido acima implica rescisão contratual,
-sem a cobrança de quaisquer valores a título de multa em desfavor do CONTRATANTE.
-ISENÇÃO DE RESPONSABILIDADE POR FRAUDE E INFORMAÇÃO FALSA
-Cláusula 9. Os CONTRATADOS não serão responsáveis por quaisquer atos de fraude ou
-informações falsas relacionadas a NFs solicitadas pelo CONTRATANTE, que se compromete a
-fornecer informações precisas e legítimas para a emissão.
-Cláusula 9.1. Esta cláusula tem a finalidade de estabelecer que o CONTRATANTE não
-se envolve em atividades fraudulentas ou ilegais e não endossa tais práticas. O
-CONTRATANTE reconhece que é sua obrigação agir de acordo com todas as leis e
-regulamentos aplicáveis relacionados à emissão de notas fiscais.
-CESSÃO E TRANSFERÊNCIA
-Cláusula 10. Nenhuma das Partes poderá ceder ou transferir a terceiros, no todo ou em parte, os
-direitos e obrigações oriundos do presente Contrato, salvo com a prévia anuência, por escrito, da
-outra Parte.
-CONFIDENCIALIDADE
-Cláusula 11. Os CONTRATADOS concorda em manter todas as informações confidenciais
-fornecidas pelo CONTRATANTE, incluindo, mas não se limitando a, informações sobre
-pacientes, registros médicos, dados pessoais, informações financeiras e quaisquer outros
-documentos ou informações relacionados à prestação de serviços e ao negócio do
-CONTRATANTE.
-Cláusula 12. Os CONTRATADOS se comprometem a não divulgar, compartilhar, transmitir ou
-utilizar de qualquer forma informações confidenciais sem o prévio consentimento por escrito do
-CONTRATANTE.
-Cláusula 13. O dever de confidencialidade estabelecido nesta cláusula permanecerá em vigor
-mesmo após a conclusão ou rescisão deste contrato.
-RESCISÃO
-Cláusula 14. O descumprimento de quaisquer das Cláusulas pelo CONTRATANTE ou pelos
-CONTRATADOS implica rescisão deste contrato, a menos que as Partes concordem em sanar o
-vício e manter a relação contratual.
-Cláusula 15. O presente instrumento poderá ser rescindido por quaisquer das Partes a qualquer
-momento, mediante comunicação de uma Parte à outra.
-Cláusula 16. No caso de a rescisão ser requerida pelos CONTRATADOS, o CONTRATANTE
-será ressarcido proporcionalmente pela parcela dos serviços contratados e não prestados.
-FORO
-Cláusula 17. Para dirimir quaisquer controvérsias oriundas do presente contrato, as partes elegem
-o foro da comarca de São Paulo.</p>
+                <p> TERMOS E CONDIÇÕES DE USO<br></br>
+                    <br></br>Ao utilizar a plataforma COBRA AI ("Plataforma"), você ("Usuário") concorda e aceita os seguintes termos e condições:
+                    <br></br>1. Descrição dos Serviços Oferecidos
+                    <br></br>1.1 A COBRA AI oferece serviços de intermediação de cobrança, recebimento, emissão de Nota Fiscal ("NF") e confecção de relatórios referentes às consultas de psicologia prestadas por profissionais psicólogos, psicanalistas ou terapeutas ("Prestadores de Serviço").
+                    <br></br>1.2 Os serviços oferecidos pela Plataforma são exclusivamente para a gestão administrativa das consultas dos Prestadores de Serviço e não constituem a prática da psicologia ou a prestação direta de serviços médicos ou terapêuticos aos pacientes.
+                    <br></br>2. Registro e Responsabilidades do Usuário
+                    <br></br>2.1 Ao utilizar a Plataforma, o Usuário concorda em fornecer informações precisas, atualizadas e completas, sendo responsável pela veracidade dos dados cadastrados. A Plataforma não é responsável por erros advindos de informações incorretas e desatuaizadas por parte do usuário.
+                    <br></br>2.2 O Usuário é responsável pela segurança de suas credenciais de acesso à Plataforma e deve notificar imediatamente a COBRA AI sobre qualquer uso não autorizado de sua conta.
+                    <br></br>3. Pagamento e Cancelamento
+                    <br></br>3.1 O acesso à Plataforma requer o pagamento recorrente mensal no valor acordado na data de acordo deste documento, por meio do cartão de crédito cadastrado pelo Usuário.
+                    <br></br>3.2 O cancelamento do serviço pode ser solicitado pelo Usuário enviando um e-mail para contato@cobraai.me. Após o cancelamento, o acesso à Plataforma será suspenso.
+                    <br></br>3.3 Não haverá reembolso das mensalidades já pagas, exceto nos casos em que o pagamento foi efetuado, mas o e-mail de solicitação de cancelamento foi enviado antes do pagamento.
+                    <br></br>4. Suspensão e Interrupção do Acesso
+                    <br></br>4.1 Em caso de inadimplência ou falha no pagamento mensal, o acesso à Plataforma poderá ser suspenso até a regularização do pagamento.
+                    <br></br>4.2 A COBRA AI se reserva o direito de interromper temporariamente o acesso à Plataforma para manutenção, atualização ou aprimoramento dos serviços, sem aviso prévio.
+                    <br></br>5. Proteção de Dados e Privacidade
+                    <br></br>5.1 A COBRA AI compromete-se a proteger os dados pessoais dos Usuários, utilizando medidas de segurança adequadas e em conformidade com as leis de proteção de dados vigentes.
+                    <br></br>6. Responsabilidades e Conduta do Usuário
+                    <br></br>6.1 O Usuário concorda e se compromete a utilizar a Plataforma de maneira ética, legal e em conformidade com todas as leis, regulamentos e diretrizes aplicáveis.
+                    <br></br>6.2 É estritamente proibido o uso da Plataforma para atividades ilegais, fraudulentas, difamatórias, prejudiciais, obscenas, discriminatórias, ou que violem os direitos de terceiros.
+                    <br></br>6.3 O Usuário reconhece e concorda que é o único responsável por suas ações, conduta e conteúdo gerado ou compartilhado na Plataforma, isentando a COBRA AI de qualquer responsabilidade decorrente dessas atividades.
+                    <br></br>7. Propriedade Intelectual
+                    <br></br>7.1 Todos os direitos de propriedade intelectual relacionados à Plataforma, incluindo software, design, marcas registradas e conteúdo, pertencem à COBRA AI.
+                    <br></br>7.2 O Usuário não está autorizado a reproduzir, distribuir ou utilizar qualquer conteúdo da Plataforma para fins comerciais sem consentimento prévio por escrito da COBRA AI.
+                    <br></br>8. Alterações nos Termos e Condições
+                    <br></br>8.1 A COBRA AI reserva-se o direito de alterar, modificar ou atualizar estes termos e condições a qualquer momento, sendo de responsabilidade do Usuário verificar periodicamente as mudanças.
+                    <br></br>8.2 A COBRA AI reserva-se o direito de modificar o valor mensal dos serviços oferecidos na Plataforma.
+                    <br></br>8.3 Em caso de alteração de preço, a COBRA AI se compromete a informar o Usuário com pelo menos 20 (vinte) dias corridos de antecedência antes que a mudança entre em vigor.
+                    <br></br>8.4 A notificação sobre a alteração de preço será enviada ao endereço de e-mail fornecido pelo Usuário no momento do cadastro na Plataforma.
+                    <br></br>9. Disposições Gerais
+                    <br></br>9.1 Estes termos e condições representam o acordo completo entre o Usuário e a COBRA AI em relação ao uso da Plataforma, substituindo quaisquer acordos anteriores.
+                    <br></br>9.2 Caso qualquer disposição destes termos seja considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito.
+
+                    <br></br>Data da última atualização: 02/janeiro/2024
+                </p>
             </div>
             <button onClick={handleAgree} className="btn btn-success">Agree</button>
             <button onClick={handleDisagree} className="btn btn-danger">Disagree</button>

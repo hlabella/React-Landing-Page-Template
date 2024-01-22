@@ -14,7 +14,6 @@ const PatientForm = () => {
         data_cobranca: null,
         dias_para_vencimento_apos_cobranca: null,
         preco_por_consulta: null,
-        acao_em_caso_de_falta: null,
         emissao: null,
         emissao_customizada: null,
         metodo_pagamento: null,
@@ -94,7 +93,7 @@ const PatientForm = () => {
         })
         .then(() => {
             // Handle success
-            setSuccessMessage(isEditing ? 'Paciente atualizado com sucesso!' : 'Paciente adicionado com sucesso!');
+            setSuccessMessage(isEditing ? 'Paciente atualizado com sucesso! Retornando...' : 'Paciente adicionado com sucesso! Retornando...');
             setTimeout(() => {
                 navigate('/dashboard/meus-pacientes');
             }, 2000); // Redirect after 2 seconds
@@ -112,11 +111,9 @@ const PatientForm = () => {
         <div className='patient-form-container'>
 
             <h2 className='text-center'>{isEditing ? 'Editar Paciente' : 'Adicionar Paciente'}</h2>
-            <button className="return-button" type="button" onClick={handleReturn}>Retornar ao Pacientes</button>
+            <button className="return-button" type="button" onClick={handleReturn}>Retornar aos Pacientes</button>
 
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
-            {successMessage && <div className="success-message">{successMessage}</div>}
-
+            
             <form onSubmit={handleSubmit}>
 
                 {/* Nome do Paciente */}
@@ -217,23 +214,6 @@ const PatientForm = () => {
                     min="0"
                 />
                                 
-                {/* acao_para_cancelamento_ou_remarcacao */}
-                {patient.envia_cobranca !== 'Não' && (
-                    <div>
-                        <span className="value-display">Ação em Caso de Falta</span>
-                        <select
-                            name="acao_em_caso_de_falta"
-                            value={patient.acao_em_caso_de_falta || ''}
-                            onChange={handleInputChange}
-                        >
-                            <option value="">Selecione uma ação</option>
-                            <option value="nada">Nada</option>
-                            <option value="cobranca_cheia">Cobrança cheia</option>
-                            <option value="meia_consulta">Cobrança de meia consulta</option>
-                        </select>
-                    </div>
-                )}
-
                 {/* emissao */}
                 <span className="value-display">Emissão</span>
                 <select
@@ -359,6 +339,10 @@ const PatientForm = () => {
                 {/* Submit Button */}
                 <button type="submit">{isEditing ? 'Atualizar' : 'Adicionar'}</button>
             </form>
+
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            {successMessage && <div className="success-message">{successMessage}</div>}
+
         </div>
     );
 };

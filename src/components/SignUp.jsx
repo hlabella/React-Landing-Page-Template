@@ -147,7 +147,7 @@ const SignUp = () => {
                         />
                     </div>
                     <button className="btn btn-primary navbar-btn" type="submit" disabled={loading}>
-                        {loading ? 'Signing Up...' : 'Sign Up'}
+                        {loading ? 'Cadastrando...' : 'Continuar'}
                     </button>
                 </form>
             </div>

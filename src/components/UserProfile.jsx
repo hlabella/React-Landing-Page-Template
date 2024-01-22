@@ -12,9 +12,10 @@ const UserProfile = () => {
         cpf_cnpj: '',
         crp_number: '',
         inscricao_municipal: '',
-        dados_bancarios_1: '',
-        dados_bancarios_2: '',
-        dados_bancarios_3: ''
+        tipo_pix1: '',
+        chave_pix1: '',
+        tipo_pix2: '',
+        chave_pix2: ''
     });
 
     const [displayValues, setDisplayValues] = useState({ ...profile });
@@ -32,6 +33,12 @@ const UserProfile = () => {
             setDisplayValues(data);
         });
     }, []);
+
+    const PIX_TYPE_LABELS = {
+        documento: 'CPF ou CNPJ',
+        celular: 'Celular',
+        email: 'E-mail',
+      };
 
     const handleInputChange = (event) => {
         setProfile({ ...profile, [event.target.name]: event.target.value });
@@ -55,18 +62,18 @@ const UserProfile = () => {
     return (
         <div className="user-profile-container">
             <h2>PSICÓLOGO</h2>
-            <h4>Nome/Razão Social*</h4>
+            <h4>Nome/Razão Social</h4>
             <div className="input-group">
                 <span className="value-display">{displayValues.user.first_name}</span>
             </div>
 
-            <h4>CNPJ*</h4>
+                <h4>CNPJ</h4>
             <div className="input-group">  
                 
                 <span className="value-display">{displayValues.cpf_cnpj}</span>
             </div>
 
-            <h4>Endereço*</h4>
+            <h4>Endereço</h4>
             <div className="input-group">
                 <textarea
                     name="endereco_completo"
@@ -102,37 +109,58 @@ const UserProfile = () => {
                 <span className="value-display">{displayValues.inscricao_municipal}</span>
             </div>
             
-            <h4>Dados Bancários 1</h4>
+            {/* tipo_pix1 and chave_pix1 */}
+            <h4>Tipo de Chave PIX 1</h4>
             <div className="input-group">
-                <textarea
-                    name="dados_bancarios_1"
-                    value={profile.dados_bancarios_1 || ''}
+                <select
+                    name="tipo_pix1"
+                    value={profile.tipo_pix1 || ''}
                     onChange={handleInputChange}
-                    placeholder="Dados Bancários 1"
-                />
-                <span className="value-display">{displayValues.dados_bancarios_1}</span>
+                >
+                    <option value="documento">CPF ou CNPJ</option>
+                    <option value="celular">Celular</option>
+                    <option value="email">E-mail</option>
+                </select>
+                <span className="value-display">{PIX_TYPE_LABELS[displayValues.tipo_pix1] || ''}</span>
             </div>
-            
-            <h4>Dados Bancários 2</h4>
+
+            <h4>Chave PIX 1</h4>
             <div className="input-group">
-                <textarea
-                    name="dados_bancarios_2"
-                    value={profile.dados_bancarios_2 || ''}
+                <input
+                    type="text"
+                    name="chave_pix1"
+                    value={profile.chave_pix1 || ''}
                     onChange={handleInputChange}
-                    placeholder="Dados Bancários 2"
+                    placeholder="Chave PIX 1"
                 />
-                <span className="value-display">{displayValues.dados_bancarios_2}</span>
+                <span className="value-display">{displayValues.chave_pix1}</span>
             </div>
-            
-            <h4>Dados Bancários 3</h4>
+
+            {/* tipo_pix2 and chave_pix2 */}
+            <h4>Tipo de Chave PIX 2 (opcional)</h4>
             <div className="input-group">
-                <textarea
-                    name="dados_bancarios_3"
-                    value={profile.dados_bancarios_3 || ''}
+                <select
+                    name="tipo_pix2"
+                    value={profile.tipo_pix2 || ''}
                     onChange={handleInputChange}
-                    placeholder="Dados Bancários 3"
+                >
+                    <option value="documento">CPF ou CNPJ</option>
+                    <option value="celular">Celular</option>
+                    <option value="email">E-mail</option>
+                </select>
+                <span className="value-display">{PIX_TYPE_LABELS[displayValues.tipo_pix2] || ''}</span>
+            </div>
+
+            <h4>Chave PIX 2 (opcional)</h4>
+            <div className="input-group">
+                <input
+                    type="text"
+                    name="chave_pix2"
+                    value={profile.chave_pix2 || ''}
+                    onChange={handleInputChange}
+                    placeholder="Chave PIX 2"
                 />
-                <span className="value-display">{displayValues.dados_bancarios_3}</span>
+                <span className="value-display">{displayValues.chave_pix2}</span>
             </div>
 
             <button className="save-button" onClick={handleSubmit}>Salvar</button>
