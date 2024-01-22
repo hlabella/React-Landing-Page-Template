@@ -51,11 +51,23 @@ const EventCreationModal = ({ isOpen, onClose, onSubmit, patients, selectInfo })
             start = new Date(selectInfo.startStr);
             end = new Date(selectInfo.endStr);
         }
-    
+
+        // Calculate duration in milliseconds
+        const durationMs = end - start;
+
+        // Convert duration to an object format
+        const duration = {
+            years: 0, // Assuming your events won't span years
+            months: 0, // Assuming your events won't span months
+            days: Math.floor(durationMs / (1000 * 60 * 60 * 24)), // Days
+            milliseconds: durationMs % (1000 * 60 * 60 * 24) // Remaining milliseconds
+        };
+
         onSubmit({
             title: selectedPatient,
             start: start.toISOString(),
             end: end.toISOString(),
+            duration: duration,
             rrule: buildRRuleString() || null,
             allDay: selectInfo.allDay
         });

@@ -1,20 +1,40 @@
 {
   "Header": {
     "title": "COBRA AI",
-    "paragraph": "Automatização de cobrança e notas fiscais para psicólogos"
+    "paragraph": "ECONOMIZE O SEU TEMPO!",
+    "paragraph2": "Automatização de cobrança de pacientes e emissão de notas fiscais para psicólogos e terapeutas. Tudo de forma personalizada e integrada com o nosso calendário!"
   },
   "About": {
-    "paragraph": "Sabemos que sua hora é valiosa e que todo mês chega aquele momento chato da cobrança e da emissão de notas! A COBRA AI automatiza todo o seu fluxo de cobrança e controle, te economizando de 2h a 4h por mês!",
+    "paragraph": "Sabemos que sua hora é valiosa e que todo mês chega aquele momento chato da cobrança e da emissão de notas! A COBRA AI automatiza todo o seu fluxo de cobrança e controle, te economizando de 2h a 4h por mês!",
     "Why": [
-      "Calculo customizado do valor por paciente",
-      "Cobrança mensal  por whatsapp",
-      "Validação dos pagamentos"
+      {
+        "title": "Calculo customizado do valor por paciente",
+        "description": "Sabemos que cada paciente tem um preço e uma política diferente! Conosco, você consegue fazer customizações individuais!"
+      },
+      {
+        "title": "Cobrança mensal por whatsapp",
+        "description": "A partir de um click, o seu paciente já recebe a cobrança diretamente no WhatsApp, por meio de uma mensagem automática."
+      },
+      {
+        "title": "Métodos de pagamento",
+        "description": "Os seus pacientes podem pagar por PIX (em breve poderão pagar no cartão ou por boleto)."
+      }
+      
     ],
     "Why2": [
-      "Emissão das NFs",
-      "Geração de relatório"
-    ],
-    "paragraph2": "Tudo isso confidencial, automático, sem secretária e direto na sua conta no fim do mês."
+      {
+        "title": "Emissão das NFs",
+        "description": "Após o pagamento, caso ative a opção, já é emitida Nota Fiscal e enviada para o paciente."
+      },
+      {
+        "title": "Geração de relatório",
+        "description": "Aqui no nosso site você consegue acompanhar o seu resultado de cada mês em painéis visuais e intuitivos."
+      },
+      {
+        "title": "Controle de pagamentos",
+        "description": "Por meio do nosso link de pagamento, você recebe o pagamento diretamente na sua conta bancária e o nosso site já sinaliza se o paciente pagou (link de pagamento em breve)."
+      }
+    ]
   },
   "Services": [
     {
@@ -87,7 +107,9 @@
   "Contact": {
     "address": "Rua dos Pinheiros 1057, ap 1712, São Paulo, SP 05422-012 ",
     "phone": "+11 94215-2384",
-    "email": "contato@cobraai.me"
+    "email": "contato@cobraai.me",
+    "instagram": "https://www.instagram.com/cobraai.oficial/",
+    "linkedin": "https://www.linkedin.com/company/cobra-ai/about/"
   },
   "FAQ": [
     {
@@ -99,8 +121,8 @@
           "Preço por consulta",
           "Emissão de uma nota por consulta ou uma nota consolidada por mês",
           "Carimbo e assinatura na nota",
-          "Política de retorno (Divisão de NFs)",
-          "Consulta cortesia (Sem NF)",
+          "Política de retorno",
+          "Consulta cortesia",
           "Regras de cancelamento",
           "Data de cobrança",
           "Frequência de cobrança (semanal, pós sessão ou mensal)"
@@ -146,6 +168,11 @@
       "id": 7,
       "question": "Eu cobro o mês adiantado. Vocês trabalham dessa forma?",
       "answer": "Atualmente, não cobramos o mês adiantado. Trabalhamos apenas com cobranças após a realização das consultas."
+    },
+    {
+      "id": 8,
+      "question": "Não encontrou a sua dúvida? Entre em contato conosco!",
+      "answer": "Whatsapp: +55 11 98264-6000 ou mande e-mail para contato@cobraai.me"
     }
   ]
 }

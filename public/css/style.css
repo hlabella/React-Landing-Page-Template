@@ -228,6 +228,14 @@ a:focus,
   margin-top: 0;
   margin-bottom: 10px;
 }
+.intro h3 {
+  font-family: "Raleway", sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
 .intro h1 span {
   font-weight: 800;
   color: #38405F;
@@ -241,7 +249,7 @@ a:focus,
   margin-bottom: 60px;
 }
 header .intro-text {
-  padding-top: 350px;
+  padding-top: 200px;
   padding-bottom: 200px;
   text-align: center;
 }
@@ -264,11 +272,13 @@ header .intro-text {
 /* About Section */
 #about {
   padding: 100px 0;
+  padding-bottom: 0px;
 }
 #about h3 {
   font-size: 22px;
   margin: 0 0 20px;
 }
+
 #about h2 {
   position: relative;
   margin-bottom: 15px;
@@ -308,6 +318,11 @@ header .intro-text {
   line-height: 24px;
   margin: 30px 0;
 }
+
+#about .aboutWhy p {
+  margin: 5px;
+}
+
 /* Services Section */
 #services {
   padding: 100px 0;
@@ -462,7 +477,7 @@ header .intro-text {
 
 /* Contact Section */
 #contact {
-  padding: 100px 0 60px;
+  padding: 50px 0 60px;
   background: linear-gradient(to right, #0E131F 0%, #38405F 100%);
   color: rgba(255, 255, 255, 0.75);
 }
@@ -589,18 +604,75 @@ label {
 /* Footer Section*/
 #footer {
   background: #f6f6f6;
-  padding: 30px 0;
+  padding: 10px 0;
 }
 #footer p {
   color: #888;
   font-size: 14px;
 }
 #footer a {
-  color: #608dfd;
+  color: #051c56;
 }
 #footer a:hover {
   border-bottom: 2px solid #608dfd;
 }
+
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px; /* Adjust as needed */
+}
+
+.modalcontact {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalcontact-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-container a {
+    margin-bottom: 10px; /* Space between links on mobile */
+  }
+}
+
 
 @media (max-width: 768px) {
   #about img {
@@ -1293,6 +1365,46 @@ label {
   margin-bottom: 4px; /* Spacing between day name and checkbox */
 }
 
+
+/*deletion modal*/
+
+.deletionmodal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the start for better structure */
+  padding: 20px;
+  width: 100%; /* Use full width of the modal */
+}
+
+.deletionmodal label {
+  align-items: center; /* Aligns checkbox and label text vertically */
+  cursor: pointer; /* Makes the entire label clickable */
+  margin-bottom: 10px; /* Spacing between this and the next element */
+}
+
+/* Style for the input number field */
+.deletionmodal input[type="number"] {
+  width: 100%; /* Ensures input takes full width of its container */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem; /* Adjust font size as needed */
+  box-sizing: border-box; /* Ensures padding and border are included in the width */
+}
+
+.addpatientmodal .save-cancellation-button {
+  background-color: #28a745; /* A green color for distinction */
+  color: white;
+  padding: 8px 15px; /* Smaller padding for a smaller button */
+  margin-top: 10px; /* Space above the button */
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Slightly smaller font size */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+} 
+
+
 @media (max-width: 600px) {
   .modal {
       width: 100%;
@@ -1334,4 +1446,70 @@ label {
 .cobranca-row-header {
   font-weight: bold;
   background-color: #f4f4f4;
+}
+
+
+/*Assinatura stuff - pagarme*/
+
+
+.recurring-payments {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 1000px;
+  margin: 20px auto;
+  overflow-x: auto;
+  margin-top:120px;
+}
+
+
+.recurring-payments form {
+  max-width: 400px;
+  margin: 30 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-style:groove;
+  border-radius: 8px;
+}
+
+.recurring-payments .form-group {
+  margin-bottom: 15px;
+}
+
+.recurring-payments .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.recurring-payments .form-group input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.recurring-payments .submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.recurring-payments .submit-button:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+  .recurring-payments form {
+      width: 100%;
+      padding: 15px;
+  }
 }
