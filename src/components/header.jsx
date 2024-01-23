@@ -16,7 +16,7 @@ export const Header = (props) => {
                 <h3>{props.data ? props.data.paragraph : "Loading"}</h3>
                 <p>{props.data ? props.data.paragraph2 : "Loading"}</p>
                 <a
-                  href="#about"
+                  href="./signup"
                   className="btn btn-custom btn-lg page-scroll"
                 >
                   SE INSCREVA AGORA!
