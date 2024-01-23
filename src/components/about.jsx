@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from 'react';
 
 export const About = (props) => {
+
+  // State to keep track of the currently active FAQ item
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  // Function to handle clicking on a question
+  const toggleAbout = (index) => {
+    // If the clicked question is already active, close it, otherwise, open the clicked question
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
   return (
     <div id="about">
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-6">
-            <img src="img/about.jpg" className="img-responsive" alt="" />
+            <img src="img/print_dash.png" className="img-responsive" alt="" />
+            <p></p>
+            <img src="img/print_dash2.png" className="img-responsive" alt="" />
           </div>
           <div className="col-xs-12 col-md-6">
             <div className="about-text">
@@ -19,8 +31,8 @@ export const About = (props) => {
                     {props.data
                       ? props.data.Why.map((d, i) => (
                           <li key={`${d.title}-${i}`}>
-                            <strong>{d.title}</strong>
-                            <p>{d.description}</p>
+                            <strong onClick={() => toggleAbout(i)}>{d.title}</strong>
+                            {activeIndex === i && <p>{d.description}</p>}
                           </li>
                         ))
                       : "loading"}
@@ -31,8 +43,8 @@ export const About = (props) => {
                     {props.data
                       ? props.data.Why2.map((d, i) => (
                           <li key={`${d.title}-${i}`}>
-                            <strong>{d.title}</strong>
-                            <p>{d.description}</p>
+                            <strong onClick={() => toggleAbout(i + props.data.Why.length)}>{d.title}</strong>
+                            {activeIndex === i + props.data.Why.length && <p>{d.description}</p>}
                           </li>
                         ))
                       : "loading"}

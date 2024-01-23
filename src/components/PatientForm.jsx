@@ -117,7 +117,8 @@ const PatientForm = () => {
             <form onSubmit={handleSubmit}>
 
                 {/* Nome do Paciente */}
-                <span className="value-display">Nome do Paciente</span>
+                <span className="value-display">Nome do Paciente </span>
+                <span className="fa fa-info-circle tooltip-icon" title="Nome da pessoa que recebe o atendimento (se forem mais de uma pessoa, escreva todos os nomes no mesmo campo, separados por vírgula)"></span>
                 <input
                     type="text"
                     name="nome_paciente"
@@ -128,7 +129,8 @@ const PatientForm = () => {
                 />
                 
                 {/* Nome do Contato no WhatsApp */}
-                <span className="value-display">Nome do Contato no WhatsApp</span>
+                <span className="value-display">Nome do Contato no WhatsApp </span>
+                <span className="fa fa-info-circle tooltip-icon" title="Nome da pessoa para quem será feita a cobrança"></span>
                 <input
                     type="text"
                     name="nome_contato_whatsapp"
@@ -138,7 +140,8 @@ const PatientForm = () => {
                 />
 
                 {/* WhatsApp */}
-                <span className="value-display">WhatsApp</span>
+                <span className="value-display">WhatsApp </span>
+                <span className="fa fa-info-circle tooltip-icon" title="Whatsapp da pessoa que receberá a cobrança"></span>
                 <input
                     type="text"
                     name="whatsapp"
@@ -148,7 +151,8 @@ const PatientForm = () => {
                 />
 
                 {/* envia_cobranca */}
-                <span className="value-display">Envia Cobrança?</span>
+                <span className="value-display">Envia Cobrança? </span>
+                <span className="fa fa-info-circle tooltip-icon" title="Paciente deveria receber alguma cobrança?"></span>
                 <select
                     name="envia_cobranca"
                     value={patient.envia_cobranca || ''}
@@ -162,7 +166,8 @@ const PatientForm = () => {
                 {/* Tipo de Cobrança */}
                 {patient.envia_cobranca !== 'Não' && (
                     <div>
-                        <span className="value-display">Tipo de Cobrança</span>
+                        <span className="value-display">Tipo de Cobrança </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="O paciente deve pagar de forma pós-mensal, ou seja, após o atendimento"></span>
                         <input
                             type="text"
                             name="tipo_cobranca"
@@ -177,7 +182,8 @@ const PatientForm = () => {
                 {/* Data de Cobrança */}
                 {patient.envia_cobranca !== 'Não' && (
                     <div>
-                        <span className="value-display">Data de Cobrança</span>
+                        <span className="value-display">Data de Cobrança </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="Em qual data deve ser cobrado o pagamento?"></span>
                         <input
                             type="date"
                             name="data_cobranca"
@@ -191,7 +197,8 @@ const PatientForm = () => {
                 {/* dias_para_vencimento_apos_cobranca */}
                 {patient.envia_cobranca !== 'Não' && (
                     <div>
-                        <span className="value-display">Dias para Vencimento Após Cobrança</span>
+                        <span className="value-display">Dias para Vencimento Após Cobrança </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="Quantos dias a pessoa tem de prazo para pagar?"></span>
                         <input
                             type="text"
                             name="dias_para_vencimento_apos_cobranca"
@@ -203,7 +210,8 @@ const PatientForm = () => {
                 )}
 
                 {/* preco_por_consulta */}
-                <span className="value-display">Preço por Consulta (R$)</span>
+                <span className="value-display">Preço por Consulta (R$) </span>
+                <span className="fa fa-info-circle tooltip-icon" title="Valor da consulta (se for pró bono / social, insira o número 0)"></span>
                 <input
                     type="number"
                     name="preco_por_consulta"
@@ -215,7 +223,8 @@ const PatientForm = () => {
                 />
                                 
                 {/* emissao */}
-                <span className="value-display">Emissão</span>
+                <span className="value-display">Emissão </span>
+                <span className="fa fa-info-circle tooltip-icon" title="Como deve ser feito o comprovante de pagamento para a pessoa?"></span>
                 <select
                     name="emissao"
                     value={patient.emissao || ''}
@@ -232,7 +241,8 @@ const PatientForm = () => {
                 {/* emissao_customizada */}
                 {patient.emissao === 'emissao_customizada' && (
                     <div>
-                        <span className="value-display">Emissão Customizada</span>
+                        <span className="value-display">Emissão Customizada </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="Se não houver quebra, deixe em branco. Caso este paciente precise quebrar uma mesma consulta em mais de uma sessão, pessoa ou qualquer outra especificidade, escreva tudo aqui"></span>
                         <input
                             type="text"
                             name="emissao_customizada"
@@ -246,16 +256,16 @@ const PatientForm = () => {
                 {/* metodo_pagamento */}
                 {patient.envia_cobranca !== 'Não' && (
                     <div>
-                        <span className="value-display">Método de Pagamento</span>
+                        <span className="value-display">Método de Pagamento </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="Primeiro ou segundo PIX cadastrado para o consultório"></span>
                         <select
                             name="metodo_pagamento"
                             value={patient.metodo_pagamento || ''}
                             onChange={handleInputChange}
                         >
                             <option value="">Selecione o Método de Pagamento</option>
-                            <option value="dados_bancarios_1">Dados Bancários 1</option>
-                            <option value="dados_bancarios_2">Dados Bancários 2</option>
-                            <option value="dados_bancarios_3">Dados Bancários 3</option>
+                            <option value="chave_pix1">Chave Pix 1</option>
+                            <option value="chave_pix2">Chave Pix 2</option>
                         </select>
                     </div>
                 )}
@@ -263,7 +273,8 @@ const PatientForm = () => {
                 {/* nome_completo_para_nota_fiscal_ou_recibo */}
                 {patient.emissao !== 'nada' && (
                     <div>
-                        <span className="value-display">Nome Completo para Nota Fiscal ou Recibo</span>
+                        <span className="value-display">Nome Completo para Nota Fiscal ou Recibo </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="Nome completo para ser inserido no recibo/NF"></span>
                         <input
                             type="text"
                             name="nome_completo_para_nota_fiscal_ou_recibo"
@@ -277,7 +288,8 @@ const PatientForm = () => {
                 {/* cpf_para_nota_fiscal_ou_recibo */}
                 {patient.emissao !== 'nada' && (
                     <div>
-                        <span className="value-display">CPF para Nota Fiscal ou Recibo</span>
+                        <span className="value-display">CPF para Nota Fiscal ou Recibo </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="CPF para ser inserido no recibo/NF"></span>
                         <input
                             type="text"
                             name="cpf_para_nota_fiscal_ou_recibo"
@@ -294,7 +306,8 @@ const PatientForm = () => {
                 {/* endereco_completo */}
                 {patient.emissao !== 'nada' && (
                     <div>
-                        <span className="value-display">Endereço Completo</span>
+                        <span className="value-display">Endereço Completo </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="Endereço para ser adicionado no recibo/NF"></span>
                         <input
                             type="text"
                             name="endereco_completo"
@@ -308,7 +321,8 @@ const PatientForm = () => {
                 {/* declaracao */}
                 {patient.emissao !== 'nada' && (
                     <div>
-                        <span className="value-display">Precisa de Declaração de Atendimento Psicológico?</span>
+                        <span className="value-display">Precisa de Declaração de Atendimento Psicológico? </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="Paciente precisa de uma declaração de atendimento psicológico para comprovar o tratamento?"></span>
                         <select
                             name="declaracao_atendimento_psicologico"
                             value={patient.declaracao_atendimento_psicologico || ''}
@@ -324,7 +338,8 @@ const PatientForm = () => {
                 {/* data inicio declaracao */}
                 {patient.emissao !== 'nada' && patient.declaracao_atendimento_psicologico === 'Sim' && (
                     <div>
-                        <span className="value-display">Data de Início do Tratamento Psicológico</span>
+                        <span className="value-display">Data de Início do Tratamento Psicológico </span>
+                        <span className="fa fa-info-circle tooltip-icon" title="Caso o paciente precise de uma declaração de atendimento psicológico, qual é a data de início do tratamento?"></span>
                         <input
                             type="date"
                             name="data_inicio_declaracao_atendimento_psicologico"
