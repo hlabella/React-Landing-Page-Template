@@ -5,7 +5,7 @@ export const Header = (props) => {
     <header id="header">
       <div className="background-video">
         <video autoPlay loop muted>
-          <source src="/img/jumbotronvid.mp4" type="video/mp4" />
+          <source src="img/jumbotronvid.mp4" type="video/mp4" />
         </video>
         <div className="overlay">
           <div className="container">
