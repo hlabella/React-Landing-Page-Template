@@ -120,14 +120,14 @@ const Agenda = () => {
                     exdate: exdates,
                 };
                 
-                console.log('event', event);
-                console.log('parsedEvent', parsedEvent);
+                //console.log('event', event);
+                //console.log('parsedEvent', parsedEvent);
                 return parsedEvent;
             });
 
 
             setEvents(parsedEvents);
-            console.log("fetchData was called: ", parsedEvents)
+            //console.log("fetchData was called: ", parsedEvents)
 
         } catch (error) {
             console.error('Error fetching events:', error);
@@ -198,7 +198,7 @@ const Agenda = () => {
 
             // Update the events state with the new event, including the ID
             const newEventWithId = { ...newEvent, id: createdEventId };
-            console.log("New event with ID:", newEventWithId);  // Log the new event with the ID
+            //console.log("New event with ID:", newEventWithId);  // Log the new event with the ID
 
             setEvents(prevEvents => {
                 const updatedEvents = [...prevEvents, newEventWithId];
@@ -339,13 +339,6 @@ const Agenda = () => {
         // Reset the eventToDelete state
         setEventToDelete(null);
     };
-
-    const handleCancelByPatient = async () => {
-        // Logic to mark a specific occurrence as cancelled using EventCancellation model
-        // ...
-        console.log("handleCancelByPatient was called")
-    };
-
     
     const handleEventDrop = async (info) => {
         const token = localStorage.getItem('token');

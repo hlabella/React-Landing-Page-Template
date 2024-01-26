@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
-    
+    const navigate = useNavigate();
     const apiUrl = process.env.REACT_APP_API_URL;
-    
     const [profile, setProfile] = useState({
         user: {
             first_name: ''
@@ -15,13 +15,18 @@ const UserProfile = () => {
         tipo_pix1: '',
         chave_pix1: '',
         tipo_pix2: '',
-        chave_pix2: ''
+        chave_pix2: '',
+        subscription_id: '',
     });
-
     const [displayValues, setDisplayValues] = useState({ ...profile });
+
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        } 
         fetch(`${apiUrl}/api/profile/`, {
             headers: {
                 'Authorization': `Token ${token}`
@@ -32,7 +37,8 @@ const UserProfile = () => {
             setProfile(data);
             setDisplayValues(data);
         });
-    }, []);
+    }, [navigate]);
+
 
     const PIX_TYPE_LABELS = {
         documento: 'CPF ou CNPJ',
@@ -62,15 +68,22 @@ const UserProfile = () => {
     return (
         <div className="user-profile-container">
             <h2>PSICÓLOGO</h2>
+
             <h4>Nome/Razão Social</h4>
             <div className="input-group">
                 <span className="value-display">{displayValues.user.first_name}</span>
             </div>
 
-                <h4>CNPJ</h4>
+            <h4>CNPJ</h4>
             <div className="input-group">  
-                
                 <span className="value-display">{displayValues.cpf_cnpj}</span>
+            </div>
+
+            <h4>Assinatura</h4>
+            <div className="input-group">  
+                <span className="value-display">
+                    {(!displayValues.subscription_id || displayValues.subscription_id === '') ? 'Inativa' : 'Ativa'}
+                </span>
             </div>
 
             <h4>Endereço</h4>
@@ -84,7 +97,6 @@ const UserProfile = () => {
                 <span className="value-display">{displayValues.endereco_completo}</span>
             </div>
 
-            
             <h4>Número do CRP</h4>
             <div className="input-group">
                 <input
