@@ -430,7 +430,6 @@ const Agenda = () => {
                 onDeleteSingle={handleDeleteSingle}
                 onDeleteFuture={handleDeleteFuture}
                 onDeleteAll={handleDeleteAll}
-                onCancelByPatient={handleCancelByPatient}
             />
                 
         </div>
