@@ -204,33 +204,78 @@ a:focus,
   outline: none;
   outline-offset: none;
 }
+
+
+
 /* Header Section */
 .intro {
   display: table;
   width: 100%;
   padding: 0;
-  background: url(https://c.pxhere.com/photos/f5/82/head_psychology_thoughts_think_perception_face_woman_psyche-1192085.jpg!d) center center no-repeat;
-  background-color: #e5e5e5;
+  background: linear-gradient(to right, #f3f3f300 0%, #e5e5e5 100%);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
 }
-.intro .overlay {
-  background: rgba(0, 0, 0, 0.2);
+
+.background-video {
+  position: relative;
+  overflow: hidden;
 }
+
+.background-video video {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.background-video h1 {
+  font-family: "Raleway", sans-serif;
+  color: #0E131F;
+  font-size: 82px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 10px;
+  -webkit-text-stroke: 1px white; /* For webkit browsers */
+  text-shadow: 1px 1px 2px #fff; /* White shadow */
+}
+
+.background-video h3 {
+  font-family: "Raleway", sans-serif;
+  color: #0E131F;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.background-video p {
+  color: #0E131F;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 30px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+
 .intro h1 {
   font-family: "Raleway", sans-serif;
-  color: #fff;
+  color: #0E131F;
   font-size: 82px;
   font-weight: 700;
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 10px;
 }
+
 .intro h3 {
   font-family: "Raleway", sans-serif;
-  color: #fff;
+  color: #0E131F;
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 10px;
@@ -240,19 +285,40 @@ a:focus,
   font-weight: 800;
   color: #38405F;
 }
+
 .intro p {
-  color: #fff;
+  color: #0E131F;
   font-size: 22px;
   font-weight: 300;
   line-height: 30px;
   margin: 0 auto;
   margin-bottom: 60px;
 }
+
 header .intro-text {
   padding-top: 200px;
   padding-bottom: 200px;
   text-align: center;
 }
+
+header .intro-text p,h3 {
+  color: #0E131F;
+  font-size: 22px;
+  font-weight: 350;
+  line-height: 30px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.8); /* White background with some opacity */
+  padding: 15px; /* Add some padding around the text */
+  border-radius: 10px; /* Optional: for rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth */
+  max-width: 80%; /* Optional: limits the width of the paragraph */
+  text-align: center; /* Center align the text */
+}
+header .intro-text h3 {
+  font-weight: 600;
+}
+
 /* Features Section */
 #features {
   background: #f6f6f6;
@@ -1452,65 +1518,46 @@ label {
 
 /*Assinatura stuff - pagarme*/
 
-
-.recurring-payments {
+.container-rp {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  width: 1000px;
-  margin: 20px auto;
-  overflow-x: auto;
-  margin-top:120px;
+  justify-content: center;
+  margin-top:100px;
+}
+    
+.container-rp .formDiv {
+  width: 400px;
+  padding: 30px;
+  border-radius: 10px;
+  -webkit-box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
+  -moz-box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
+  box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
 }
 
-
-.recurring-payments form {
-  max-width: 400px;
-  margin: 30 auto;
-  padding: 20px;
-  background-color: #f7f7f7;
-  border-style:groove;
-  border-radius: 8px;
-}
-
-.recurring-payments .form-group {
-  margin-bottom: 15px;
-}
-
-.recurring-payments .form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.recurring-payments .form-group input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.recurring-payments .submit-button {
-  width: 100%;
+.container-rp .form {
   padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+}
+    
+.container-rp .alert {
+  text-align: center;
+  margin-top: 20px;
+}
+    
+.container-rp .creditCard {
+  margin-bottom: 10%;
 }
 
-.recurring-payments .submit-button:hover {
-  background-color: #45a049;
+.container-rp input, select {
+  margin-bottom: 10px;
 }
 
-@media (max-width: 600px) {
-  .recurring-payments form {
-      width: 100%;
-      padding: 15px;
-  }
+.container-rp button {
+  background-color:#28a745
+}
+
+.alert-rp {
+  margin-top: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  color:red
 }
