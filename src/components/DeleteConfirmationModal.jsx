@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDate, hasRecurrence, onDeleteSingle, onDeleteFuture, onDeleteAll, onCancelByPatient }) => {
+
+const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDate, hasRecurrence, onDeleteSingle, onDeleteFuture, onDeleteAll}) => {
     const navigate = useNavigate();
     const [isCancelledByPatient, setIsCancelledByPatient] = useState(false);
     const [chargeValue, setChargeValue] = useState('');
@@ -56,7 +57,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
             setChargeValue('0');
             // API
             // Send eventName, isCancelledByPatient, and chargeValue to your backend
-            console.log("Saving cancellation charge for:", eventName, false, '0');
+            //console.log("Saving cancellation charge for:", eventName, false, '0');
             const eventDate_obj = new Date(eventDate);
             const formattedDate = eventDate_obj.toISOString();
       
@@ -93,8 +94,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
     const handleSaveCancellationCharge = () => {
         // API call logic here
         // Send eventName, isCancelledByPatient, and chargeValue to your backend
-        onCancelByPatient();
-        console.log("Saving cancellation charge for:", eventName, isCancelledByPatient, chargeValue);
+        //console.log("Saving cancellation charge for:", eventName, isCancelledByPatient, chargeValue);
         // Implement actual API call logic
 
         const eventDate_obj = new Date(eventDate);
