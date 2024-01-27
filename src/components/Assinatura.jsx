@@ -524,7 +524,7 @@ const Assinatura = () => {
                                     // Else, display the paragraph
                                 <div>
                                     <p>Sua assinatura já está ativa!</p>
-                                    <p>Ligue para cancelar: +55 (11) 98264-6000 (prometemos que respondemos rápido)</p>
+                                    <p>Se quiser cancelar, alterar o cartão, o CNPJ ou a Razão Social, mande uma mensagem no Whatsapp para: +55 (11) 98264-6000 (prometemos que respondemos rápido)</p>
                                 </div>
                                 )
                             }
