@@ -77,6 +77,11 @@ export const Navigation = (props) => {
                 Time
               </a>
             </li>
+            <li>
+              <a href="#contact" className="page-scroll" onClick={(e) => handleAnchorClick(e, '#contact')}>
+                Contato
+              </a>
+            </li>
             
             
             {isAuthenticated ? (

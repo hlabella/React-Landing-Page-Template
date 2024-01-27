@@ -77,8 +77,8 @@ const Login = () => {
                             aria-required="true"
                         />
                     </div>
-                    <button className="btn btn-default navbar-btn" type="submit" disabled={loading}>
-                        {loading ? 'Logging in...' : 'Login'}
+                    <button className="btn btn-default" type="submit" disabled={loading}>
+                        {loading ? 'Logging in...' : 'Entrar'}
                     </button>
                 </form>
             </div>

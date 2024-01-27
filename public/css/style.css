@@ -295,13 +295,13 @@ a:focus,
   margin-bottom: 60px;
 }
 
-header .intro-text {
+#header .header-text {
   padding-top: 200px;
   padding-bottom: 200px;
   text-align: center;
 }
 
-header .intro-text p,h3 {
+#header .header-text p {
   color: #0E131F;
   font-size: 22px;
   font-weight: 350;
@@ -315,8 +315,19 @@ header .intro-text p,h3 {
   max-width: 80%; /* Optional: limits the width of the paragraph */
   text-align: center; /* Center align the text */
 }
-header .intro-text h3 {
+#header .header-text h3 {
+  color: #0E131F;
+  font-size: 22px;
   font-weight: 600;
+  line-height: 30px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.8); /* White background with some opacity */
+  padding: 15px; /* Add some padding around the text */
+  border-radius: 10px; /* Optional: for rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth */
+  max-width: 80%; /* Optional: limits the width of the paragraph */
+  text-align: center; /* Center align the text */
 }
 
 /* Features Section */
@@ -898,12 +909,9 @@ label {
 #signup form input[type="password"] {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-
-
 
 
 
@@ -1547,7 +1555,11 @@ label {
   margin-bottom: 10%;
 }
 
-.container-rp input, select {
+.container-rp input {
+  margin-bottom: 10px;
+}
+
+.container-rp select {
   margin-bottom: 10px;
 }
 
