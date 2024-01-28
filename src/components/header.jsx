@@ -10,7 +10,7 @@ export const Header = (props) => {
   return (
     <header id="header">
       <div className="background-video">
-        <EmbedVideo src="img/jumbotronvid.mp4" className="headerVideo" />
+        <EmbedVideo  className="headerVideo" />
         <div className="overlay">
           <div className="container">
             <div className="row">
