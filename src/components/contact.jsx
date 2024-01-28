@@ -34,6 +34,10 @@ export const Contact = (props) => {
                       <i className="fa fa-whatsapp"></i>
                     </a>
                   </li>
+                  <li>
+                    <p style={{marginBottom:"0px", textAlign:"left", fontSize:"10px"}}>CNPJ: {props.data ? props.data.cnpj : ""}</p>
+                    <p style={{marginBottom:"0px", textAlign:"left", fontSize:"10px"}}>Razão Social: {props.data ? props.data.razaoSocial : ""}</p>
+                  </li>
                 </ul>
               </div>
             </div>

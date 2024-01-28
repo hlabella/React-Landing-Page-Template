@@ -17,7 +17,6 @@ export default function validateInfo(values) {
   errors.cexp = false;
   errors.ccvv = false;
   errors.customerDocumentNumber = false;
-  errors.customerPhone = false;
   errors.billingZipCode = false;
   errors.billingAddressLine1 = false;
   errors.billingCity = false;
@@ -103,26 +102,11 @@ export default function validateInfo(values) {
     errors.message = "O documento é inválido";
   }
 
-  //Cardholder Document Verification
-  const regexTestPhone = (phoneNumber) => {
-      const regex = /^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/;
-      return regex.test(phoneNumber);
-  };
-  if (values.customerPhone === null || !values.customerPhone.trim()) {
-    errors.message = "O telefone está incompleto";
-  } else if (regexTestPhone(values.customerPhone)) {
-    errors.customerPhone = true;
-  } else {
-    errors.message = "O telefone é inválido";
-  }
-
   if (
     errors.cname &&
     errors.cnumber &&
     errors.cexp &&
-    errors.billingZipCode &&
     errors.ccvv &&
-    errors.customerPhone &&
     errors.customerDocumentNumber &&
     errors.billingZipCode &&
     errors.billingAddressLine1 &&
