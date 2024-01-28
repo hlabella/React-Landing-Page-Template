@@ -1,12 +1,16 @@
 import React from "react";
+import EmbedVideo from './EmbedVideo';
 
 export const Header = (props) => {
+  
+  const createMarkup = (htmlContent) => {
+    return { __html: htmlContent };
+  };
+
   return (
     <header id="header">
       <div className="background-video">
-        <video autoPlay loop muted>
-          <source src="img/jumbotronvid.mp4" type="video/mp4" />
-        </video>
+        <EmbedVideo src="img/jumbotronvid.mp4" className="headerVideo" />
         <div className="overlay">
           <div className="container">
             <div className="row">
@@ -16,7 +20,8 @@ export const Header = (props) => {
                   <span></span>
                 </h1>
                 <h3>{props.data ? props.data.paragraph : "Loading"}</h3>
-                <p>{props.data ? props.data.paragraph2 : "Loading"}</p>
+                {/* Render paragraph2 with HTML content (the strong tag)*/}
+                <p dangerouslySetInnerHTML={createMarkup(props.data ? props.data.paragraph2 : "Loading")}></p>
                 <a
                   href="./signup"
                   className="btn btn-custom btn-lg page-scroll"
