@@ -14,7 +14,7 @@ import Login from "./components/Login";  // Assuming you have a Login component
 import SignUp from "./components/SignUp";  // Assuming you have a SignUp component
 import ProtectedRoute from './components/ProtectedRoute';  // Import ProtectedRoute
 import Dashboard from './components/Dashboard';  // Import Dashboard
-import Agreement from './components/Agreement';
+//import Agreement from './components/Agreement';
 import UserProfile from './components/UserProfile';
 import Patients from './components/Patients';
 import PatientForm from './components/PatientForm';
@@ -51,7 +51,7 @@ const App = () => {
             <Contact data={landingPageData.Contact} />
           </>
         } />
-        <Route path="/agreement" element={<ProtectedRoute component={Agreement} />} />
+        {/*<Route path="/agreement" element={<ProtectedRoute component={Agreement} />} />*/}
         <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />} />
 
         <Route path="/dashboard/meu-consultorio" element={<ProtectedRoute component={UserProfile} />} />

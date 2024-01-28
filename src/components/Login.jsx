@@ -56,11 +56,12 @@ const Login = () => {
                 {error && <div className="alert alert-danger">{error}</div>}
                 <form onSubmit={handleSubmit} noValidate>
                     <div className="form-group">
-                        <label htmlFor="username">Usuário</label>
+                        <label htmlFor="username">E-mail</label>
                         <input
                             id="username"
                             type="text"
                             value={username}
+                            placeholder="ex: jean@valjean.com"
                             onChange={(e) => setUsername(e.target.value)}
                             className="form-control"
                             aria-required="true"
@@ -72,6 +73,7 @@ const Login = () => {
                             id="password"
                             type="password"
                             value={password}
+                            placeholder="********"
                             onChange={(e) => setPassword(e.target.value)}
                             className="form-control"
                             aria-required="true"

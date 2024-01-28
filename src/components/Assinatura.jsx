@@ -43,7 +43,8 @@ const Assinatura = () => {
     const [loading, setLoading] = useState(false);
     const [profile, setProfile] = useState({
         user: {
-            first_name: ''
+            first_name: '',
+            email: ''
         },
         endereco_completo: '',
         cpf_cnpj: '',
@@ -54,6 +55,7 @@ const Assinatura = () => {
         tipo_pix2: '',
         chave_pix2: '',
         subscription_id: '',
+        phone_number: ''
     });
 
     useEffect(() => {
@@ -77,11 +79,8 @@ const Assinatura = () => {
     const [values, setValues] = useState({
 
         // Customer Information
-        customerName: '',
-        customerEmail: '',
         customerDocumentType: '',
         customerDocumentNumber: '',
-        customerPhone: '',
 
         // Billing Address (if needed separately)
         billingAddressLine1: '',
@@ -132,10 +131,7 @@ const Assinatura = () => {
         if (validateInfo(values).variant === 'sucesso') {
             
             const {
-                customerName,
-                customerEmail,
                 customerDocumentNumber,
-                customerPhone,
                 billingAddressLine1,
                 billingAddressLine2,
                 billingCity,
@@ -153,7 +149,7 @@ const Assinatura = () => {
             const expYear = sanitizedExpiration.substring(sanitizedExpiration.length - 2); // Last two digits for year
 
             // Sanitize the customer phone input
-            const sanitizedPhone = customerPhone.replace(/\D/g, ''); // Remove non-digit characters
+            const sanitizedPhone = profile.phone_number.replace(/\D/g, ''); // Remove non-digit characters
             const areaCode = sanitizedPhone.substring(0, 2); // First two digits for area code
             const phoneNumber = sanitizedPhone.substring(2); // Remaining digits for phone number
             
@@ -195,7 +191,7 @@ const Assinatura = () => {
                     })
                 };
 
-                return fetch('https://api.pagar.me/core/v5/tokens?appId=pk_test_mXx3NpelhmcQj5Wv', options_cardtoken)
+                return fetch('https://api.pagar.me/core/v5/tokens?appId=pk_0Jg8yJXF7oIrLMXD', options_cardtoken)
                     .then(response => response.json())
                     .then(response => {
                         if (response.id) {
@@ -234,8 +230,8 @@ const Assinatura = () => {
                         installments: 1,
                         customer: {
                             phones: {mobile_phone: {country_code: '55', area_code: areaCode, number: phoneNumber}},
-                            name: customerName,
-                            email: customerEmail,
+                            name: profile.user.first_name,
+                            email: profile.user.email,
                             document_type: customerDocumentType,
                             document: sanitizedDocument,
                             customer_type: customerType
@@ -390,47 +386,7 @@ const Assinatura = () => {
                                                     isValid={errors.customerDocumentNumber}
                                                 />
                                             </Form.Group>
-
-                                            {/* Customer Information */}
-                                            <Form.Group>
-                                                <Form.Control
-                                                    type="text"
-                                                    id="customerName"
-                                                    data-testid="customerName"
-                                                    name="customerName"
-                                                    placeholder="Nome Completo"
-                                                    value={values.customerName}
-                                                    onChange={handleChange}
-                                                    onFocus={handleFocus}
-                                                    isValid={errors.customerName}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Control
-                                                    type="email"
-                                                    id="customerEmail"
-                                                    data-testid="customerEmail"
-                                                    name="customerEmail"
-                                                    placeholder="Email"
-                                                    value={values.customerEmail}
-                                                    onChange={handleChange}
-                                                    onFocus={handleFocus}
-                                                    isValid={errors.customerEmail}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Form.Control
-                                                    type="text" // Changed to text to allow separators and area code
-                                                    id="customerPhone"
-                                                    data-testid="customerPhone"
-                                                    name="customerPhone"
-                                                    placeholder="Telefone (ex: 11 91234-5678)"
-                                                    value={values.customerPhone}
-                                                    onChange={handleChange}
-                                                    onFocus={handleFocus}
-                                                    isValid={errors.customerPhone}
-                                                />
-                                            </Form.Group>
+                                            
                                             {/* Billing Address */}
                                             <Form.Group>
                                                 <Form.Control
