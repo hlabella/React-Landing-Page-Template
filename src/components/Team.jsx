@@ -10,8 +10,8 @@ export const Team = (props) => {
         <div id="row">
           {props.data
             ? props.data.map((d, i) => (
-                <a href={d.linkedin}>
-                  <div key={`${d.name}-${i}`} className="col-md-6 col-sm-6 team">
+                <a key={`${d.name}-${i}`} href={d.linkedin}>
+                  <div className="col-md-6 col-sm-6 team">
                     <div className="thumbnail">
                       {" "}
                       <img src={d.img} alt="..." className="team-img" />

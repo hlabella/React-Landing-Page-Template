@@ -1,5 +1,4 @@
 import React from "react";
-import EmbedVideo from './EmbedVideo';
 
 export const Header = (props) => {
   
@@ -10,7 +9,7 @@ export const Header = (props) => {
   return (
     <header id="header">
       <div className="background-video">
-        <EmbedVideo  className="headerVideo" />
+        <img src="img/jumbotrongif.gif" alt="Background" className="headerGif" />
         <div className="overlay">
           <div className="container">
             <div className="row">
