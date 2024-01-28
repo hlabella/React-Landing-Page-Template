@@ -336,6 +336,43 @@ a:focus,
   text-align: center; /* Center align the text */
 }
 
+@media only screen and (max-width: 768px) {
+  .background-video h1,
+  #header .header-text h1,
+  .intro h1 {
+    font-size: 60px; /* Adjust the size as needed for h1 */
+  }
+
+  .background-video h2,
+  #header .header-text h2,
+  .intro h2 {
+    font-size: 24px; /* Adjust the size as needed for h2 */
+  }
+
+  .background-video h3,
+  #header .header-text h3,
+  .intro h3 {
+    font-size: 20px; /* Adjust the size as needed for h3 */
+  }
+
+  .background-video p,
+  #header .header-text p,
+  .intro p {
+    font-size: 18px; /* Adjust the size as needed for paragraphs */
+  }
+
+  #header .header-text {
+    padding-top: 140px;
+    padding-bottom: 200px;
+    text-align: center;
+  }
+
+}
+
+
+
+
+
 /* Features Section */
 #features {
   background: #f6f6f6;
