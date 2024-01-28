@@ -8,11 +8,11 @@ const EmbedVideo = (props) => {
           <video
             loop
             muted
+            controls="true"
             autoplay="autoplay"
             playsinline
-            src="${props.src}"
             class="${props.className}"
-          ></video>
+          ><source src="img/jumbotronvid.mp4" type="video/mp4"></video>
         `,
       }}
     ></div>
