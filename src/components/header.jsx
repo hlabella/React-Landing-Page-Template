@@ -9,7 +9,7 @@ export const Header = (props) => {
   return (
     <header id="header">
       <div className="background-video">
-        <img src="img/jumbotrongif.gif" alt="Background" className="headerGif" />
+        <img src="img/jumbotronimg.png" alt="Background" className="headerGif" />
         <div className="overlay">
           <div className="container">
             <div className="row">

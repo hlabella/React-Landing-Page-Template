@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDate, hasRecurrence, onDeleteSingle, onDeleteFuture, onDeleteAll}) => {
+const InvoiceOverrideModal = ({ isOpen, onClose, patient, monthYear }) => {
     const navigate = useNavigate();
-    const [isCancelledByPatient, setIsCancelledByPatient] = useState(false);
+    const [override, setOverride] = useState(false);
     const [chargeValue, setChargeValue] = useState('');
     const apiUrl = process.env.REACT_APP_API_URL;
-              
+    
+
     const fetchData = async () => {
+        
         if (isOpen) {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -17,11 +19,9 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
             }
 
             try {
-                // Modify the URL to include event name/date as required by your API
-                const eventDate_obj = new Date(eventDate);
-                const formattedDate = eventDate_obj.toISOString();
-      
-                const url = `${apiUrl}/api/event-cancellation/?eventID=${eventID}&eventDate=${encodeURIComponent(formattedDate)}`;
+                const [year, month] = monthYear.split('-');
+                const url = `${apiUrl}/api/invoice-overrides/?patient_id=${patient.patient_id}&month=${month}&year=${year}`;
+                
                 const response = await fetch(url, {
                     method: 'GET',
                     headers: {
@@ -32,9 +32,9 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
 
                 if (!response.ok) throw new Error('Error fetching event cancellation data');
                 const data = await response.json();
-                //console.log('user cancelled data:', data)
-                setIsCancelledByPatient(data.isCancelledByPatient);
-                setChargeValue(data.chargeValue);
+                //console.log('user override data:', data);
+                setOverride(data.override_flag);
+                setChargeValue(data.override_amount);
                 
             } catch (error) {
                 console.error('Error fetching event cancellation data:', error);
@@ -44,23 +44,22 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
 
     useEffect(() => {
         fetchData();
-    }, [isOpen, eventName, eventDate]);
+    }, [isOpen,monthYear]);
 
     if (!isOpen) return null;
 
-    // Handle change in cancellation checkbox
-    const handleCancellationChange = (e) => {
+    // Handle change in override checkbox
+    const handleOverrideChange = (e) => {
+        //console.log("override checkbox clicked");
         const checked = e.target.checked;
-        setIsCancelledByPatient(checked);
-        
+        setOverride(checked);
+
         if (!checked) {
             setChargeValue('0');
             // API
             // Send eventName, isCancelledByPatient, and chargeValue to your backend
-            //console.log("Saving cancellation charge for:", eventName, false, '0');
-            const eventDate_obj = new Date(eventDate);
-            const formattedDate = eventDate_obj.toISOString();
-      
+            const [year, month] = monthYear.split('-');
+
             const token = localStorage.getItem('token');
             if (!token) {
                 // Assuming you have a way to navigate to login
@@ -68,22 +67,23 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
                 return;
             }
 
-            fetch(`${apiUrl}/api/event-cancellation/`, {
+            fetch(`${apiUrl}/api/invoice-overrides/`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Token ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ 
-                    eventID: eventID,
-                    eventDate: formattedDate
+                    patient_id: patient.patient_id,
+                    month: month,
+                    year: year
                 })
             });
 
             // Handle successful deletion here (e.g., refetch events, update state)
             //fetchData();
-            
         }
+
     };
 
     // Handle charge value change
@@ -91,15 +91,10 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
         setChargeValue(e.target.value);
     };
 
-    const handleSaveCancellationCharge = () => {
+     //call api to save
+    const handleSaveOverrideCharge = () => {
         // API call logic here
-        // Send eventName, isCancelledByPatient, and chargeValue to your backend
-        //console.log("Saving cancellation charge for:", eventName, isCancelledByPatient, chargeValue);
-        // Implement actual API call logic
-
-        const eventDate_obj = new Date(eventDate);
-        const formattedDate = eventDate_obj.toISOString();
-      
+        const [year, month] = monthYear.split('-');
         const token = localStorage.getItem('token');
         if (!token) {
             // Assuming you have a way to navigate to login
@@ -107,64 +102,50 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
             return;
         }
 
-        fetch(`${apiUrl}/api/event-cancellation/`, {
+        fetch(`${apiUrl}/api/invoice-overrides/`, {
             method: 'POST',
             headers: {
                 'Authorization': `Token ${token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ 
-                eventID: eventID,
-                eventDate: formattedDate,
-                chargeValue: chargeValue
+                patient_id: patient.patient_id,
+                month: month,
+                year: year,
+                override_amount: chargeValue
             })
         });
 
         //fetchData();
     };
 
-
-    // Determine which function to call for deleting the event
-    const handleDeleteEvent = hasRecurrence ? onDeleteSingle : onDeleteAll;
-
     return (
         <div className="modal">
             <div className="addpatientmodal">
-                <p>Ação para: '{eventName}'?</p>
-                
-                <button onClick={handleDeleteEvent}>Deletar este evento</button>
-                {hasRecurrence && (
-                    <>
-                        <button onClick={onDeleteFuture}>
-                            Deletar este evento e todos no futuro
-                        </button>
-                        <button onClick={onDeleteAll}>
-                            Deletar todos os eventos na recorrência
-                        </button>
-                    </>
-                )}
+                <p>Mudar valor final para '{patient.nome_paciente}'?</p>
+
                 <div className='deletionmodal'>
                     
                     <label>
                         <input type="checkbox" id="cancelCheckbox" 
-                            checked={isCancelledByPatient} 
-                            onChange={handleCancellationChange} 
+                            checked={override} 
+                            onChange={handleOverrideChange} 
                         />
                         <span className="custom-checkbox"></span>
-                        <span className="checkbox-label">Evento cancelado pelo paciente</span>
+                        <span className="checkbox-label">Sobrescrever valor</span>
                     </label>
                 
-                    {isCancelledByPatient && (
+                    {override && (
                         <>
                             <input 
                                 type="number"
                                 value={chargeValue}
                                 onChange={handleChargeValueChange}
-                                placeholder="Cobrar cancelamento"
+                                placeholder="Novo Valor (ex.: 2000)"
                             />
                             
-                            <button className='save-cancellation-button' onClick={handleSaveCancellationCharge}>
-                                Salvar cobrança de cancelamento
+                            <button className='save-cancellation-button' onClick={handleSaveOverrideCharge}>
+                                Salvar novo valor
                             </button>
                             
                         </>
@@ -177,4 +158,4 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
     );
 }
 
-export default DeleteConfirmationModal;
+export default InvoiceOverrideModal;
