@@ -248,8 +248,7 @@ a:focus,
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 10px;
-  -webkit-text-stroke: 1px white; /* For webkit browsers */
-  text-shadow: 1px 1px 2px #fff; /* White shadow */
+  -webkit-text-stroke: 0.5px white;  /*For webkit browsers */
 }
 
 .background-video h3 {
@@ -308,32 +307,30 @@ a:focus,
 }
 
 #header .header-text p {
-  color: #0E131F;
-  font-size: 22px;
-  font-weight: 350;
+  color: #fff;
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
   line-height: 30px;
   margin: 0 auto;
   margin-bottom: 10px;
-  background-color: rgba(255, 255, 255, 0.8); /* White background with some opacity */
-  padding: 15px; /* Add some padding around the text */
-  border-radius: 10px; /* Optional: for rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth */
+  padding: 10px; /* Add some padding around the text */
   max-width: 80%; /* Optional: limits the width of the paragraph */
   text-align: center; /* Center align the text */
 }
 #header .header-text h3 {
-  color: #0E131F;
-  font-size: 22px;
-  font-weight: 600;
+  font-family: "Raleway", sans-serif;
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
   line-height: 30px;
   margin: 0 auto;
   margin-bottom: 10px;
-  background-color: rgba(255, 255, 255, 0.8); /* White background with some opacity */
-  padding: 15px; /* Add some padding around the text */
-  border-radius: 10px; /* Optional: for rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth */
-  max-width: 80%; /* Optional: limits the width of the paragraph */
+  padding: 10px; /* Add some padding around the text */
+  max-width: 50%; /* Optional: limits the width of the paragraph */
   text-align: center; /* Center align the text */
+  background-color: #fff;
+  opacity: 60%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1539,7 +1536,6 @@ label {
 /* Cobranca.css */
 .cobranca-table {
   width: 100%;
-  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -1569,6 +1565,27 @@ label {
   background-color: #f4f4f4;
 }
 
+.cobranca-table select {
+  width: 100%; /* Make the select box full width */
+  padding: 10px 15px; /* Add some padding for aesthetics */
+  margin-bottom: 20px; /* Add some space below the select box */
+  border: 1px solid #ddd; /* A light border to match your row style */
+  border-radius: 5px; /* Optional: Rounded corners */
+  background-color: #ffffff; /* A light background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* A subtle shadow for depth */
+  font-size: 16px; /* Increase font size for better readability */
+  color: #333; /* A darker text color for contrast */
+  cursor: pointer; /* Change the cursor to indicate it's selectable */
+}
+
+.cobranca-table select:focus {
+  border-color: #aaa; /* Change border color on focus for visual feedback */
+  outline: none; /* Remove the default focus outline */
+}
+
+.cobranca-table select option {
+  padding: 10px; /* Add padding for options for better readability */
+}
 
 /*Assinatura stuff - pagarme*/
 
@@ -1586,6 +1603,7 @@ label {
   -webkit-box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
   -moz-box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
   box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
+  margin-bottom: 50px;
 }
 
 .container-rp .form {
