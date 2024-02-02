@@ -39,7 +39,7 @@ export const Contact = (props) => {
                     <p>Razão Social: {props.data ? props.data.razaoSocial : ""}</p>
                   </li>
                   <li>
-                    <img src="img/lgpd.png" style={{ width: '80px', height: 'auto' }} />
+                    <img src="img/LGPD.png" style={{ width: '80px', height: 'auto' }} />
                   </li>
                 </ul>
               </div>
