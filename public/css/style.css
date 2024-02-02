@@ -585,6 +585,8 @@ a:focus,
 
 .planos {
   margin-bottom: 25px;
+  display: flex; /* Make the planos flex containers to align children */
+  flex-direction: column; /* Stack children vertically */
 }
 
 .planos h3 {
@@ -600,24 +602,21 @@ a:focus,
   color:#000
 }
 
-.plano1, .plano3 {
+.plano1, .plano2, .plano3 {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   border-radius: 20px;
   padding: 20px;
   text-align: center;
-  background: #ffffff;
-  height: 400px;
+  background: #ffffff; /* plano2 should override this with its own background */
+  height: 400px; /* Make height 100% of the flex container */
+  display: flex; /* Use flexbox for internal alignment */
+  flex-direction: column; /* Stack content vertically */
+  position: relative; /* Set position relative for absolute positioning of children */
 }
 
 .plano2 {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
   background: #007bff;
-  height: 400px;
 }
 
 .plano1 ul li:not(:last-child) { /* Add border to all li elements except the last one */
@@ -625,40 +624,28 @@ a:focus,
   padding-bottom: 5px;
 }
 
-.plano1 .signup-button {
-  margin-top: 30px;
+.planos .signup-button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff; /* Example background color */
-  color: #ffffff; /* Text color */
+  margin-top: 30px;
   cursor: pointer;
   font-size: medium;
   transition: background-color 0.3s ease;
+  position: absolute; /* Position the button absolutely within its parent */
+  bottom: 40px; /* Fixed distance from the bottom of the box */
+  left: 50%; /* Align to the center */
+  transform: translateX(-50%); /* Center align the button */
+}
+
+.plano1 .signup-button, .plano3 .signup-button {
+  background-color: #007bff;
+  color: #ffffff;
 }
 
 .plano2 .signup-button {
-  margin-top: 75px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #ffffff; /* Example background color */
-  color: #000000; /* Text color */
-  cursor: pointer;
-  font-size: medium;
-  transition: background-color 0.3s ease;
-}
-
-.plano3 .signup-button {
-  margin-top: 95px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff; /* Example background color */
-  color: #ffffff; /* Text color */
-  cursor: pointer;
-  font-size: medium;
-  transition: background-color 0.3s ease;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 

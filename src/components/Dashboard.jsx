@@ -59,10 +59,10 @@ const Dashboard = () => {
     return (
       <div id="dash" className="container mt-5 dashboard" style={{ paddingTop: "120px" }}>
             {profile.subscription_id && profile.subscription_id !== '' ? (
-                <h1 className="text-center">ÁREA DO PROFISSIONAL: Dr. {profile.user.first_name}</h1>
+                <h1 className="text-center">{profile.user.first_name.toUpperCase()}</h1>
             ) : (
                 <div>
-                    <h1 className="text-center">ÁREA DO PROFISSIONAL: Dr. {profile.user.first_name}</h1>
+                    <h1 className="text-center">{profile.user.first_name.toUpperCase()}</h1>
                     <p className="text-center" style={{ color: '#ec7c7c' }}>assinatura inativa</p>
                 </div>
             )}
