@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const InvoiceOverrideModal = ({ isOpen, onClose, patient, monthYear }) => {
+const InvoiceOverrideModal = ({ isOpen, onClose, patient, monthYear, updateOverrides }) => {
     const navigate = useNavigate();
     const [override, setOverride] = useState(false);
     const [chargeValue, setChargeValue] = useState('');
+    const [inputError, setInputError] = useState('');
     const apiUrl = process.env.REACT_APP_API_URL;
-    
+    const moneyRegex = /^\d+(\.\d{0,2})?$/;
 
+    useEffect(() => {
+        // Clear error message when modal is opened or chargeValue is changed
+        setInputError('');
+    }, [isOpen, chargeValue]);
+    
     const fetchData = async () => {
         
         if (isOpen) {
@@ -35,7 +41,7 @@ const InvoiceOverrideModal = ({ isOpen, onClose, patient, monthYear }) => {
                 //console.log('user override data:', data);
                 setOverride(data.override_flag);
                 setChargeValue(data.override_amount);
-                
+
             } catch (error) {
                 console.error('Error fetching event cancellation data:', error);
             }
@@ -79,17 +85,25 @@ const InvoiceOverrideModal = ({ isOpen, onClose, patient, monthYear }) => {
                     year: year
                 })
             });
-
             // Handle successful deletion here (e.g., refetch events, update state)
             //fetchData();
+            
         }
 
     };
 
+    
     // Handle charge value change
     const handleChargeValueChange = (e) => {
-        setChargeValue(e.target.value);
+        const value = e.target.value;
+        if (moneyRegex.test(value) || value === '') {
+            setChargeValue(value);
+            setInputError('');  // Clear error message if the input is valid
+        } else {
+            setInputError('Determine um valor válido (ex: 1000)');
+        }
     };
+
 
      //call api to save
     const handleSaveOverrideCharge = () => {
@@ -116,7 +130,9 @@ const InvoiceOverrideModal = ({ isOpen, onClose, patient, monthYear }) => {
             })
         });
 
-        //fetchData();
+        updateOverrides(); // This will trigger the re-fetching of overrides in the parent component
+        onClose(); //close the modal
+
     };
 
     return (
@@ -143,7 +159,7 @@ const InvoiceOverrideModal = ({ isOpen, onClose, patient, monthYear }) => {
                                 onChange={handleChargeValueChange}
                                 placeholder="Novo Valor (ex.: 2000)"
                             />
-                            
+                            {inputError && <div style={{ color: 'red' }}>{inputError}</div>}
                             <button className='save-cancellation-button' onClick={handleSaveOverrideCharge}>
                                 Salvar novo valor
                             </button>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, ToggleButton, ButtonGroup } from "react-bootstrap";
 import Cards from 'react-credit-cards-2';
 import validateInfo from '../validateInfo';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
@@ -57,25 +57,11 @@ const Assinatura = () => {
         subscription_id: '',
         phone_number: ''
     });
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/login');
-            return;
-        }   
-        fetch(`${apiUrl}/api/profile/`, {
-            headers: {
-                'Authorization': `Token ${token}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            setProfile(data);
-        });     
-    }, [navigate]);
-
-
+    const [selectedPlan, setSelectedPlan] = useState('premium');
+    const plans = {
+        basico: { price: 9999, label: 'Básico - R$99/mês' },
+        premium: { price: 19999, label: 'Premium - R$199,99/mês' }
+    };
     const [values, setValues] = useState({
 
         // Customer Information
@@ -98,6 +84,25 @@ const Assinatura = () => {
 
     });
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }   
+        fetch(`${apiUrl}/api/profile/`, {
+            headers: {
+                'Authorization': `Token ${token}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            setProfile(data);
+        });     
+    }, [navigate]);
+
+
+    const handlePlanChange = (value) => setSelectedPlan(value);
 
     const handleFocus = (e) => {
         setValues({ 
@@ -247,7 +252,7 @@ const Assinatura = () => {
                                 country: 'BR'
                             },
                         },
-                        pricing_scheme: {scheme_type: 'Unit', price: 19999},
+                        pricing_scheme: {scheme_type: 'Unit', price: plans[selectedPlan].price},
                         quantity: 1,
                         currency: 'BRL',
                         description: 'cobra ai'
@@ -298,16 +303,16 @@ const Assinatura = () => {
     };
 
     return (
-        <div className="recurring-payments">
+        <div className="patients-table">
             <h2>Assinatura</h2>
-            
             <div>
                 <div className="container-rp">
                     <div className="box justify-content-center align-items-center">
                         <div className="formDiv">
                             {
                                 (!profile.subscription_id || profile.subscription_id === '') ? (
-                                <div>
+                                <div classname="noSub">
+                                    
                                     <div className="creditCard">
                                         <Cards
                                             cvc={values.cardSecurityCode}
@@ -319,6 +324,15 @@ const Assinatura = () => {
                                     </div>
                                     <div className='rpform'>
                                         <Form onSubmit={handleSubmit}>
+
+                                            <Form.Group>
+                                                <Form.Label>Escolha seu Plano</Form.Label>
+                                                <Form.Control as="select" value={selectedPlan} onChange={e => setSelectedPlan(e.target.value)} className="plan-select-dropdown">
+                                                    {Object.entries(plans).map(([planKey, planDetails]) => (
+                                                        <option key={planKey} value={planKey}>{planDetails.label}</option>
+                                                    ))}
+                                                </Form.Control>
+                                            </Form.Group>
 
                                             {/* Card Information */}
                                             <Form.Group>
@@ -471,7 +485,7 @@ const Assinatura = () => {
                                                 id="validateButton"
                                                 type="submit"
                                             >
-                                                {loading ? 'Carregando...' : 'Assinar por R$199,99'}
+                                                {loading ? 'Carregando...' : `Assinar plano ${plans[selectedPlan].label}`}
                                             </Button>
                                         </Form>
                                     </div>

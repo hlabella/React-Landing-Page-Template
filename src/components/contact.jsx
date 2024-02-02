@@ -19,24 +19,27 @@ export const Contact = (props) => {
             <div className="row">
               <div className="social">
                 <ul>
-                  <li>
+                  <li className='fali'>
                     <a href={props.data ? props.data.linkedin : "/"}>
                       <i className="fa fa-linkedin"></i>
                     </a>
                   </li>
-                  <li>
+                  <li className='fali'>
                     <a href={props.data ? props.data.instagram : "/"}>
                       <i className="fa fa-instagram"></i>
                     </a>
                   </li>
-                  <li>
+                  <li className='fali'>
                     <a href={`https://wa.me/${whatsappNumber}?text=${encodedMessage}`}>
                       <i className="fa fa-whatsapp"></i>
                     </a>
                   </li>
                   <li>
-                    <p style={{marginBottom:"0px", textAlign:"left", fontSize:"10px"}}>CNPJ: {props.data ? props.data.cnpj : ""}</p>
-                    <p style={{marginBottom:"0px", textAlign:"left", fontSize:"10px"}}>Razão Social: {props.data ? props.data.razaoSocial : ""}</p>
+                    <p>CNPJ: {props.data ? props.data.cnpj : ""}</p>
+                    <p>Razão Social: {props.data ? props.data.razaoSocial : ""}</p>
+                  </li>
+                  <li>
+                    <img src="img/lgpd.png" style={{ width: '80px', height: 'auto' }} />
                   </li>
                 </ul>
               </div>
