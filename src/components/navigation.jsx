@@ -78,6 +78,11 @@ export const Navigation = (props) => {
               </a>
             </li>
             <li>
+              <a href="#price" className="page-scroll" onClick={(e) => handleAnchorClick(e, '#price')}>
+                Preço
+              </a>
+            </li>
+            <li>
               <a href="#contact" className="page-scroll" onClick={(e) => handleAnchorClick(e, '#contact')}>
                 Contato
               </a>
