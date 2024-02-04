@@ -190,7 +190,7 @@ const Agenda = () => {
     
             if (!response.ok) {
                 // To get more detailed error information
-                const errorResponse = await response.json();
+                const errorResponse = await response.text();
                 console.error("Server responded with an error:", errorResponse);
                 throw new Error(`Event creation failed: ${response.status} ${response.statusText}`);
             }
