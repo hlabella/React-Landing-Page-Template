@@ -188,8 +188,13 @@ const Agenda = () => {
                 body: JSON.stringify(newEvent)
             });
     
-            if (!response.ok) throw new Error('Event creation failed');
-    
+            if (!response.ok) {
+                // To get more detailed error information
+                const errorResponse = await response.json();
+                console.error("Server responded with an error:", errorResponse);
+                throw new Error(`Event creation failed: ${response.status} ${response.statusText}`);
+            }
+
             // Extract the ID from the response
             const responseData = await response.json();
             const createdEventId = responseData.id;
