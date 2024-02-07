@@ -64,7 +64,7 @@ export const Navigation = (props) => {
             </li>
             <li>
               <a href="#services" className="page-scroll" onClick={(e) => handleAnchorClick(e, '#services')}>
-                Serviços
+                Como Funciona
               </a>
             </li>
             <li>

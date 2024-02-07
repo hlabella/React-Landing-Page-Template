@@ -43,7 +43,7 @@ const SignUp = () => {
         
         //phone
         const regexTestPhone = (phoneNumber) => {
-            const regex = /^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/;
+            const regex = /^\s*\(?(\d{2})\)?[-. ]?9[-. ]?(\d{4})[-. ]?(\d{4})\s*$/;
             return regex.test(phoneNumber);
         };
         if (!phoneNumber.trim()) {
@@ -166,9 +166,11 @@ const SignUp = () => {
                             type="text" 
                             id="phoneNumber"
                             value={phoneNumber} 
-                            placeholder="Telefone (ex: 11 91234-5678)"
+                            placeholder="Telefone (ex: 11912345678)"
                             onChange={(e) => setPhoneNumber(e.target.value)} 
                             className="form-control"
+                            pattern="\d{11}"
+                            title="Digite o Telefone no formato 11912345678. Apenas números, DDD + 9 dígitos."
                         />
                     </div>
                     <div className="form-group">

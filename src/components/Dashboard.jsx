@@ -26,6 +26,7 @@ const Dashboard = () => {
         subscription_id: '',
         phone_number: ''
     });
+    const [loading, setLoading] = useState(true);
 
     
     
@@ -46,6 +47,7 @@ const Dashboard = () => {
       .then(res => res.json())
       .then(data => {
           setProfile(data);
+          setLoading(false);
       });
       
     }, [navigate]);
@@ -54,7 +56,9 @@ const Dashboard = () => {
         navigate(path);
     };
 
-
+    if (loading) {
+        return <div>Loading...</div>;
+    }
   
     return (
       <div id="dash" className="container mt-5 dashboard" style={{ paddingTop: "120px" }}>

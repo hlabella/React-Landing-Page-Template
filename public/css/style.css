@@ -1045,6 +1045,25 @@ label {
 
 /* dashboard */
 
+.dashboard-link {
+  margin-bottom: 20px; /* Adjust spacing as needed */
+}
+
+.dashboard-button {
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #007bff; /* Background color */
+  color: #fff; /* Text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.dashboard-button:hover {
+  background-color: #0056b3; /* Darker shade on hover for visual feedback */
+}
+
+
 #dash .container {
   height: 100vh; /* Full height of the viewport */
   justify-content: center; /* Horizontal center alignment */
@@ -1150,6 +1169,21 @@ label {
 
 
 /* UserProfile.css */
+
+.return-button {
+  margin-bottom: 20px; /* Space above the button */
+  padding: 8px 16px; /* Padding inside the button */
+  background-color: #6c757d; /* Button background color */
+  color: #fff; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background color change on hover */
+}
+
+.return-button:hover {
+  background-color: #5a6268; /* Darker shade on hover */
+}
 
 .user-profile-container {
   display: flex;
@@ -1361,6 +1395,10 @@ label {
   border-radius: 4px;
 }
 
+.patient-form-container input::placeholder {
+  color: #a9a9a9ae; /* Light gray placeholder text */
+}
+
 .patient-form-container button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -1413,7 +1451,15 @@ label {
   }
 }
 
-
+.custom-tooltip {
+  position: absolute;
+  padding: 8px;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  z-index: 1000;
+  white-space: nowrap;
+}
 
 
 /*agreement stuff*/

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const UserProfile = () => {
     const navigate = useNavigate();
@@ -64,9 +66,15 @@ const UserProfile = () => {
         });
     };
 
+    const goToDashboard = () => {
+        navigate('/dashboard'); 
+    };
 
     return (
         <div className="user-profile-container">
+            <div className="dashboard-link">
+                <button onClick={goToDashboard} className="dashboard-button"><FontAwesomeIcon icon={faArrowLeft} /> Voltar</button>
+            </div>
             <h2>PSICÓLOGO</h2>
 
             <h4>Nome/Razão Social</h4>
