@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import InvoiceOverrideModal from './InvoiceOverrideModal';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Cobranca = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -175,6 +177,10 @@ const Cobranca = () => {
         fetchOverrides(selectedMonthYear);
     };
 
+    const goToDashboard = () => {
+        navigate('/dashboard'); 
+    };
+
     const renderPaymentStatus = (patient) => {
         // Assuming each patient object in patientsData has an 'id' field
         const isPaid = payments.some(payment => payment.id === patient.patient_id);
@@ -234,6 +240,7 @@ const Cobranca = () => {
                     <p>Valor de Cancelamentos </p>
                     <p>Total Calculado</p>
                     <p>Total para Cobrança</p>
+                    {/*<p>Envia Cobrança?</p>*/}
                     <p>Pagamento Efetuado</p>
                 </div>
                 {patientsData.map(patient => {
@@ -259,6 +266,7 @@ const Cobranca = () => {
                             <p>{formattedTotalCancelledEvents}</p>
                             <p>{formattedTotal}</p>
                             {renderOverrides(patient)}
+                            {/*<p>{patient.envia_cobranca}</p>*/}
                             {renderPaymentStatus(patient)}
                         </div>
                     );
@@ -268,6 +276,9 @@ const Cobranca = () => {
     };
     return (
         <div className="patients-table">
+            <div className="dashboard-link">
+                <button onClick={goToDashboard} className="dashboard-button"><FontAwesomeIcon icon={faArrowLeft} /> Voltar</button>
+            </div>
             <h2>Cobrança</h2>
             <div className='cobranca-table'>
                 <h3>Mês de Referência</h3>

@@ -9,14 +9,12 @@ export const Price = () => {
     const redirectToSignup = () => {
         navigate('/signup'); 
     };
-    const redirectToContact = () => {
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            navigate('/#contact')
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+
+    const whatsappNumber = "5511982646000";
+    const templateMessage = "Olá! Estou interessado em saber mais sobre os serviços do COBRA AÍ.";
+    const encodedMessage = encodeURIComponent(templateMessage);
     
+
     return (
         <div id="price" className="text-center">
             <div className="container">
@@ -56,7 +54,9 @@ export const Price = () => {
                             <ul>
                                 <li>Está sentindo falta de algum recurso? Converse conosco e podemos verificar a possibilidade de um plano customizado!</li>
                             </ul>
-                            <button onClick={redirectToContact} className="signup-button">Fale Conosco</button>
+                            <a href={`https://wa.me/${whatsappNumber}?text=${encodedMessage}`}>
+                                <button className="signup-button">Fale Conosco</button>
+                            </a>
                         </div>
                     </div>
                 </div>

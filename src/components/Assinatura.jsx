@@ -4,6 +4,8 @@ import { Button, Form, ToggleButton, ButtonGroup } from "react-bootstrap";
 import Cards from 'react-credit-cards-2';
 import validateInfo from '../validateInfo';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const brazilianStates = [
     { value: 'AC', label: 'Acre' },
@@ -302,8 +304,15 @@ const Assinatura = () => {
         }
     };
 
+    const goToDashboard = () => {
+        navigate('/dashboard'); 
+    };
+
     return (
         <div className="patients-table">
+            <div className="dashboard-link">
+                <button onClick={goToDashboard} className="dashboard-button"><FontAwesomeIcon icon={faArrowLeft} /> Voltar</button>
+            </div>
             <h2>Assinatura</h2>
             <div>
                 <div className="container-rp">

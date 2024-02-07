@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 
 const PatientForm = () => {
-    
+
     const initialPatientState = {
         nome_paciente: null,
         nome_contato_whatsapp: null,
@@ -23,16 +23,70 @@ const PatientForm = () => {
         declaracao_atendimento_psicologico: null,
         data_inicio_declaracao_atendimento_psicologico: null        
     };
-
+    const { patientId } = useParams();
+    const navigate = useNavigate();
+    const isEditing = patientId !== undefined;
     const [patient, setPatient] = useState(initialPatientState);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const apiUrl = process.env.REACT_APP_API_URL;
-    
-    const { patientId } = useParams();
-    const navigate = useNavigate();
-    const isEditing = patientId !== undefined;
+    //tooltip variables
+    const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [tooltipContent, setTooltipContent] = useState('');
+    const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
+    //button can be clicked once
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false); // State variable to track button disabled status
 
+    const validateInputs = () => {
+        
+        //phone
+        if (!patient.whatsapp.trim()) {
+            setErrorMessage('Whatsapp é obrigatório.');
+            return false;
+        }
+
+        //dias para vencimento
+        const dias = Number(patient.dias_para_vencimento_apos_cobranca); // Convert to number
+        if (isNaN(dias)) {
+            setErrorMessage('Dias para vencimento após cobrança deve ser numérico.');
+            return false;
+        } else if (patient.dias_para_vencimento_apos_cobranca  && (!Number.isInteger(dias) || dias <= 0) ) {
+            setErrorMessage('Dias para vencimento após cobrança deve ser um número inteiro maior que zero.');
+            return false;
+        }
+        
+    
+        // preco_por_consulta
+        if (!patient.preco_por_consulta) {
+            setErrorMessage('Preço por consulta é obrigatório.');
+            return false;
+        }
+        const preco = parseFloat(patient.preco_por_consulta);
+        if (isNaN(preco) || preco < 0) {
+            setErrorMessage('Preço por consulta deve ser um número positivo.');
+            return false;
+        }
+        const decimalCheck = (/^\d+(\.\d{0,2})?$/).test(patient.preco_por_consulta); // Check if the price has more than two decimal places
+        if (!decimalCheck) {
+            setErrorMessage('Preço por consulta deve ter no máximo duas casas decimais.');
+            return false;
+        }
+
+        //cpf_para_nota_fiscal_ou_recibo
+        const regexTestDocument = (documentNumber) => {
+            const regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+            return regex.test(documentNumber);
+        };
+        if (patient.cpf_para_nota_fiscal_ou_recibo != null && !regexTestDocument(patient.cpf_para_nota_fiscal_ou_recibo) ) {
+            setErrorMessage('Documento incompleto ou inválido.');
+            return false;
+        }
+        
+                
+        //pass
+        return true;
+    };
+    
     useEffect(() => {
         const token = localStorage.getItem('token');
         
@@ -62,13 +116,13 @@ const PatientForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        setErrorMessage('');
+        if (!validateInputs()) return;
+
+        setIsButtonDisabled(true); // Disable the button on submit
+        
         const token = localStorage.getItem('token');
-    
-        if (!token) {
-            navigate('/login');
-            return;
-        }
-    
         const method = isEditing ? 'PUT' : 'POST';
         const url = isEditing ? `${apiUrl}/api/user-patients/${patientId}/` : `${apiUrl}/api/user-patients/`;
     
@@ -82,6 +136,7 @@ const PatientForm = () => {
         })
         .then(response => {
             if (!response.ok) {
+                setIsButtonDisabled(false);
                 return response.json().then(error => {
                     const errorMessages = Object.keys(error).map(key => `${key}: ${error[key].join(", ")}`).join("\n");
                     setErrorMessage(`Error Response: ${errorMessages}`);
@@ -101,12 +156,25 @@ const PatientForm = () => {
         .catch(error => {
             console.error('Error:', error);
             setErrorMessage('An unexpected error occurred.'); // Generic error message
+            setIsButtonDisabled(false);
         });
     };
     
     const handleReturn = () => {
         navigate('/dashboard/meus-pacientes'); // Navigate to the dashboard
     };
+
+    const showTooltip = (event, content) => {
+        const { top, left, height } = event.currentTarget.getBoundingClientRect();
+        setTooltipContent(content);
+        setTooltipPosition({ top: top + height + window.scrollY, left: left + window.scrollX });
+        setTooltipVisible(true);
+    };
+
+    const hideTooltip = () => {
+        setTooltipVisible(false);
+    };
+
     return (
         <div className='patient-form-container'>
 
@@ -118,41 +186,59 @@ const PatientForm = () => {
 
                 {/* Nome do Paciente */}
                 <span className="value-display">Nome do Paciente </span>
-                <span className="fa fa-info-circle tooltip-icon" title="Nome da pessoa que recebe o atendimento (se forem mais de uma pessoa, escreva todos os nomes no mesmo campo, separados por vírgula)"></span>
+                <span
+                    className="fa fa-info-circle tooltip-icon"
+                    onMouseEnter={(e) => showTooltip(e, "Nome da pessoa que recebe o atendimento (se forem mais de uma pessoa, escreva todos os nomes no mesmo campo, separados por vírgula)")}
+                    onMouseLeave={hideTooltip}
+                ></span>
                 <input
                     type="text"
                     name="nome_paciente"
                     value={patient.nome_paciente || ''}
                     onChange={handleInputChange}
-                    placeholder="Nome do Paciente"
+                    placeholder="Ex: João Silva"
                     required
                 />
                 
                 {/* Nome do Contato no WhatsApp */}
                 <span className="value-display">Nome do Contato no WhatsApp </span>
-                <span className="fa fa-info-circle tooltip-icon" title="Nome da pessoa para quem será feita a cobrança"></span>
+                <span
+                    className="fa fa-info-circle tooltip-icon"
+                    onMouseEnter={(e) => showTooltip(e, "Nome da pessoa para quem será feita a cobrança")}
+                    onMouseLeave={hideTooltip}
+                ></span>
                 <input
                     type="text"
                     name="nome_contato_whatsapp"
                     value={patient.nome_contato_whatsapp || ''}
                     onChange={handleInputChange}
-                    placeholder="Nome do Contato no WhatsApp"
+                    placeholder="Ex: Maria Silva"
                 />
 
                 {/* WhatsApp */}
                 <span className="value-display">WhatsApp </span>
-                <span className="fa fa-info-circle tooltip-icon" title="Whatsapp da pessoa que receberá a cobrança"></span>
+                <span
+                    className="fa fa-info-circle tooltip-icon"
+                    onMouseEnter={(e) => showTooltip(e, "Whatsapp da pessoa que receberá a cobrança")}
+                    onMouseLeave={hideTooltip}
+                ></span>
                 <input
                     type="text"
                     name="whatsapp"
                     value={patient.whatsapp || ''}
                     onChange={handleInputChange}
-                    placeholder="WhatsApp"
+                    placeholder="Ex: 11912345678"
+                    pattern="\d{11}"
+                    title="Digite o WhatsApp no formato 11912345678. Apenas números, DDD + 9 dígitos."
                 />
 
                 {/* envia_cobranca */}
                 <span className="value-display">Envia Cobrança? </span>
-                <span className="fa fa-info-circle tooltip-icon" title="Paciente deveria receber alguma cobrança?"></span>
+                <span
+                    className="fa fa-info-circle tooltip-icon"
+                    onMouseEnter={(e) => showTooltip(e, "Paciente deveria receber alguma cobrança?")}
+                    onMouseLeave={hideTooltip}
+                ></span>
                 <select
                     name="envia_cobranca"
                     value={patient.envia_cobranca || ''}
@@ -167,7 +253,11 @@ const PatientForm = () => {
                 {patient.envia_cobranca !== 'Não' && (
                     <div>
                         <span className="value-display">Tipo de Cobrança </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="O paciente deve pagar de forma pós-mensal, ou seja, após o atendimento"></span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "O paciente deve pagar de forma pós-mensal, ou seja, após o atendimento")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <input
                             type="text"
                             name="tipo_cobranca"
@@ -182,14 +272,21 @@ const PatientForm = () => {
                 {/* Data de Cobrança */}
                 {patient.envia_cobranca !== 'Não' && (
                     <div>
-                        <span className="value-display">Data de Cobrança </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="Em qual data deve ser cobrado o pagamento?"></span>
+                        <span className="value-display">Dia de Cobrança </span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "Em qual dia do mês deve ser cobrado o pagamento?")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <input
-                            type="date"
+                            type="number"
                             name="data_cobranca"
                             value={patient.data_cobranca || null}
                             onChange={handleInputChange}
-                            placeholder="Data de Cobrança"
+                            placeholder="Ex: 25"
+                            step="1"
+                            min="1"
+                            max="31"
                         />
                     </div>
                 )}
@@ -198,20 +295,30 @@ const PatientForm = () => {
                 {patient.envia_cobranca !== 'Não' && (
                     <div>
                         <span className="value-display">Dias para Vencimento Após Cobrança </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="Quantos dias a pessoa tem de prazo para pagar?"></span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "Quantos dias a pessoa tem de prazo para pagar?")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <input
-                            type="text"
+                            type="number"
                             name="dias_para_vencimento_apos_cobranca"
                             value={patient.dias_para_vencimento_apos_cobranca || null}
                             onChange={handleInputChange}
-                            placeholder="Dias para vencimento após cobrança"
+                            placeholder="Ex: 1"
+                            step="1" 
+                            min="0"
                         />
                     </div>
                 )}
 
                 {/* preco_por_consulta */}
                 <span className="value-display">Preço por Consulta (R$) </span>
-                <span className="fa fa-info-circle tooltip-icon" title="Valor da consulta (se for pró bono / social, insira o número 0)"></span>
+                <span
+                    className="fa fa-info-circle tooltip-icon"
+                    onMouseEnter={(e) => showTooltip(e, "Valor da consulta (se for pró bono / social, insira o número 0)")}
+                    onMouseLeave={hideTooltip}
+                ></span>
                 <input
                     type="number"
                     name="preco_por_consulta"
@@ -224,7 +331,11 @@ const PatientForm = () => {
                                 
                 {/* emissao */}
                 <span className="value-display">Emissão </span>
-                <span className="fa fa-info-circle tooltip-icon" title="Como deve ser feito o comprovante de pagamento para a pessoa?"></span>
+                <span
+                    className="fa fa-info-circle tooltip-icon"
+                    onMouseEnter={(e) => showTooltip(e, "Como deve ser feito o comprovante de pagamento para a pessoa?")}
+                    onMouseLeave={hideTooltip}
+                ></span>
                 <select
                     name="emissao"
                     value={patient.emissao || ''}
@@ -242,7 +353,11 @@ const PatientForm = () => {
                 {patient.emissao === 'emissao_customizada' && (
                     <div>
                         <span className="value-display">Emissão Customizada </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="Se não houver quebra, deixe em branco. Caso este paciente precise quebrar uma mesma consulta em mais de uma sessão, pessoa ou qualquer outra especificidade, escreva tudo aqui"></span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "Se não houver quebra, deixe em branco. Caso este paciente precise quebrar uma mesma consulta em mais de uma sessão, pessoa ou qualquer outra especificidade, escreva tudo aqui")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <input
                             type="text"
                             name="emissao_customizada"
@@ -257,7 +372,11 @@ const PatientForm = () => {
                 {patient.envia_cobranca !== 'Não' && (
                     <div>
                         <span className="value-display">Método de Pagamento </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="Primeiro ou segundo PIX cadastrado para o consultório"></span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "Primeiro ou segundo PIX cadastrado para o consultório")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <select
                             name="metodo_pagamento"
                             value={patient.metodo_pagamento || ''}
@@ -274,13 +393,17 @@ const PatientForm = () => {
                 {patient.emissao !== 'nada' && (
                     <div>
                         <span className="value-display">Nome Completo para Nota Fiscal ou Recibo </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="Nome completo para ser inserido no recibo/NF"></span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "Nome completo para ser inserido no recibo/NF")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <input
                             type="text"
                             name="nome_completo_para_nota_fiscal_ou_recibo"
                             value={patient.nome_completo_para_nota_fiscal_ou_recibo || ''}
                             onChange={handleInputChange}
-                            placeholder="Nome completo para nota fiscal ou recibo"
+                            placeholder="Ex: João Silva"
                         />
                     </div>
                 )}
@@ -289,13 +412,17 @@ const PatientForm = () => {
                 {patient.emissao !== 'nada' && (
                     <div>
                         <span className="value-display">CPF para Nota Fiscal ou Recibo </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="CPF para ser inserido no recibo/NF"></span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "CPF para ser inserido no recibo/NF")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <input
                             type="text"
                             name="cpf_para_nota_fiscal_ou_recibo"
                             value={patient.cpf_para_nota_fiscal_ou_recibo || ''}
                             onChange={handleInputChange}
-                            placeholder="CPF para nota fiscal ou recibo"
+                            placeholder="Ex: 123.456.789-00"
                             pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"  // Pattern for Brazilian CPF
                             title="Digite um CPF no formato 000.000.000-00"
                         />
@@ -307,13 +434,17 @@ const PatientForm = () => {
                 {patient.emissao !== 'nada' && (
                     <div>
                         <span className="value-display">Endereço Completo </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="Endereço para ser adicionado no recibo/NF"></span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "Endereço para ser adicionado no recibo/NF")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <input
                             type="text"
                             name="endereco_completo"
                             value={patient.endereco_completo || ''}
                             onChange={handleInputChange}
-                            placeholder="Endereço Completo"
+                            placeholder="Ex: Rua Vergueiro 1057 apto 123"
                         />
                     </div>
                 )}
@@ -322,7 +453,11 @@ const PatientForm = () => {
                 {patient.emissao !== 'nada' && (
                     <div>
                         <span className="value-display">Precisa de Declaração de Atendimento Psicológico? </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="Paciente precisa de uma declaração de atendimento psicológico para comprovar o tratamento?"></span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "Paciente precisa de uma declaração de atendimento psicológico para comprovar o tratamento?")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <select
                             name="declaracao_atendimento_psicologico"
                             value={patient.declaracao_atendimento_psicologico || ''}
@@ -339,7 +474,11 @@ const PatientForm = () => {
                 {patient.emissao !== 'nada' && patient.declaracao_atendimento_psicologico === 'Sim' && (
                     <div>
                         <span className="value-display">Data de Início do Tratamento Psicológico </span>
-                        <span className="fa fa-info-circle tooltip-icon" title="Caso o paciente precise de uma declaração de atendimento psicológico, qual é a data de início do tratamento?"></span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "Caso o paciente precise de uma declaração de atendimento psicológico, qual é a data de início do tratamento?")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
                         <input
                             type="date"
                             name="data_inicio_declaracao_atendimento_psicologico"
@@ -349,14 +488,22 @@ const PatientForm = () => {
                     </div>
                 )}
 
-
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
 
                 {/* Submit Button */}
-                <button type="submit">{isEditing ? 'Atualizar' : 'Adicionar'}</button>
+                <button type="submit" disabled={isButtonDisabled}>
+                    {isEditing ? 'Atualizar' : 'Adicionar'}
+                </button>
+
             </form>
 
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
-            {successMessage && <div className="success-message">{successMessage}</div>}
+            
+            {tooltipVisible && (
+            <div className="custom-tooltip" style={{ top: tooltipPosition.top, left: tooltipPosition.left }}>
+                {tooltipContent}
+            </div>
+            )}
 
         </div>
     );

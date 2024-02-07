@@ -8,6 +8,9 @@ import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import DeleteConfirmationModal from './DeleteConfirmationModal'; // Adjust the path as necessary
 import EventCreationModal from './EventCreationModal'; // Adjust the path as necessary
 import { rrulestr, RRule } from 'rrule';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 
 const Agenda = () => {
     const navigate = useNavigate();
@@ -384,8 +387,15 @@ const Agenda = () => {
         }
     };
 
+    const goToDashboard = () => {
+        navigate('/dashboard'); 
+    };
+
     return (
         <div className="agenda">
+            <div className="dashboard-link">
+                <button onClick={goToDashboard} className="dashboard-button"><FontAwesomeIcon icon={faArrowLeft} /> Voltar</button>
+            </div>
             <h2>Agenda</h2>
       
 
