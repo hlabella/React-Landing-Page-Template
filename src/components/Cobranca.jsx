@@ -144,6 +144,45 @@ const Cobranca = () => {
         }
     };
     
+    const handleCobrancaChange = async (patientId, currentStatus) => {
+        const newStatus = !currentStatus; // Toggle the current boolean status
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+    
+        try {
+            // API call to update patient.envia_cobranca
+            const response = await fetch(`${apiUrl}/api/user-patients/${patientId}/`, {
+                method: 'PATCH', // Use PATCH to partially update the resource
+                headers: {
+                    'Authorization': `Token ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    envia_cobranca: newStatus, // Send the new boolean status
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            // Update the local state to reflect the change
+            setPatientsData(prevPatientsData =>
+                prevPatientsData.map(patient => {
+                    if (patient.patient_id === patientId) {
+                        return { ...patient, envia_cobranca: newStatus };
+                    }
+                    return patient;
+                }),
+            );
+        } catch (error) {
+            console.error('Error updating envia_cobranca:', error);
+        }
+    };    
+
     const generateMonthYearOptions = (startYear) => {
         const options = [];
         const currentDate = new Date();
@@ -240,7 +279,7 @@ const Cobranca = () => {
                     <p>Valor de Cancelamentos </p>
                     <p>Total Calculado</p>
                     <p>Total para Cobrança</p>
-                    {/*<p>Envia Cobrança?</p>*/}
+                    <p>Envia Cobrança?</p>
                     <p>Pagamento Efetuado</p>
                 </div>
                 {patientsData.map(patient => {
@@ -266,7 +305,13 @@ const Cobranca = () => {
                             <p>{formattedTotalCancelledEvents}</p>
                             <p>{formattedTotal}</p>
                             {renderOverrides(patient)}
-                            {/*<p>{patient.envia_cobranca}</p>*/}
+                            <p>
+                                <input
+                                    type="checkbox"
+                                    checked={patient.envia_cobranca}
+                                    onChange={() => handleCobrancaChange(patient.patient_id, patient.envia_cobranca)}
+                                />
+                            </p>
                             {renderPaymentStatus(patient)}
                         </div>
                     );

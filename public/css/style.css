@@ -368,8 +368,6 @@ a:focus,
 
 
 
-
-
 /* Features Section */
 #features {
   background: #f6f6f6;
@@ -386,10 +384,12 @@ a:focus,
   background: linear-gradient(to right, #0E131F 0%, #38405F 100%);
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
 }
+
 /* About Section */
 #about {
   padding: 100px 0;
   padding-bottom: 0px;
+  margin-bottom: 50px;
 }
 #about h3 {
   font-size: 22px;
@@ -416,8 +416,8 @@ a:focus,
   list-style: none;
   padding: 0;
 }
+
 #about .about-text li:before {
-  content: "\f00c";
   font-family: "FontAwesome";
   color: #38405F;
   font-size: 11px;
@@ -425,7 +425,7 @@ a:focus,
   padding-right: 8px;
 }
 #about img {
-  width: 520px;
+  width: 500px;
   margin-top: 10px;
   background: #fff;
   border-right: 0;
@@ -438,6 +438,17 @@ a:focus,
 
 #about .aboutWhy p {
   margin: 5px;
+}
+
+.about-text ul li strong {
+  cursor: pointer;
+  margin-right: 5px;
+  margin-left: 10px;
+  user-select: none; /* Prevent text selection */
+}
+
+.about-text ul li strong:hover {
+  color: #b0b1b1; /* Change color on hover */
 }
 
 /* Services Section */
@@ -1278,7 +1289,7 @@ label {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  width: 1000px;
+  width: 1200px;
   margin: 20px auto;
   overflow-x: auto;
   margin-top:120px;
@@ -1387,6 +1398,7 @@ label {
 .patient-form-container input[type="text"],
 .patient-form-container input[type="date"],
 .patient-form-container input[type="number"],
+.patient-form-container .customizedinput,
 .patient-form-container select {
   width: 100%;
   padding: 10px;
@@ -1458,7 +1470,8 @@ label {
   color: white;
   border-radius: 4px;
   z-index: 1000;
-  white-space: nowrap;
+  max-width: 300px; 
+  word-wrap: break-word; 
 }
 
 

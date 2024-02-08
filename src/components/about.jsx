@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareMinus, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+
 
 export const About = (props) => {
 
@@ -29,25 +32,27 @@ export const About = (props) => {
                 <div className="col-lg-6 col-sm-6 col-xs-12">
                   <ul>
                     {props.data
-                      ? props.data.Why.map((d, i) => (
-                          <li key={`${d.title}-${i}`}>
-                            <strong onClick={() => toggleAbout(i)}>{d.title}</strong>
-                            {activeIndex === i && <p>{d.description}</p>}
-                          </li>
-                        ))
-                      : "loading"}
+                        ? props.data.Why.map((d, i) => (
+                            <li key={`${d.title}-${i}`} onClick={() => toggleAbout(i)}>
+                              <FontAwesomeIcon icon={activeIndex === i ? faSquareMinus : faSquarePlus} />
+                              <strong>{d.title}</strong>
+                              {activeIndex === i && <p>{d.description}</p>}
+                            </li>
+                          ))
+                        : "loading"}
                   </ul>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-xs-12">
                   <ul>
                     {props.data
-                      ? props.data.Why2.map((d, i) => (
-                          <li key={`${d.title}-${i}`}>
-                            <strong onClick={() => toggleAbout(i + props.data.Why.length)}>{d.title}</strong>
-                            {activeIndex === i + props.data.Why.length && <p>{d.description}</p>}
-                          </li>
-                        ))
-                      : "loading"}
+                        ? props.data.Why2.map((d, i) => (
+                            <li key={`${d.title}-${i}`} onClick={() => toggleAbout(i + props.data.Why.length)}>
+                              <FontAwesomeIcon icon={activeIndex === i + props.data.Why.length ? faSquareMinus : faSquarePlus} />
+                              <strong>{d.title}</strong>
+                              {activeIndex === i + props.data.Why.length && <p>{d.description}</p>}
+                            </li>
+                          ))
+                        : "loading"}
                   </ul>
                 </div>
               </div>

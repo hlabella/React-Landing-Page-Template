@@ -27,6 +27,31 @@ const EventCreationModal = ({ isOpen, onClose, onSubmit, patients, selectInfo })
         SA: false,
         SU: false,
     });
+
+    const validateInputs = () => {
+        // Check for a selected patient
+        if (!selectedPatient) {
+            alert("Selecione um paciente");
+            return false;
+        }
+    
+        // Validation for 'UNTIL' end criteria
+        if (recurrence.end === 'UNTIL' && !recurrence.untilDate) {
+            alert("Especifique a data final");
+            return false;
+        }
+    
+        // Validation for 'COUNT' end criteria
+        if (recurrence.end === 'COUNT' && !recurrence.count) {
+            alert("Especifique quantas vezes o event deve acontecer");
+            return false;
+        }
+    
+        // Additional validation conditions can be added here
+    
+        return true; // Form is valid
+    };
+    
     
     // Update selectedPatient when the modal opens
     useEffect(() => {
@@ -35,10 +60,32 @@ const EventCreationModal = ({ isOpen, onClose, onSubmit, patients, selectInfo })
         }
     }, [isOpen, patients]);
 
+    const resetFormState = () => {
+        setSelectedPatient(patients.length > 0 ? patients[0].nome_paciente : '');
+        setRecurrence({
+            frequency: 'NONE',
+            end: 'NEVER',
+            untilDate: '',
+            count: '',
+        });
+        setSelectedDays({
+            MO: false,
+            TU: false,
+            WE: false,
+            TH: false,
+            FR: false,
+            SA: false,
+            SU: false,
+        });
+    };
+
     const handleSubmit = () => {
 
+        if (!validateInputs()) {
+            return; // Stop the submission process
+        }
+        
         let start, end;
-    
         if (selectInfo.allDay) {
             // Parse date as local date at midnight
             const startDate = new Date(selectInfo.startStr + 'T00:00:00');
@@ -71,7 +118,7 @@ const EventCreationModal = ({ isOpen, onClose, onSubmit, patients, selectInfo })
             rrule: buildRRuleString() || null,
             allDay: selectInfo.allDay
         });
-        onClose();
+        resetFormState();
     };
 
     const buildRRuleString = () => {
@@ -113,7 +160,7 @@ const EventCreationModal = ({ isOpen, onClose, onSubmit, patients, selectInfo })
         }
 
         const rrule = new RRule(rruleOptions);
-        console.log(rrule.toString());
+        //console.log(rrule.toString());
         return rrule.toString();
     };
 

@@ -1878,6 +1878,11 @@
   dependencies:
     "@swc/helpers" "^0.5.0"
 
+"@react-br-forms/cpf-cnpj-mask@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@react-br-forms/cpf-cnpj-mask/-/cpf-cnpj-mask-1.0.6.tgz#34bfd22d8d4bbe69e1f71a0770b3d0f33a75eb30"
+  integrity sha512-zZFDpJC45vx1jqB2E47/wfs7vF4Mjz/rm/0uqrkJgZWUdZ2eMMceBK9g+Xqbh6wVj6vx89gAQ+2CxH5UEAL9Iw==
+
 "@remix-run/router@1.12.0":
   version "1.12.0"
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.12.0.tgz"

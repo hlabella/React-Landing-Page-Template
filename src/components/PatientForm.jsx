@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
-
+import CpfCnpj from '@react-br-forms/cpf-cnpj-mask';
 
 const PatientForm = () => {
 
     const initialPatientState = {
-        nome_paciente: null,
-        nome_contato_whatsapp: null,
-        whatsapp: null,
-        envia_cobranca: null,
+        nome_paciente: '',
+        nome_contato_whatsapp: '',
+        whatsapp: '',
+        envia_cobranca: true,
         tipo_cobranca: 'Pós-mensal',
-        data_cobranca: null,
-        dias_para_vencimento_apos_cobranca: null,
-        preco_por_consulta: null,
-        emissao: null,
-        emissao_customizada: null,
-        metodo_pagamento: null,
-        nome_completo_para_nota_fiscal_ou_recibo: null,
-        cpf_para_nota_fiscal_ou_recibo: null,
-        endereco_completo: null,
-        declaracao_atendimento_psicologico: null,
-        data_inicio_declaracao_atendimento_psicologico: null        
+        data_cobranca: '1', 
+        dias_para_vencimento_apos_cobranca: '', 
+        preco_por_consulta: '', 
+        emissao: 'nada', 
+        emissao_customizada: '', 
+        metodo_pagamento: 'chave_pix1', 
+        nome_completo_para_nota_fiscal_ou_recibo: '',
+        cpf_para_nota_fiscal_ou_recibo: '',
+        endereco_completo: '',
+        declaracao_atendimento_psicologico: false, 
+        data_inicio_declaracao_atendimento_psicologico: '' 
     };
     const { patientId } = useParams();
     const navigate = useNavigate();
@@ -36,6 +35,8 @@ const PatientForm = () => {
     const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
     //button can be clicked once
     const [isButtonDisabled, setIsButtonDisabled] = useState(false); // State variable to track button disabled status
+    const [cpfCnpj, setCpfCnpj] = useState(""); // State to hold the CPF/CNPJ value
+    const [isCPF, setIsCPF] = useState(true); // State to determine if the input is CPF
 
     const validateInputs = () => {
         
@@ -106,12 +107,34 @@ const PatientForm = () => {
             .then(response => response.json())
             .then(data => {
                 setPatient(data);
+                setCpfCnpj(data.cpf_para_nota_fiscal_ou_recibo);
             });       
         }
     }, [patientId, isEditing, navigate]);
 
     const handleInputChange = (event) => {
-        setPatient({ ...patient, [event.target.name]: event.target.value });
+        const { name, value } = event.target;
+    
+        // Determine if the field being changed is a boolean field
+        const isBooleanField = ['envia_cobranca', 'declaracao_atendimento_psicologico'].includes(name);
+    
+        // Convert "true" and "false" strings to actual boolean values for boolean fields
+        const inputValue = isBooleanField ? value === "true" : value;
+    
+        setPatient({
+            ...patient,
+            [name]: inputValue,
+        });
+    };    
+
+    // Function to handle changes in the CpfCnpj component
+    const handleCpfCnpjChange = (value, type) => {
+        setCpfCnpj(value); // Update the CPF/CNPJ value
+        setIsCPF(type === "CPF"); // Update the input type (CPF or CNPJ)
+        setPatient({
+            ...patient,
+            cpf_para_nota_fiscal_ou_recibo: value, // Update the patient state with the new CPF/CNPJ value
+        });
     };
 
     const handleSubmit = (event) => {
@@ -122,10 +145,16 @@ const PatientForm = () => {
 
         setIsButtonDisabled(true); // Disable the button on submit
         
+        if (patient.data_inicio_declaracao_atendimento_psicologico === '') {
+            patient.data_inicio_declaracao_atendimento_psicologico = null;
+        }
+        
         const token = localStorage.getItem('token');
         const method = isEditing ? 'PUT' : 'POST';
         const url = isEditing ? `${apiUrl}/api/user-patients/${patientId}/` : `${apiUrl}/api/user-patients/`;
-    
+
+        //console.log('patient',patient);
+
         fetch(url, {
             method: method,
             headers: {
@@ -241,16 +270,15 @@ const PatientForm = () => {
                 ></span>
                 <select
                     name="envia_cobranca"
-                    value={patient.envia_cobranca || ''}
+                    value={patient.envia_cobranca ? "true" : "false"}
                     onChange={handleInputChange}
                 >
-                    <option value="">Selecione</option>
-                    <option value="Sim">Sim</option>
-                    <option value="Não">Não</option>
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
                 </select>
                 
                 {/* Tipo de Cobrança */}
-                {patient.envia_cobranca !== 'Não' && (
+                {patient.envia_cobranca && (
                     <div>
                         <span className="value-display">Tipo de Cobrança </span>
                         <span
@@ -270,29 +298,29 @@ const PatientForm = () => {
                 )}
 
                 {/* Data de Cobrança */}
-                {patient.envia_cobranca !== 'Não' && (
+                {patient.envia_cobranca && (
                     <div>
                         <span className="value-display">Dia de Cobrança </span>
                         <span
                             className="fa fa-info-circle tooltip-icon"
-                            onMouseEnter={(e) => showTooltip(e, "Em qual dia do mês deve ser cobrado o pagamento?")}
+                            onMouseEnter={(e) => showTooltip(e, "Em qual dia após o fechamento do mês deve ser cobrado o pagamento?")}
                             onMouseLeave={hideTooltip}
                         ></span>
-                        <input
-                            type="number"
+                        <select
                             name="data_cobranca"
-                            value={patient.data_cobranca || null}
+                            value={patient.data_cobranca || '1'} // Default to "1" if no value is set
                             onChange={handleInputChange}
-                            placeholder="Ex: 25"
-                            step="1"
-                            min="1"
-                            max="31"
-                        />
+                        >
+                            <option value="1">dia 1 (recomendado)</option>
+                            {[...Array(14).keys()].map(day => (
+                                <option key={day + 2} value={day + 2}>dia {day + 2}</option>
+                            ))}
+                        </select>
                     </div>
                 )}
 
                 {/* dias_para_vencimento_apos_cobranca */}
-                {patient.envia_cobranca !== 'Não' && (
+                {patient.envia_cobranca && (
                     <div>
                         <span className="value-display">Dias para Vencimento Após Cobrança </span>
                         <span
@@ -303,12 +331,32 @@ const PatientForm = () => {
                         <input
                             type="number"
                             name="dias_para_vencimento_apos_cobranca"
-                            value={patient.dias_para_vencimento_apos_cobranca || null}
+                            value={patient.dias_para_vencimento_apos_cobranca || ''}
                             onChange={handleInputChange}
                             placeholder="Ex: 1"
                             step="1" 
                             min="0"
                         />
+                    </div>
+                )}
+
+                {/* metodo_pagamento */}
+                {patient.envia_cobranca && (
+                    <div>
+                        <span className="value-display">Método de Pagamento </span>
+                        <span
+                            className="fa fa-info-circle tooltip-icon"
+                            onMouseEnter={(e) => showTooltip(e, "Primeiro ou segundo PIX cadastrado para o consultório")}
+                            onMouseLeave={hideTooltip}
+                        ></span>
+                        <select
+                            name="metodo_pagamento"
+                            value={patient.metodo_pagamento || ''}
+                            onChange={handleInputChange}
+                        >
+                            <option value="chave_pix1">Chave Pix 1</option>
+                            <option value="chave_pix2">Chave Pix 2</option>
+                        </select>
                     </div>
                 )}
 
@@ -338,14 +386,12 @@ const PatientForm = () => {
                 ></span>
                 <select
                     name="emissao"
-                    value={patient.emissao || ''}
+                    value={patient.emissao || 'nada'}
                     onChange={handleInputChange}
                 >
-                    <option value="">Selecione uma opção</option>
                     <option value="nada">Nada</option>
                     <option value="recibo">Recibo</option>
                     <option value="nf">Nota Fiscal</option>
-                    <option value="recibo_nf">Recibo e Nota Fiscal</option>
                     <option value="emissao_customizada">Emissão Customizada</option>
                 </select>
 
@@ -368,26 +414,7 @@ const PatientForm = () => {
                     </div>
                 )}
                 
-                {/* metodo_pagamento */}
-                {patient.envia_cobranca !== 'Não' && (
-                    <div>
-                        <span className="value-display">Método de Pagamento </span>
-                        <span
-                            className="fa fa-info-circle tooltip-icon"
-                            onMouseEnter={(e) => showTooltip(e, "Primeiro ou segundo PIX cadastrado para o consultório")}
-                            onMouseLeave={hideTooltip}
-                        ></span>
-                        <select
-                            name="metodo_pagamento"
-                            value={patient.metodo_pagamento || ''}
-                            onChange={handleInputChange}
-                        >
-                            <option value="">Selecione o Método de Pagamento</option>
-                            <option value="chave_pix1">Chave Pix 1</option>
-                            <option value="chave_pix2">Chave Pix 2</option>
-                        </select>
-                    </div>
-                )}
+                
 
                 {/* nome_completo_para_nota_fiscal_ou_recibo */}
                 {patient.emissao !== 'nada' && (
@@ -417,14 +444,13 @@ const PatientForm = () => {
                             onMouseEnter={(e) => showTooltip(e, "CPF para ser inserido no recibo/NF")}
                             onMouseLeave={hideTooltip}
                         ></span>
-                        <input
-                            type="text"
+                        <CpfCnpj
+                            className="customizedInput"
                             name="cpf_para_nota_fiscal_ou_recibo"
-                            value={patient.cpf_para_nota_fiscal_ou_recibo || ''}
-                            onChange={handleInputChange}
-                            placeholder="Ex: 123.456.789-00"
-                            pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"  // Pattern for Brazilian CPF
-                            title="Digite um CPF no formato 000.000.000-00"
+                            placeholder="Digite um CPF ou CNPJ"
+                            type="tel"
+                            value={cpfCnpj}
+                            onChange={(event, type) => handleCpfCnpjChange(event.target.value, type)}
                         />
                     </div>
                 )}
@@ -460,18 +486,19 @@ const PatientForm = () => {
                         ></span>
                         <select
                             name="declaracao_atendimento_psicologico"
-                            value={patient.declaracao_atendimento_psicologico || ''}
+                            value={patient.declaracao_atendimento_psicologico ? "true" : "false"} // Consistently use "true" and "false" strings
                             onChange={handleInputChange}
                         >
-                            <option value="Não">Não</option>
-                            <option value="Sim">Sim</option>
+                            <option value="false">Não</option>
+                            <option value="true">Sim</option>
                         </select>
+
                     </div>
                 )}
 
 
                 {/* data inicio declaracao */}
-                {patient.emissao !== 'nada' && patient.declaracao_atendimento_psicologico === 'Sim' && (
+                {patient.emissao !== 'nada' && patient.declaracao_atendimento_psicologico && (
                     <div>
                         <span className="value-display">Data de Início do Tratamento Psicológico </span>
                         <span
@@ -482,7 +509,7 @@ const PatientForm = () => {
                         <input
                             type="date"
                             name="data_inicio_declaracao_atendimento_psicologico"
-                            value={patient.data_inicio_declaracao_atendimento_psicologico || null}
+                            value={patient.data_inicio_declaracao_atendimento_psicologico || ''}
                             onChange={handleInputChange}
                         />
                     </div>
