@@ -118,6 +118,19 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
                 eventDate: formattedDate,
                 chargeValue: chargeValue
             })
+        }).then(response => {
+            if (!response.ok) {
+                // If the server response was not ok, throw an error
+                console.log(response.json())
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse the JSON of the response
+        })
+        .then(() => {
+            onClose();
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
 
         //fetchData();
@@ -151,7 +164,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
                             onChange={handleCancellationChange} 
                         />
                         <span className="custom-checkbox"></span>
-                        <span className="checkbox-label">Evento cancelado pelo paciente</span>
+                        <span className="checkbox-label">Cobrar multa por cancelamento</span>
                     </label>
                 
                     {isCancelledByPatient && (

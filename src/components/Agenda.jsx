@@ -190,14 +190,16 @@ const Agenda = () => {
                 },
                 body: JSON.stringify(newEvent)
             });
-    
+            
             if (!response.ok) {
                 // To get more detailed error information
                 const errorResponse = await response.text();
                 console.error("Server responded with an error:", errorResponse);
                 throw new Error(`Event creation failed: ${response.status} ${response.statusText}`);
             }
-
+            
+            setIsModalOpen(false);
+            
             // Extract the ID from the response
             const responseData = await response.json();
             const createdEventId = responseData.id;
@@ -276,7 +278,7 @@ const Agenda = () => {
         }
 
         const occurrenceDate = eventToDelete.start; // The date of the occurrence to delete
-
+        
         try {
             const response = await fetch(`${apiUrl}/api/remove_future_occurrences/`, {
                 method: 'PUT',
@@ -312,6 +314,9 @@ const Agenda = () => {
             console.error('No event selected for deletion');
             return;
         }
+
+        // Close the modal
+        setIsDeleteModalOpen(false);
     
         try {
             const response = await fetch(`${apiUrl}/api/remove/`, {
@@ -337,8 +342,7 @@ const Agenda = () => {
                 return updatedEvents;
             });
             
-            // Close the modal
-            setIsDeleteModalOpen(false);
+            
         } catch (error) {
             console.error('Error deleting event:', error);
             // You might want to display an error message to the user here

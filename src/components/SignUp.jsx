@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const SignUp = () => {
@@ -17,7 +17,44 @@ const SignUp = () => {
     const [isPrivacyModalOpen, setPrivacyModalOpen] = useState(false);
     const [isTermsModalOpen, setTermsModalOpen] = useState(false);
 
+    const privacyModalRef = useRef(); // Create a ref for the privacy modal
+    const termsModalRef = useRef(); // Create a ref for the terms modal
+  
 
+    //privacy modal
+    useEffect(() => {
+        // Function to handle click event
+        const handleClickOutside = (event) => {
+        if (privacyModalRef.current && !privacyModalRef.current.contains(event.target)) {
+            setPrivacyModalOpen(false); // Close the modal if click is outside the modal content
+        }
+        };
+
+        // Add event listener when the privacy modal is open
+        if (isPrivacyModalOpen) {
+        document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        // Cleanup the event listener
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isPrivacyModalOpen]); // Only re-run the effect if isPrivacyModalOpen changes
+
+    //terms modal
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+        if (termsModalRef.current && !termsModalRef.current.contains(event.target)) {
+            setTermsModalOpen(false); // Close the modal if click is outside the modal content
+        }
+        };
+
+        if (isTermsModalOpen) {
+        document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isTermsModalOpen]);
+
+    
     const validateInputs = () => {
         if (!email.trim()) {
             setError('Email é obrigatório.');
@@ -211,8 +248,8 @@ const SignUp = () => {
             </div>
 
             {isPrivacyModalOpen && (
-                <div className="modalcontact">
-                <div className="modalcontact-content" style={{textAlign:"left"}}>
+                <div className="modalcontact" onClick={() => setPrivacyModalOpen(false)}>
+                <div className="modalcontact-content" style={{textAlign:"left"}} onClick={e => e.stopPropagation()} ref={privacyModalRef}>
                     <span className="close" onClick={() => setPrivacyModalOpen(false)}>&times;</span>
                     <h2>Política de Privacidade</h2>
                     <p>
@@ -239,8 +276,8 @@ const SignUp = () => {
             )}
 
             {isTermsModalOpen && (
-                <div className="modalcontact">
-                <div className="modalcontact-content" style={{textAlign:"left"}}>
+                <div className="modalcontact" onClick={() => setTermsModalOpen(false)}>
+                <div className="modalcontact-content" style={{textAlign:"left"}} onClick={e => e.stopPropagation()} ref={termsModalRef}>
                     <span className="close" onClick={() => setTermsModalOpen(false)}>&times;</span>
                     <h2>Termos e Condições</h2>
                     <p>
