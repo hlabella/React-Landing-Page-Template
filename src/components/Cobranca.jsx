@@ -11,6 +11,10 @@ const Cobranca = () => {
     const [patientsData, setPatientsData] = useState([]);
     const [monthYearOptions, setMonthYearOptions] = useState([]);
     const [payments, setPayments] = useState([]);
+    //not subscribed:
+    const [blurClass, setBlurClass] = useState('');
+    const [subscription, setSubscription] = useState(true);
+    //override
     const [overrideList, setOverrideList] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentPatient, setCurrentPatient] = useState(null); // To keep track of which patient's total is being overridden
@@ -39,17 +43,16 @@ const Cobranca = () => {
             
             //console.log(data);
             if (!data.subscription_id || data.subscription_id === '') {
-                navigate('/dashboard/assinatura');
-                return;
+                setBlurClass('blur-content');
+                setSubscription(false);
             }           
-            else {
-                //ultimo mes é o default da fatura
-                if (selectedMonthYear && token) {
-                    fetchPatientsWithEvents(selectedMonthYear, setPatientsData, token);
-                    fetchOverrides(selectedMonthYear);
-                    fetchPayments(selectedMonthYear);
-                }
+            
+            if (selectedMonthYear && token) {
+                fetchPatientsWithEvents(selectedMonthYear, setPatientsData, token);
+                fetchOverrides(selectedMonthYear);
+                fetchPayments(selectedMonthYear);
             }
+            
 
         });    
     
@@ -248,21 +251,21 @@ const Cobranca = () => {
             const formattedOverrideAmount = new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
-            }).format(patientOverride.override_amount);
+            }).format( subscription ? patientOverride.override_amount : 999);
     
             return (
-                <p style={{ fontWeight: "bold", color: "#11d194" }}>
+                <p className={blurClass} style={{ fontWeight: "bold", color: "#11d194" }}>
                     {formattedOverrideAmount} <i className="fa fa-pencil" onClick={() => handleTotalClick(patient)} style={{ cursor: 'pointer' }}></i>
                 </p>
             );
         } else {
             // If no override exists, display the default total
             return (
-                <p style={{ fontWeight: "bold", color: "#11d194" }}>
+                <p className={blurClass} style={{ fontWeight: "bold", color: "#11d194" }}>
                     {new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(patient.total)} <i className="fa fa-pencil" onClick={() => handleTotalClick(patient)} style={{ cursor: 'pointer' }}></i>
+                    }).format(subscription ? patient.total : 999)} <i className="fa fa-pencil" onClick={() => handleTotalClick(patient)} style={{ cursor: 'pointer' }}></i>
                 </p>
             );
         }
@@ -283,27 +286,27 @@ const Cobranca = () => {
                     <p>Pagamento Efetuado</p>
                 </div>
                 {patientsData.map(patient => {
-                    const formattedTotalEvents = new Intl.NumberFormat('pt-BR', {
+                    const formattedTotalEvents = subscription ? new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(patient.total_consultation_charge);
-                    const formattedTotalCancelledEvents = new Intl.NumberFormat('pt-BR', {
+                    }).format(patient.total_consultation_charge) : '999';
+                    const formattedTotalCancelledEvents =  subscription ? new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(patient.total_cancellation_charges);
-                    const formattedTotal = new Intl.NumberFormat('pt-BR', {
+                    }).format(patient.total_cancellation_charges) : '999';
+                    const formattedTotal =  subscription ? new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(patient.total);
+                    }).format(patient.total) : '999';
 
                     return (
                         <div key={patient.nome_paciente} className="cobranca-row">
                             <p>{patient.nome_paciente}</p>
-                            <p>{patient.events_count}</p>
-                            <p>{formattedTotalEvents}</p>
-                            <p>{patient.cancelled_events_count}</p>
-                            <p>{formattedTotalCancelledEvents}</p>
-                            <p>{formattedTotal}</p>
+                            <p className={blurClass}>{subscription ? patient.events_count : 999}</p>
+                            <p className={blurClass}>{formattedTotalEvents}</p>
+                            <p className={blurClass}>{subscription ? patient.cancelled_events_count : 999}</p>
+                            <p className={blurClass}>{formattedTotalCancelledEvents}</p>
+                            <p className={blurClass}>{formattedTotal}</p>
                             {renderOverrides(patient)}
                             <p>
                                 <input
@@ -351,7 +354,7 @@ const Cobranca = () => {
                 onClose={handleCloseModal}
                 patient={currentPatient}
                 monthYear={selectedMonthYear}
-                updateOverrides={() => fetchOverrides(selectedMonthYear)}
+                updateOverrides={fetchOverrides}
             />
 
         </div>

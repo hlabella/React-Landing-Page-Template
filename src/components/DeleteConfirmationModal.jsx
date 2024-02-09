@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDate, hasRecurrence, onDeleteSingle, onDeleteFuture, onDeleteAll}) => {
+const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDate, hasRecurrence, onDeleteSingle, onDeleteFuture, onDeleteAll, fetchEvents}) => {
     const navigate = useNavigate();
     const [isCancelledByPatient, setIsCancelledByPatient] = useState(false);
     const [chargeValue, setChargeValue] = useState('');
@@ -63,7 +63,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
       
             const token = localStorage.getItem('token');
             if (!token) {
-                // Assuming you have a way to navigate to login
+                
                 navigate('/login');
                 return;
             }
@@ -78,6 +78,9 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
                     eventID: eventID,
                     eventDate: formattedDate
                 })
+            })
+            .then(() => {
+                fetchEvents();
             });
 
             // Handle successful deletion here (e.g., refetch events, update state)
@@ -127,6 +130,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
             return response.json(); // Parse the JSON of the response
         })
         .then(() => {
+            fetchEvents();
             onClose();
         })
         .catch(error => {

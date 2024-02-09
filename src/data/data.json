@@ -2,10 +2,10 @@
   "Header": {
     "title": "COBRA AI",
     "paragraph": "ECONOMIZE O SEU TEMPO!",
-    "paragraph2": "<strong>Automatização de cobrança de pacientes e emissão de notas fiscais para psicólogos e terapeutas.</strong> Tudo de forma personalizada e integrada com o nosso calendário!"
+    "paragraph2": "<strong>Automatização de cobrança de pacientes e emissão de notas fiscais e recibos para psicólogos e terapeutas.</strong> Tudo de forma personalizada e integrada com o nosso calendário!"
   },
   "About": {
-    "paragraph": "Sabemos que sua hora é valiosa e que todo mês chega aquele momento chato da cobrança e da emissão de notas! A COBRA AI automatiza todo o seu fluxo de cobrança e controle, te economizando de 2h a 4h por mês!",
+    "paragraph": "Sabemos que sua hora é valiosa e que todo mês chega aquele momento chato da cobrança e da emissão de notas ou recibos! A COBRA AI automatiza todo o seu fluxo de cobrança e controle, te economizando de 2h a 4h por mês!",
     "Why": [
       {
         "title": "Cálculo customizado do valor por paciente",
@@ -23,8 +23,8 @@
     ],
     "Why2": [
       {
-        "title": "Emissão das NFs",
-        "description": "Após o pagamento, caso ative a opção, já é emitida Nota Fiscal e enviada para o paciente."
+        "title": "Emissão das NFs ou Recibos",
+        "description": "Após o pagamento, caso ative a opção, já é emitida Nota Fiscal/Recibo e enviada para o paciente."
       },
       {
         "title": "Geração de relatório",
@@ -49,8 +49,8 @@
     },
     {
       "icon": "fa fa-book",
-      "name": "Emissão de NFs",
-      "text": "Quando cada pagamento cair, o COBRA AI emite a Nota Fiscal seguindo as políticas de pagamento individuais e envia para o paciente por Whatsapp."
+      "name": "Emissão de NFs/Recibos",
+      "text": "Quando cada pagamento cair, o COBRA AI emite a Nota Fiscal ou Recibo seguindo as políticas de pagamento individuais e envia para o paciente por Whatsapp."
     },
     {
       "icon": "fa fa-bar-chart",
@@ -159,12 +159,12 @@
     {
       "id": 5,
       "question": "Vocês estão disponíveis em que região?",
-      "answer": "Atualmente, nossos serviços estão disponíveis apenas para profissionais que emitem notas no município de São Paulo (SP)."
+      "answer": "Estamos disponíveis em qualquer região do Brasil!"
     },
     {
       "id": 6,
       "question": "E se eu não gostar? O que eu faço?",
-      "answer": "Se você não estiver satisfeito com o serviço, basta solicitar o cancelamento e não será necessário pagar pelo mês seguinte."
+      "answer": "Se você não estiver satisfeito com o serviço, basta solicitar o cancelamento e cancelaremos as cobranças dos meses seguintes."
     },
     {
       "id": 7,
