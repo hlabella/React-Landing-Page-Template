@@ -171,7 +171,7 @@ const Agenda = () => {
             });
 
             //console.log('event', event);
-            console.log('parsedEvents', parsedEvents);
+            //console.log('parsedEvents', parsedEvents);
             setEvents(parsedEvents);
 
         } catch (error) {
