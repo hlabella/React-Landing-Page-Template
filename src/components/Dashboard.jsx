@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding, faCalendar, faUser, faReceipt, faChartLine, faCreditCard, faDollarSign, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faCalendar, faUser, faReceipt, faChartLine, faCreditCard, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 
 //whatsapp stuff
 import { WhatsAppWidget } from 'react-whatsapp-widget';
@@ -97,32 +97,18 @@ const Dashboard = () => {
                 </div>
                 <div className="col-md-4 mb-3" onClick={() => handleNavigation('./meus-recibos')}>
                     <div className="card">
-                        {profile.subscription_id && profile.subscription_id !== '' ? (
-                                <div className="card-body">
-                                    <FontAwesomeIcon icon={faReceipt} size="3x" />
-                                    <h5 className="card-title">Meus recibos/Notas Fiscais</h5>
-                                </div>
-                            ) : (
-                                <div className="card-body">
-                                    <FontAwesomeIcon icon={faLock} size="3x" style={{ color: '#ec7c7c' }} />
-                                    <h5 className="card-title">Meus recibos/Notas Fiscais (Acesso Restrito)</h5>
-                                </div>
-                        )}
+                        <div className="card-body">
+                            <FontAwesomeIcon icon={faReceipt} size="3x" />
+                            <h5 className="card-title">Meus recibos/Notas Fiscais</h5>
+                        </div>
                     </div>
                 </div>
                 <div className="col-md-4 mb-3" onClick={() => handleNavigation('./relatorios')}>
                     <div className="card">
-                        {profile.subscription_id && profile.subscription_id !== '' ? (
-                            <div className="card-body">
-                                <FontAwesomeIcon icon={faChartLine} size="3x" />
-                                <h5 className="card-title">Relatórios</h5>
-                            </div>
-                        ) : (
-                            <div className="card-body">
-                                <FontAwesomeIcon icon={faLock} size="3x" style={{ color: '#ec7c7c' }} />
-                                <h5 className="card-title">Relatórios (Acesso Restrito)</h5>
-                            </div>
-                        )}
+                        <div className="card-body">
+                            <FontAwesomeIcon icon={faChartLine} size="3x" />
+                            <h5 className="card-title">Relatórios</h5>
+                        </div>
                     </div>
                 </div>
                 <div className="col-md-4 mb-3" onClick={() => handleNavigation('./assinatura')}>
@@ -137,17 +123,10 @@ const Dashboard = () => {
             <div className="row">
                 <div className="col-md-12 mb-3" onClick={() => handleNavigation('./cobranca')}>
                     <div className="card cardcobranca">
-                        {profile.subscription_id && profile.subscription_id !== '' ? (
-                            <div className="card-body">
-                                <FontAwesomeIcon icon={faDollarSign} size="3x" />
-                                <h5 className="card-title">Cobrança</h5>
-                            </div>
-                        ) : (
-                            <div className="card-body">
-                                <FontAwesomeIcon icon={faLock} size="3x" style={{ color: '#ec7c7c' }} />
-                                <h5 className="card-title">Cobrança (Acesso Restrito)</h5>
-                            </div>
-                        )}
+                        <div className="card-body">
+                            <FontAwesomeIcon icon={faDollarSign} size="3x" />
+                            <h5 className="card-title">Cobrança</h5>
+                        </div>
                     </div>
                 </div>
             </div>

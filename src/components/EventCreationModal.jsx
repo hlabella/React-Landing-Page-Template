@@ -84,7 +84,7 @@ const EventCreationModal = ({ isOpen, onClose, onSubmit, patients, selectInfo })
         if (!validateInputs()) {
             return; // Stop the submission process
         }
-        
+
         let start, end;
         if (selectInfo.allDay) {
             // Parse date as local date at midnight
@@ -266,7 +266,7 @@ const EventCreationModal = ({ isOpen, onClose, onSubmit, patients, selectInfo })
     
                     {/* Submit and Cancel Buttons */}
                     <button onClick={handleSubmit}>Criar Evento</button>
-                    <button onClick={onClose}>Cancelar</button>
+                    <button onClick={() => {resetFormState(); onClose();}}>Cancelar</button>
                 </div>
             </div>
         )

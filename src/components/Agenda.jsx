@@ -22,11 +22,50 @@ const Agenda = () => {
     const [eventToDelete, setEventToDelete] = useState(null);
     const [currentSelectInfo, setCurrentSelectInfo] = useState(null);
     
+    const eventRender = (info) => {
+        const event = info.event;
+        if (event.extendedProps.cancellations && event.extendedProps.cancellations.length > 0) {
+            // Convert event start date to UTC string for comparison
+            const eventStartDateUTC = event.start.toISOString().split('T')[0]; // "YYYY-MM-DD"
+    
+            // Check if any cancellation date matches the event start date
+            const isCancelled = event.extendedProps.cancellations.some(cancellationDate => {
+                // Extract just the date part for comparison
+                const cancellationDateUTC = cancellationDate.split('T')[0]; // "YYYY-MM-DD"
+                return cancellationDateUTC === eventStartDateUTC;
+            });
+    
+            if (isCancelled) {
+                // Add 'cancelled-event' class to the event element
+                info.el.classList.add('cancelled-event');
+            }
+        }
+    };
+    
+
     const fetchData = async () => {
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login');
             return;
+        }
+
+        let cancellations = null;
+
+        try {
+            const cancellationsResponse = await fetch(`${apiUrl}/api/event-cancellations/`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                    'Content-Type': 'application/json'
+                },
+            });
+            if (!cancellationsResponse.ok) throw new Error('Error fetching cancellations');
+
+            cancellations = await cancellationsResponse.json();
+
+        } catch (error) {
+            console.error('Error fetching cancellations:', error);
         }
 
         //fetch events
@@ -53,7 +92,7 @@ const Agenda = () => {
                 //console.log('durationObj:', durationObj);
                 return durationObj;
             };
-            
+
             const parsedEvents = data.map(event => {
                 const start = new Date(event.start);
                 const end = new Date(event.end);
@@ -112,7 +151,11 @@ const Agenda = () => {
                         console.error('Error parsing exdate for event:', event.title, e);
                     }
                 }
-                            
+
+                // Map the filtered cancellations to an array of dates
+                const eventCancellations = cancellations.filter(cancellation => cancellation.eventID === event.id);
+                const cancellationDates = eventCancellations.map(cancellation => cancellation.cancelledDate);
+                
                 const parsedEvent = {
                     ...event,
                     start,
@@ -121,16 +164,15 @@ const Agenda = () => {
                     duration: duration,
                     rrule: rruleForFullCalendar,
                     exdate: exdates,
+                    cancellations: cancellationDates,
                 };
-                
-                //console.log('event', event);
-                //console.log('parsedEvent', parsedEvent);
+
                 return parsedEvent;
             });
 
-
+            //console.log('event', event);
+            //console.log('parsedEvents', parsedEvents);
             setEvents(parsedEvents);
-            //console.log("fetchData was called: ", parsedEvents)
 
         } catch (error) {
             console.error('Error fetching events:', error);
@@ -415,6 +457,7 @@ const Agenda = () => {
                 }}
                 locale="pt-br"
                 events={events}
+                eventDidMount={eventRender}
                 selectable={true}
                 weekends={true}
                 timeZone='local'
@@ -449,6 +492,7 @@ const Agenda = () => {
                 onDeleteSingle={handleDeleteSingle}
                 onDeleteFuture={handleDeleteFuture}
                 onDeleteAll={handleDeleteAll}
+                fetchEvents={fetchData}
             />
                 
         </div>

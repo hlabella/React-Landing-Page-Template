@@ -42,7 +42,7 @@ export const Price = () => {
                             <ul>
                                 <li style={{color:"white"}}>Todos os benefícios do Plano Básico</li>
                                 <li style={{color:"white"}}>+</li>
-                                <li style={{color:"white",fontWeight:"bold"}}>Emissão customizada de Nota Fiscal</li>
+                                <li style={{color:"white",fontWeight:"bold"}}>Emissão customizada de Nota Fiscal ou Recibo</li>
                             </ul>
                             <button onClick={redirectToSignup} className="signup-button">Começe agora!</button>
                         </div>

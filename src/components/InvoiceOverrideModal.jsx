@@ -128,11 +128,13 @@ const InvoiceOverrideModal = ({ isOpen, onClose, patient, monthYear, updateOverr
                 year: year,
                 override_amount: chargeValue
             })
+        })
+        .then(() => {
+            updateOverrides(monthYear); // This will trigger the re-fetching of overrides in the parent component
+        })
+        .finally(() => {
+            onClose();
         });
-
-        updateOverrides(); // This will trigger the re-fetching of overrides in the parent component
-        onClose(); //close the modal
-
     };
 
     return (

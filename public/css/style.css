@@ -1672,9 +1672,24 @@ label {
   }
 }
 
+.cancelled-event {
+  background-color: #c83838dd; /* Lighter red for a softer look */
+  border: 1px solid #c83838dd; /* Add a border for more definition */
+  color: #000000; /* Change the text color to match the theme */
+  font-style: italic; /* Italicize the text to indicate cancellation */
+}
+
 
 
 /* Cobranca.css */
+
+.blur-content {
+  filter: blur(4px);
+  user-select: none;
+  pointer-events: none;
+}
+
+
 .cobranca-table {
   width: 100%;
   margin: 0 auto;
