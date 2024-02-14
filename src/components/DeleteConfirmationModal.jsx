@@ -83,9 +83,6 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
                 fetchEvents();
             });
 
-            // Handle successful deletion here (e.g., refetch events, update state)
-            //fetchData();
-            
         }
     };
 
@@ -130,14 +127,11 @@ const DeleteConfirmationModal = ({ isOpen, onClose, eventID, eventName, eventDat
             return response.json(); // Parse the JSON of the response
         })
         .then(() => {
-            fetchEvents();
             onClose();
         })
         .catch(error => {
             console.error('Error:', error);
         });
-
-        //fetchData();
     };
 
 
