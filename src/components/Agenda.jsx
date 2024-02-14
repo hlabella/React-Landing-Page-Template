@@ -273,6 +273,7 @@ const Agenda = () => {
     const handleCloseModal = () => {
         setIsDeleteModalOpen(false);
         setEventToDelete(null);
+        fetchData();
     };
 
     const handleDeleteSingle = async () => {

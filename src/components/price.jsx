@@ -50,7 +50,6 @@ export const Price = () => {
                     <div className="col-md-4 planos">
                         <div className="plano3">
                             <h3>Customizado</h3>
-                            <h4>R$???/Mês</h4>
                             <ul>
                                 <li>Está sentindo falta de algum recurso? Converse conosco e podemos verificar a possibilidade de um plano customizado!</li>
                             </ul>
