@@ -78,7 +78,7 @@ export const Contact = (props) => {
                     <p>Razão Social: {props.data ? props.data.razaoSocial : ""}</p>
                   </li>
                   <li>
-                    <img src="img/LGPD.png" style={{ width: '80px', height: 'auto' }} />
+                    <img src="img/LGPD.png" alt="Site em conformidade com a Lei Geral de Proteção de Dados" style={{ width: '80px', height: 'auto' }} />
                   </li>
                 </ul>
               </div>
@@ -88,8 +88,8 @@ export const Contact = (props) => {
       </div>
       <div id="footer">
         <div className="footer-container">
-          <a onClick={() => setPrivacyModalOpen(true)}>Política de Privacidade</a>
-          <a onClick={() => setTermsModalOpen(true)}>Termos e Condições</a>
+          <div style={{color:"blue"}} onClick={() => setPrivacyModalOpen(true)}>Política de Privacidade</div>
+          <div style={{color:"blue"}} onClick={() => setTermsModalOpen(true)}>Termos e Condições</div>
         </div>
       </div>
       
