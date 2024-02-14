@@ -9,7 +9,7 @@ export const Header = (props) => {
   const createMarkup = (htmlContent) => {
     return { __html: htmlContent };
   };
-  const videoUrl = "https://www.youtube.com/embed/xJIlTbBWxek?autoplay=1&mute=1&loop=1&playlist=xJIlTbBWxek&controls=0&showinfo=0&autohide=1&modestbranding=1&vq=hd1080";
+  const videoUrl = "https://www.youtube-nocookie.com/embed/xJIlTbBWxek?autoplay=1&mute=1&loop=1&playlist=xJIlTbBWxek&controls=0&showinfo=0&autohide=1&modestbranding=1&vq=hd1080";
 
 
   return (
@@ -24,6 +24,7 @@ export const Header = (props) => {
           </div>
         </div>
         <div className="overlay">
+          <div className="image-background" style={{ backgroundImage: `url('img/jumbo_mobile.png')` }}></div>
           <div className="container">
             <div className="row">
               <div className="col-md-8 col-md-offset-2 intro-text header-text">

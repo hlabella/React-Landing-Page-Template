@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
 
-export const Navigation = (props) => {
+export const Navigation = () => {
   const navigate = useNavigate(); // Initialize useNavigate
   const isAuthenticated = !!localStorage.getItem('token'); // Check if the user is authenticated
 
@@ -48,7 +48,7 @@ export const Navigation = (props) => {
           </button>
           
           <a className="navbar-brand page-scroll" href="#page-top" onClick={(e) => handleAnchorClick(e, '#page-top')} style={{ display: 'flex', alignItems: 'center' }}>
-            <img src="/img/cobraai.png" style={{height: '55px', width:'50px', marginRight: '10px'}} alt=""/>COBRA AI
+            <img src="/img/cobraai.png" style={{height: '55px', width:'auto', marginRight: '10px'}} alt=""/>COBRA AI
           </a>{" "}
         </div>
 
