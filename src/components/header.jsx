@@ -9,7 +9,7 @@ export const Header = (props) => {
   const createMarkup = (htmlContent) => {
     return { __html: htmlContent };
   };
-  const videoUrl = "https://www.youtube-nocookie.com/embed/xJIlTbBWxek?autoplay=1&mute=1&loop=1&playlist=xJIlTbBWxek&controls=0&showinfo=0&autohide=1&modestbranding=1&vq=hd1080";
+  const videoUrl = "https://www.youtube.com/embed/xJIlTbBWxek?autoplay=1&mute=1&loop=1&playlist=xJIlTbBWxek&controls=0&showinfo=0&autohide=1&modestbranding=1&vq=hd1080";
 
 
   return (

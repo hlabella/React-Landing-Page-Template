@@ -18,6 +18,7 @@ const Cobranca = () => {
     const [overrideList, setOverrideList] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentPatient, setCurrentPatient] = useState(null); // To keep track of which patient's total is being overridden
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const options = generateMonthYearOptions(2023);
@@ -52,7 +53,7 @@ const Cobranca = () => {
                 fetchOverrides(selectedMonthYear);
                 fetchPayments(selectedMonthYear);
             }
-            
+            setLoading(false);
 
         });    
     
@@ -222,6 +223,10 @@ const Cobranca = () => {
     const goToDashboard = () => {
         navigate('/dashboard'); 
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     const renderPaymentStatus = (patient) => {
         // Assuming each patient object in patientsData has an 'id' field
