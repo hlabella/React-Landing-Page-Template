@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -21,7 +21,21 @@ const Agenda = () => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [eventToDelete, setEventToDelete] = useState(null);
     const [currentSelectInfo, setCurrentSelectInfo] = useState(null);
-    
+    const calendarRef = useRef(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        let calendarApi = calendarRef.current?.getApi();
+        if (calendarApi) {
+          // Remove all existing events
+          calendarApi.removeAllEvents();
+      
+          // Add new events from state
+          events.forEach(event => calendarApi.addEvent(event));
+        }
+      }, [events]); // Re-run this effect when `events` state changes
+      
+
     const eventRender = (info) => {
         const event = info.event;
         if (event.extendedProps.cancellations && event.extendedProps.cancellations.length > 0) {
@@ -44,6 +58,7 @@ const Agenda = () => {
     
 
     const fetchData = async () => {
+
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login');
@@ -63,7 +78,7 @@ const Agenda = () => {
             if (!cancellationsResponse.ok) throw new Error('Error fetching cancellations');
 
             cancellations = await cancellationsResponse.json();
-
+            
         } catch (error) {
             console.error('Error fetching cancellations:', error);
         }
@@ -173,7 +188,6 @@ const Agenda = () => {
             //console.log('event', event);
             //console.log('parsedEvents', parsedEvents);
             setEvents(parsedEvents);
-
         } catch (error) {
             console.error('Error fetching events:', error);
         }
@@ -203,9 +217,9 @@ const Agenda = () => {
             navigate('/login');
             return;
         }
-        
         fetchData();
-        
+        setLoading(false);
+
     }, [navigate, apiUrl]);
 
     const handleDateSelect = async (selectInfo) => {
@@ -438,6 +452,10 @@ const Agenda = () => {
         navigate('/dashboard'); 
     };
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="agenda">
             <div className="dashboard-link">
@@ -447,6 +465,7 @@ const Agenda = () => {
       
 
             <FullCalendar
+                ref={calendarRef}
                 nowIndicator={true}
                 editable
                 plugins={[rrulePlugin, dayGridPlugin, timeGridPlugin, interactionPlugin]}

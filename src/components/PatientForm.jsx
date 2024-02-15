@@ -37,6 +37,7 @@ const PatientForm = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false); // State variable to track button disabled status
     const [cpfCnpj, setCpfCnpj] = useState(""); // State to hold the CPF/CNPJ value
     const [isCPF, setIsCPF] = useState(true); // State to determine if the input is CPF
+    const [loading, setLoading] = useState(true);
 
     const validateInputs = () => {
         
@@ -108,6 +109,7 @@ const PatientForm = () => {
             .then(data => {
                 setPatient(data);
                 setCpfCnpj(data.cpf_para_nota_fiscal_ou_recibo);
+                setLoading(false);
             });       
         }
     }, [patientId, isEditing, navigate]);
@@ -203,6 +205,10 @@ const PatientForm = () => {
     const hideTooltip = () => {
         setTooltipVisible(false);
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className='patient-form-container'>
