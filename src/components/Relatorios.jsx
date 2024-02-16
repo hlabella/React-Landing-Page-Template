@@ -26,7 +26,7 @@ const Patients = () => {
                 <button onClick={goToDashboard} className="dashboard-button"><FontAwesomeIcon icon={faArrowLeft} /> Voltar</button>
             </div>
             <h2>Relatórios</h2>
-            <h3>Em construção</h3>
+            <h3>Em manutenção</h3>
             
         </div>
     );

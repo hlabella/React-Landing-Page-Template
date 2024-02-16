@@ -33,7 +33,7 @@ const Agenda = () => {
           // Add new events from state
           events.forEach(event => calendarApi.addEvent(event));
         }
-      }, [events]); // Re-run this effect when `events` state changes
+    }, [events]); // Re-run this effect when `events` state changes
       
 
     const eventRender = (info) => {

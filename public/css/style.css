@@ -1865,3 +1865,102 @@ label {
   pointer-events: none; /* Prevent the arrow from being clickable */
   transform: translateY(-50%);
 }
+
+
+/* tutorial section */
+
+
+.tutorial-table {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 1200px;
+  margin: 20px auto;
+  margin-top:120px;
+}
+
+.tutorial-container {
+  padding: 20px;
+}
+
+.dashboard-link .dashboard-button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tutorial-title {
+  margin-top: 20px;
+  text-align: center;
+}
+.playlist {
+  margin-top: 30px;
+}
+
+.playlist-item {
+  margin-bottom: 20px; /* Adds space between rows */
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.playlist-item:hover {
+  transform: scale(1.02); /* Slightly enlarges the item on hover */
+}
+
+.video-content {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: background-color 0.1s ease;
+}
+
+.video-content:hover {
+  background-color: #e0e0e0;
+}
+
+.video-title {
+  font-weight: bold;
+  flex-grow: 1; /* Ensures the title takes up remaining space */
+  text-align: left;
+}
+
+
+
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.video-container {
+  width: 80%;
+  position: relative;
+  padding-top: 45%; /* This percentage represents the aspect ratio of the video */
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
