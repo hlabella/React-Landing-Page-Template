@@ -1964,3 +1964,71 @@ label {
   width: 100%;
   height: 100%;
 }
+
+
+/*blog stuff*/
+.blog-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 800px;
+  margin: 20px auto;
+  margin-top:120px;
+}
+
+
+/* Styling for the list of posts */
+.post-preview {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.post-preview:last-child {
+  border-bottom: none;
+}
+
+.post-preview h2 {
+  color: #333;
+  font-size: 24px;
+}
+
+.post-preview p {
+  color: #666;
+}
+
+.read-more-link {
+  display: inline-block;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Styling for individual post details */
+
+.post-detail {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 800px;
+  margin: 20px auto;
+  margin-top:120px;
+}
+
+.post-detail h1 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.post-detail div {
+  color: #666;
+  line-height: 1.6;
+}
