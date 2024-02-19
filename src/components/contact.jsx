@@ -58,6 +58,7 @@ export const Contact = (props) => {
             <div className="row">
               <div className="social">
                 <ul>
+                  
                   <li className='fali'>
                     <a href={props.data ? props.data.linkedin : "/"}>
                       <i className="fa fa-linkedin"></i>
@@ -73,6 +74,11 @@ export const Contact = (props) => {
                       <i className="fa fa-whatsapp"></i>
                     </a>
                   </li>
+                  <li className='fali'>
+                    <a href='/posts'>
+                      <i className="fa fa-book"></i>
+                    </a>
+                  </li> 
                   <li>
                     <p>CNPJ: {props.data ? props.data.cnpj : ""}</p>
                     <p>Razão Social: {props.data ? props.data.razaoSocial : ""}</p>

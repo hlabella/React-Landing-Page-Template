@@ -20,6 +20,12 @@ const SignUp = () => {
     const privacyModalRef = useRef(); // Create a ref for the privacy modal
     const termsModalRef = useRef(); // Create a ref for the terms modal
   
+    useEffect(() => {
+        const token = localStorage.getItem('token'); // Or wherever you store the token
+        if (token) {
+            navigate('/dashboard'); // Redirect to dashboard if token exists
+        }
+    }, [navigate]);
 
     //privacy modal
     useEffect(() => {

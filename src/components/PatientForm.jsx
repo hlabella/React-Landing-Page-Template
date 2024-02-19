@@ -79,7 +79,7 @@ const PatientForm = () => {
             const regex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
             return regex.test(documentNumber);
         };
-        if (patient.cpf_para_nota_fiscal_ou_recibo != null && !regexTestDocument(patient.cpf_para_nota_fiscal_ou_recibo) ) {
+        if (patient.emissao != 'nada' && !regexTestDocument(patient.cpf_para_nota_fiscal_ou_recibo) ) {
             setErrorMessage('Documento incompleto ou inválido.');
             return false;
         }
@@ -111,6 +111,9 @@ const PatientForm = () => {
                 setCpfCnpj(data.cpf_para_nota_fiscal_ou_recibo);
                 setLoading(false);
             });       
+        }
+        else {
+            setLoading(false);
         }
     }, [patientId, isEditing, navigate]);
 
