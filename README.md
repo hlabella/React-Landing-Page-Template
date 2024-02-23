@@ -8,9 +8,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - nvm install 18 
-        - nvm use 18 
-        - yarn install
+        - yarn install --ignore-engines
     build:
       commands:
         - yarn run build
