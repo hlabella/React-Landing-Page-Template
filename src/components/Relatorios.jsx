@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Bar } from 'react-chartjs-2';
+import UnpaidReportTable from './UnpaidReportTable';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -28,15 +29,25 @@ const Patients = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [graphData, setGraphData] = useState({
-        labels: [],
-        datasets: [{
-            label: 'Valor cobrado',
-            data: [],
-            backgroundColor: 'rgba(17, 209, 148, 0.5)',
-            borderColor: 'rgba(17, 209, 148, 1)',
-            borderWidth: 1,
-        }],
+        labels: [], // Months
+        datasets: [
+            {
+                label: 'Valor Cobrado',
+                data: [],
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+            },
+            {
+                label: 'Valor Recebido',
+                data: [],
+                backgroundColor: 'rgba(17, 209, 148, 0.5)',
+                borderColor: 'rgba(17, 209, 148, 1)',
+                borderWidth: 1,
+            }
+        ],
     });
+    const [unpaidData, setUnpaidData] = useState([]);
     //not subscribed:
     const [blurClass, setBlurClass] = useState('');
     const [subscription, setSubscription] = useState(true);
@@ -71,8 +82,8 @@ const Patients = () => {
             }           
             
             fetchUserInvoiceReport(startMonthYear, endMonthYear, token);
-            // fetchOverridesSum(startMonthYear, endMonthYear);
-            // fetchPaymentsSum(startMonthYear, endMonthYear);
+            fetchPaymentsReport(startMonthYear, endMonthYear, token);
+            fetchUnpaidReport(startMonthYear, endMonthYear, token);
             
             //finish loading
             setLoading(false);
@@ -104,18 +115,79 @@ const Patients = () => {
             const labels = data.map(item => item.monthYear);
             const totalCharged = data.map(item => item.total);
 
-            setGraphData({
-                labels,
-                datasets: [{
-                    label: 'Valor cobrado',
-                    data: totalCharged,
-                    backgroundColor: 'rgba(17, 209, 148, 0.5)',
-                    borderColor: 'rgba(17, 209, 148, 1)',
-                    borderWidth: 1,
-                }]
-            });
+            setGraphData(prevData => ({
+                ...prevData,
+                labels, 
+                datasets: [
+                    { ...prevData.datasets[0], data: totalCharged }, // Update only the first dataset
+                    prevData.datasets[1] // Keep the second dataset unchanged
+                ]
+            }));
 
             //console.log("data", data);
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const fetchPaymentsReport = async (startMonthYear, endMonthYear, token) => {
+        try {
+            const url = new URL(`${apiUrl}/api/user-payments-report/`);
+            url.searchParams.append("startMonthYear", startMonthYear);
+            url.searchParams.append("endMonthYear", endMonthYear);
+    
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            
+            const totalReceived = data.map(item => item.total); // Assuming `data` has a similar structure with 'total' field
+
+            setGraphData(prevData => ({
+                ...prevData,
+                datasets: [
+                    prevData.datasets[0], // Keep the first dataset unchanged
+                    { ...prevData.datasets[1], data: totalReceived } // Update only the second dataset
+                ]
+            }));
+
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const fetchUnpaidReport = async (startMonthYear, endMonthYear, token) => {
+        try {
+            const url = new URL(`${apiUrl}/api/user-unpaid-report/`);
+            url.searchParams.append("startMonthYear", startMonthYear);
+            url.searchParams.append("endMonthYear", endMonthYear);
+    
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            
+            setUnpaidData(data);
 
         } catch (error) {
             console.error('Error:', error);
@@ -132,7 +204,6 @@ const Patients = () => {
                 <button onClick={goToDashboard} className="dashboard-button"><FontAwesomeIcon icon={faArrowLeft} /> Voltar</button>
             </div>
             <h2>Relatórios</h2>
-            <h3>[Em manutenção]</h3>
             <h3>Valor Cobrado por mês</h3>
             <Bar
                 data={graphData}
@@ -144,11 +215,8 @@ const Patients = () => {
                     },
                 }}
             />
-            <h3>Valor Recebido por mês</h3>
-            <h4>grafico de barra</h4>
-            <h3>Inadimplência</h3>
-            <h4>Tabela de valores</h4>
-
+            <h3>Inadimplência no Ano</h3>
+            <UnpaidReportTable data={unpaidData} />
         </div>
     );
 };

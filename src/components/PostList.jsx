@@ -22,6 +22,15 @@ const PostList = () => {
         fetchPosts();
     }, []);
 
+    const stripHtml = (html) => {
+        // Creating a new div element
+        const tempDiv = document.createElement("div");
+        // Setting the HTML content to the div
+        tempDiv.innerHTML = html;
+        // Extracting and returning the text content from the div
+        return tempDiv.textContent || tempDiv.innerText || "";
+    };
+
     const goToLP = () => {
         navigate('/'); 
     };
@@ -34,7 +43,7 @@ const PostList = () => {
             {posts.map(post => (
                 <div key={post.id} className='post-preview'>
                     <h2>{post.title}</h2>
-                    <p>{post.content.substring(0, 200)}...</p>
+                    <p>{stripHtml(post.content).substring(0, 200)}...</p>
                     <Link className='read-more-link' to={`/posts/${post.slug}`}>Leia mais</Link>
                 </div>
             ))}

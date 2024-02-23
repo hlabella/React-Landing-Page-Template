@@ -2,6 +2,9 @@
   "name": "landingpage-react-template",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.1.0",
+    "@ckeditor/ckeditor5-react": "^6.2.0",
+    "@ckeditor/ckeditor5-upload": "^41.1.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -17,6 +20,7 @@
     "@testing-library/user-event": "^7.1.2",
     "card-validator": "^9.0.0",
     "chart.js": "^4.4.1",
+    "ckeditor5-custom-build": "file:./ckeditor5",
     "emailjs-com": "^2.6.4",
     "moment": "^2.29.4",
     "react": "^17.0.1",
@@ -27,6 +31,7 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^6.19.0",
     "react-scripts": "^5.0.1",
+    "react-table": "^7.8.0",
     "react-whatsapp-widget": "^2.2.0",
     "rrule": "^2.8.1",
     "smooth-scroll": "^16.1.3"

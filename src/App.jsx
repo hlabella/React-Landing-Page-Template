@@ -27,6 +27,7 @@ import Cobranca from './components/Cobranca';
 import Tutorial from './components/Tutorial';
 import PostList from './components/PostList';
 import PostDetail from './components/PostDetail';
+import EditorBlog from './components/EditorBlog';
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -71,6 +72,7 @@ const App = () => {
         <Route path="/dashboard/tutorial" element={<ProtectedRoute component={Tutorial} />} />
         <Route path="/posts" element={<PostList />} />
         <Route path="/posts/:slug" element={<PostDetail />} />
+        <Route path="/editor" element={<ProtectedRoute component={EditorBlog} />} />
       </Routes>
     </Router>
   );
