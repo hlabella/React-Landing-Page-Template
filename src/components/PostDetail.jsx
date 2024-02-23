@@ -35,7 +35,7 @@ const PostDetail = () => {
                 <button onClick={goToPosts} className="dashboard-button"><FontAwesomeIcon icon={faArrowLeft} /> Voltar</button>
             </div>
             <h1>{post.title}</h1>
-            <div>{post.content}</div>
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
     );
 };

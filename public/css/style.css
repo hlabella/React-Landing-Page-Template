@@ -2009,7 +2009,7 @@ label {
 }
 
 /* Styling for individual post details */
-
+/* Styling for individual post details */
 .post-detail {
   display: flex;
   flex-direction: column;
@@ -2018,8 +2018,10 @@ label {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   width: 800px;
+  max-width: 100%; /* Ensure it doesn't exceed the viewport width */
   margin: 20px auto;
-  margin-top:120px;
+  margin-top: 120px;
+  overflow: hidden; /* Add this if you want to hide overflow */
 }
 
 .post-detail h1 {
@@ -2031,4 +2033,60 @@ label {
 .post-detail div {
   color: #666;
   line-height: 1.6;
+  word-wrap: break-word; /* Break long words to prevent overflow */
+}
+
+/* Contain images and other media within the post detail boundaries */
+.post-detail img, .post-detail video, .post-detail iframe {
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
+}
+
+
+
+/* styling for report table */
+
+.unpaidtable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.unpaidtable th,
+.unpaidtable td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.unpaidtable th {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.unpaidtable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.unpaidtable tr:hover {
+  background-color: #f1f1f1;
+}
+
+.asc::after,
+.desc::after {
+  content: '';
+  display: inline-block;
+  margin-left: 5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+
+.asc::after {
+  border-bottom: 5px solid #666;
+}
+
+.desc::after {
+  border-top: 5px solid #666;
 }
