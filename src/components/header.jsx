@@ -2,6 +2,7 @@ import React from "react";
 //whatsapp stuff
 import { WhatsAppWidget } from 'react-whatsapp-widget';
 import 'react-whatsapp-widget/dist/index.css';
+import ReactPlayer from 'react-player/lazy'
 
 
 export const Header = (props) => {
@@ -41,6 +42,15 @@ export const Header = (props) => {
                 >
                   INSCREVA-SE AGORA!
                 </a>{" "}
+                <div className="react-player-wrapper">
+                  <ReactPlayer 
+                    url='/img/cobraai_short.mp4'
+                    width='100%'
+                    height='100%'
+                    controls={true}
+                    className="react-player"
+                  />
+                </div>
               </div>
             </div>
           </div>
