@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import ReactPlayer from 'react-player/lazy'
 
 const Tutorial = () => {
     
@@ -47,11 +48,17 @@ const Tutorial = () => {
                 <button onClick={goToDashboard} className="dashboard-button"><FontAwesomeIcon icon={faArrowLeft} /> Voltar</button>
             </div>
             <h2>Aprenda a usar o COBRA AI</h2>
-            
+            <div className="react-player-wrapper-tutorial">
+                <ReactPlayer 
+                url='/img/cobraai_short.mp4'
+                controls={true}
+                className="react-player-tutorial"
+                />
+            </div>
             <div className="container">
                 <div className="row playlist">
                     {videos.map(video => (
-                        <div key={video.id} className="col-12 col-sm-6 col-md-4 playlist-item" onClick={() => selectVideo(video.url)}>
+                        <div key={video.id} className="col-12 playlist-item" onClick={() => selectVideo(video.url)}>
                             <div className="video-content">
                                 <FontAwesomeIcon icon={faPlayCircle} size="2x" />
                                 <span className="video-title">{video.titulo}</span>

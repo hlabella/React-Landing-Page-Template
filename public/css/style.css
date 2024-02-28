@@ -278,7 +278,17 @@ a:focus,
 }
 
 
+.react-player-wrapper {
+  margin-top: 50px; /* Adjust the spacing above the player as needed */
+  position: relative;
+  padding-top: 56.25%; /* Aspect ratio for 16:9 videos */
+}
 
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 .background-video h1 {
   font-family: "Raleway", sans-serif;
@@ -1886,6 +1896,20 @@ label {
   padding: 20px;
 }
 
+.react-player-wrapper-tutorial {
+  margin-top: 20px; /* Reduced top margin */
+  position: relative;
+  height: 360px; /* Fixed height for the player */
+  display: flex;
+  justify-content: center; /* Center the player horizontally */
+}
+
+.react-player-tutorial {
+  max-width: 100%; /* Ensure it doesn't overflow its container */
+  max-height: 100%; /* Keep the aspect ratio intact */
+}
+
+
 .dashboard-link .dashboard-button {
   background-color: #007bff;
   color: #ffffff;
@@ -1903,6 +1927,7 @@ label {
   margin-top: 20px;
   text-align: center;
 }
+
 .playlist {
   margin-top: 30px;
 }
