@@ -208,7 +208,7 @@ const Assinatura = () => {
                             tokenError.show = true;
                             tokenError.variant = "danger";
                             tokenError.message = response.message;
-                            setErrors(tokenError)
+                            setErrors(tokenError);
                             throw new Error(response.message);
                         }
                     })

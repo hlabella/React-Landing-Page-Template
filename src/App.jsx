@@ -24,6 +24,7 @@ import Recibos from './components/Recibos';
 import Relatorios from './components/Relatorios';
 import Assinatura from './components/Assinatura';
 import Cobranca from './components/Cobranca';
+import CobrancaAdmin from './components/CobrancaAdmin';
 import Tutorial from './components/Tutorial';
 import PostList from './components/PostList';
 import PostDetail from './components/PostDetail';
@@ -69,6 +70,7 @@ const App = () => {
         <Route path="/dashboard/relatorios" element={<ProtectedRoute component={Relatorios} />} />
         <Route path="/dashboard/assinatura" element={<ProtectedRoute component={Assinatura} />} />
         <Route path="/dashboard/cobranca" element={<ProtectedRoute component={Cobranca} />} />
+        <Route path="/dashboard/cobranca-admin" element={<ProtectedRoute component={CobrancaAdmin} />} />
         <Route path="/dashboard/tutorial" element={<ProtectedRoute component={Tutorial} />} />
         <Route path="/posts" element={<PostList />} />
         <Route path="/posts/:slug" element={<PostDetail />} />
