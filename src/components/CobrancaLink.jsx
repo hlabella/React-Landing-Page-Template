@@ -1,117 +1,70 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import InvoiceOverrideModal from './InvoiceOverrideModal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-const CobrancaAdmin = () => {
+const CobrancaLink = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const [selectedMonthYear, setSelectedMonthYear] = useState('');
-    
-    //admin
-    const [selectedUser, setSelectedUser] = useState(''); // State to track the selected user
-    const [users, setUsers] = useState([]); // State to store all users
-
     const [patientsData, setPatientsData] = useState([]);
     const [monthYearOptions, setMonthYearOptions] = useState([]);
     const [payments, setPayments] = useState([]);
-
+    //not subscribed:
+    const [blurClass, setBlurClass] = useState('');
+    const [subscription, setSubscription] = useState(true);
     //override
     const [overrideList, setOverrideList] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentPatient, setCurrentPatient] = useState(null); // To keep track of which patient's total is being overridden
     const [loading, setLoading] = useState(true);
 
-    //check if user is staff
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/login');
-            return;
-        }
-        const checkStaffStatus = async () => {
-            const response = await fetch(`${apiUrl}/api/check-user-staff-status/`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Token ${token}`
-                },
-            });
-            const data = await response.json();
-            if (!data.isStaff) {
-                navigate('/');
-            }
-        };
-        checkStaffStatus();
-    }, [navigate]);
-
-    useEffect(() => {
-        console.log(selectedUser);
-    }, [selectedUser]);
-
-
-    //generate users and month options
     useEffect(() => {
         const options = generateMonthYearOptions(2023);
         setMonthYearOptions(options);
         setSelectedMonthYear(options[0]); // Set the default selected option to the most recent date
-        fetchUsers(); // Fetch all users when the component mounts
     }, []);
 
-    //get patients, payments and overrides
     useEffect(() => {
        
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/');
-            return;
-        }
-   
-        if (selectedMonthYear && token && selectedUser) {
-            fetchPatientsWithEvents(selectedMonthYear, setPatientsData, token, selectedUser);
-            fetchOverrides(selectedMonthYear, selectedUser);
-            fetchPayments(selectedMonthYear, selectedUser);
-        }
-        setLoading(false);
-
-    }, [navigate, selectedMonthYear, selectedUser, apiUrl]);
-
-    const fetchUsers = async () => {
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login');
             return;
         }
-        try {
-            const url = new URL(`${apiUrl}/api/users/`);
-    
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Token ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+        
+        fetch(`${apiUrl}/api/profile/`, {
+            headers: {
+                'Authorization': `Token ${token}`
             }
-    
-            const data = await response.json();
+        })
+        .then(res => res.json())
+        .then(data => {
             
-            setUsers(data);
-            setSelectedUser(data[0].username);
+            //console.log(data);
+            if (!data.subscription_id || data.subscription_id === '') {
+                setBlurClass('blur-content');
+                setSubscription(false);
+            }           
+            
+            if (selectedMonthYear && token) {
+                fetchPatientsWithEvents(selectedMonthYear, setPatientsData, token);
+                fetchOverrides(selectedMonthYear);
+                fetchPayments(selectedMonthYear);
+            }
+            setLoading(false);
 
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
+        });    
+    
+    }, [navigate, selectedMonthYear, apiUrl]);
 
-    const fetchPatientsWithEvents = async (monthYear, setPatientsData, token, selectedUser) => {
+    const fetchPatientsWithEvents = async (monthYear, setPatientsData, token) => {
        
         try {
-            const url = new URL(`${apiUrl}/api/user-invoices-admin/`);
+            const url = new URL(`${apiUrl}/api/user-invoices/`);
             url.searchParams.append("monthYear", monthYear);
-            url.searchParams.append("username", selectedUser);
-
+    
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -134,7 +87,7 @@ const CobrancaAdmin = () => {
         }
     };
 
-    const fetchOverrides = async (monthYear, selectedUser) => {
+    const fetchOverrides = async (monthYear) => {
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login');
@@ -142,8 +95,8 @@ const CobrancaAdmin = () => {
         }
         try {
             const [year, month] = monthYear.split('-');
-            const url = `${apiUrl}/api/invoice-override-list-admin/?month=${month}&year=${year}&username=${selectedUser}`;
-
+            const url = `${apiUrl}/api/invoice-override-list/?month=${month}&year=${year}`;
+            
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -164,7 +117,7 @@ const CobrancaAdmin = () => {
         }
     };
 
-    const fetchPayments = async (monthYear, selectedUser) => {
+    const fetchPayments = async (monthYear) => {
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/login');
@@ -172,7 +125,7 @@ const CobrancaAdmin = () => {
         }
         try {
             const [year, month] = monthYear.split('-');
-            const url = `${apiUrl}/api/invoice-payments-admin/?month=${month}&year=${year}&username=${selectedUser}`;
+            const url = `${apiUrl}/api/invoice-payments/?month=${month}&year=${year}`;
             
             const response = await fetch(url, {
                 method: 'GET',
@@ -195,6 +148,7 @@ const CobrancaAdmin = () => {
         }
     };
     
+    
     const generateMonthYearOptions = (startYear) => {
         const options = [];
         const currentDate = new Date();
@@ -216,12 +170,59 @@ const CobrancaAdmin = () => {
         setSelectedMonthYear(event.target.value);
     };
 
-    const handleUserChange = (event) => {
-        setSelectedUser(event.target.value);
+
+    const handleTotalClick = (patient) => {
+        setCurrentPatient(patient);
+        setIsModalOpen(true);
+    };
+    
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setCurrentPatient(null);
+        fetchOverrides(selectedMonthYear);
     };
 
     const goToDashboard = () => {
         navigate('/dashboard'); 
+    };
+
+    const handleCreateLink = (patient) => {
+        //create link to send to patient
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+        const override = overrideList.find(ov => ov.patient_id === patient.patient_id);
+        const amountToSend = override ? override.override_amount : patient.total;
+        try {
+           
+            const url = `${apiUrl}/api/create-payment-link/`;
+            
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  billingType: 'PIX',
+                  chargeType: 'DETACHED',
+                  name: 'psicologo'+patient.patient_id+'-'+patient.nome_paciente+'-'+selectedMonthYear,
+                  dueDateLimitDays: 10,
+                  value: amountToSend
+                })
+            };
+              
+            fetch(url, options)
+                .then(response => response.json())
+                .then(response => console.log(response))
+                .catch(err => console.error(err));
+            
+            
+        } catch (error) {
+            console.error('Error creating paymentlink:', error);
+        }
     };
 
     if (loading) {
@@ -256,21 +257,21 @@ const CobrancaAdmin = () => {
             const formattedOverrideAmount = new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
-            }).format( patientOverride.override_amount);
+            }).format( subscription ? patientOverride.override_amount : 999);
     
             return (
-                <p style={{ fontWeight: "bold", color: "#11d194" }}>
-                    {formattedOverrideAmount} 
+                <p className={blurClass} style={{ fontWeight: "bold", color: "#11d194" }}>
+                    {formattedOverrideAmount} <i className="fa fa-pencil" onClick={() => handleTotalClick(patient)} style={{ cursor: 'pointer' }}></i>
                 </p>
             );
         } else {
             // If no override exists, display the default total
             return (
-                <p style={{ fontWeight: "bold", color: "#11d194" }}>
+                <p className={blurClass} style={{ fontWeight: "bold", color: "#11d194" }}>
                     {new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(patient.total)}
+                    }).format(subscription ? patient.total : 999)} <i className="fa fa-pencil" onClick={() => handleTotalClick(patient)} style={{ cursor: 'pointer' }}></i>
                 </p>
             );
         }
@@ -287,40 +288,38 @@ const CobrancaAdmin = () => {
                     <p>Valor de Cancelamentos </p>
                     <p>Total Calculado</p>
                     <p>Total para Cobrança</p>
-                    <p>Envia Cobrança?</p>
                     <p>Pagamento Efetuado</p>
+                    <p>Enviar Link de Pagamento por Whatsapp</p>
                 </div>
                 {patientsData.map(patient => {
-                    const formattedTotalEvents = new Intl.NumberFormat('pt-BR', {
+                    const formattedTotalEvents = subscription ? new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(patient.total_consultation_charge);
-                    const formattedTotalCancelledEvents = new Intl.NumberFormat('pt-BR', {
+                    }).format(patient.total_consultation_charge) : '999';
+                    const formattedTotalCancelledEvents =  subscription ? new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(patient.total_cancellation_charges);
-                    const formattedTotal =new Intl.NumberFormat('pt-BR', {
+                    }).format(patient.total_cancellation_charges) : '999';
+                    const formattedTotal =  subscription ? new Intl.NumberFormat('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }).format(patient.total);
+                    }).format(patient.total) : '999';
 
                     return (
                         <div key={patient.nome_paciente} className="cobranca-row">
                             <p>{patient.nome_paciente}</p>
-                            <p>{patient.events_count}</p>
-                            <p>{formattedTotalEvents}</p>
-                            <p>{patient.cancelled_events_count}</p>
-                            <p>{formattedTotalCancelledEvents}</p>
-                            <p>{formattedTotal}</p>
+                            <p className={blurClass}>{subscription ? patient.events_count : 999}</p>
+                            <p className={blurClass}>{formattedTotalEvents}</p>
+                            <p className={blurClass}>{subscription ? patient.cancelled_events_count : 999}</p>
+                            <p className={blurClass}>{formattedTotalCancelledEvents}</p>
+                            <p className={blurClass}>{formattedTotal}</p>
                             {renderOverrides(patient)}
-                            <p>
-                                <input
-                                    type="checkbox"
-                                    checked={patient.envia_cobranca}
-                                    disabled
-                                />
-                            </p>
                             {renderPaymentStatus(patient)}
+                            <p>
+                                <a onClick={() => handleCreateLink(patient)}>
+                                    <i className="fa fa-whatsapp" style={{ color: 'green', cursor: 'pointer' }}></i>
+                                </a>
+                            </p>
                         </div>
                     );
                 })}
@@ -334,16 +333,6 @@ const CobrancaAdmin = () => {
             </div>
             <h2>Cobrança</h2>
             <div className='cobranca-table'>
-                <h3>User</h3>
-                <select onChange={handleUserChange} value={selectedUser}>
-                    {users.map(user => {
-                        return (
-                            <option key={user.username} value={user.username}>
-                                {user.username}
-                            </option>
-                        );
-                    })}
-                </select>
                 <h3>Mês de Referência</h3>
                 <select onChange={handleMonthYearChange} value={selectedMonthYear}>
                     {monthYearOptions.map(option => {
@@ -362,10 +351,18 @@ const CobrancaAdmin = () => {
                 </select>
                 <h3>Resumo do Mês</h3>
                 {selectedMonthYear && renderPatientsData()}
-            </div> 
+            </div>
+            
+            <InvoiceOverrideModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                patient={currentPatient}
+                monthYear={selectedMonthYear}
+                updateOverrides={fetchOverrides}
+            />
 
         </div>
     );
 };
 
-export default CobrancaAdmin;
+export default CobrancaLink;
