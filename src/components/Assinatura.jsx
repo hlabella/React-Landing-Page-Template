@@ -61,8 +61,8 @@ const Assinatura = () => {
     });
     const [selectedPlan, setSelectedPlan] = useState('premium');
     const plans = {
-        basico: { price: 9999, label: 'Básico - R$99/mês' },
-        premium: { price: 19999, label: 'Premium - R$199,99/mês' }
+        basico: { price: 4999, label: 'Básico - R$49/mês (30 dias grátis)' },
+        premium: { price: 9999, label: 'Premium - R$99/mês (30 dias grátis)' }
     };
     const [values, setValues] = useState({
 

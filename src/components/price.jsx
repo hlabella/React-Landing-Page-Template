@@ -25,7 +25,10 @@ export const Price = () => {
                     <div className="col-md-4 planos">
                         <div className="plano1">
                             <h3>Básico</h3>
-                            <h4>R$99/Mês</h4>
+                            <p style={{textDecoration: "line-through", color: "black", marginBottom: "0px"}}>R$99/Mês</p>
+                            
+                            <h4>30 dias grátis</h4>
+                            <h4 style={{marginTop: "0px"}}>R$49/Mês</h4>
                             <ul>
                                 <li>Pacientes ilimitados</li>
                                 <li>Cobrança automática</li>
@@ -38,7 +41,10 @@ export const Price = () => {
                     <div className="col-md-4 planos">
                         <div className="plano2">
                             <h3 style={{color:"white"}}>Premium <FontAwesomeIcon icon={faStar} style={{color:"yellow"}}/></h3>
-                            <h4 style={{color:"white"}}>R$199/Mês</h4>
+                            <p style={{color:"white", textDecoration: "line-through", marginBottom: "0px"}}>R$199/Mês</p>
+                            
+                            <h4 style={{color:"white"}}>30 dias grátis</h4>
+                            <h4 style={{color:"white", marginTop: "0px"}}>R$99/Mês</h4>
                             <ul>
                                 <li style={{color:"white"}}>Todos os benefícios do Plano Básico</li>
                                 <li style={{color:"white"}}>+</li>

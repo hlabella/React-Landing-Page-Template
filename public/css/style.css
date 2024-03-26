@@ -675,7 +675,7 @@ a:focus,
   padding: 20px;
   text-align: center;
   background: #ffffff; /* plano2 should override this with its own background */
-  height: 400px; /* Make height 100% of the flex container */
+  height: 480px; /* Make height 100% of the flex container */
   display: flex; /* Use flexbox for internal alignment */
   flex-direction: column; /* Stack content vertically */
   position: relative; /* Set position relative for absolute positioning of children */
@@ -1857,7 +1857,7 @@ label {
   background-color: #fff; /* Set background color */
   cursor: pointer; /* Change cursor to pointer */
   width: 100%; /* Make the dropdown full width to accommodate longer text */
-  font-size: 16px; /* Optional: Increase font size for better readability */
+  font-size: 12px; /* Optional: Increase font size for better readability */
   margin-bottom: 20px; /* Add some margin at the bottom */
   height: 40px;
 }
