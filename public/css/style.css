@@ -1849,33 +1849,41 @@ label {
   color:red
 }
 
-.plan-select-dropdown {
-  appearance: none; /* Remove default style of select dropdown */
-  border: 1px solid #ccc; /* Add custom border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 12px; /* Increase right padding to give more space for the text */
-  background-color: #fff; /* Set background color */
-  cursor: pointer; /* Change cursor to pointer */
-  width: 100%; /* Make the dropdown full width to accommodate longer text */
-  font-size: 12px; /* Optional: Increase font size for better readability */
-  margin-bottom: 20px; /* Add some margin at the bottom */
-  height: 40px;
+
+
+/*Assinatura: plan-selection */
+
+.plan-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-/* Style for the dropdown arrow */
-.plan-select-dropdown::-ms-expand {
-  display: none; /* Hide the default arrow in IE */
+.plan-option {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-.plan-select-dropdown::after {
-  content: '\25BC'; /* Custom arrow */
-  position: absolute;
-  top: 50%;
-  right: 25px; /* Adjust according to the padding */
-  pointer-events: none; /* Prevent the arrow from being clickable */
-  transform: translateY(-50%);
+.plan-option:hover {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 1px 1px rgba(0, 0, 0, 0.23);
 }
 
+.plan-option.selected {
+  background-color: #f0f0f0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 2px 2px rgba(0, 0, 0, 0.23);
+}
+
+@media (max-width: 600px) {
+  .plan-selection {
+    flex-direction: column;
+  }
+}
 
 /* tutorial section */
 

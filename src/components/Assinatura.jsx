@@ -61,8 +61,16 @@ const Assinatura = () => {
     });
     const [selectedPlan, setSelectedPlan] = useState('premium');
     const plans = {
-        basico: { price: 4999, label: 'Básico - R$49/mês (30 dias grátis)' },
-        premium: { price: 9999, label: 'Premium - R$99/mês (30 dias grátis)' }
+        basico: { 
+            price: 4999, 
+            label: <span><b>Básico</b> - R$49/mês <s>R$99/mês</s> <br></br>(30 dias grátis, pague apenas no segundo mês)</span>,
+            label2: 'Básico'
+        },
+        premium: { 
+            price: 9999, 
+            label: <span><b>Premium</b> - R$99/mês <s>R$199/mês</s> <br></br>(30 dias grátis, pague apenas no segundo mês)</span>, 
+            label2: 'Premium'
+        }
     };
     const [values, setValues] = useState({
 
@@ -104,7 +112,10 @@ const Assinatura = () => {
     }, [navigate]);
 
 
-    const handlePlanChange = (value) => setSelectedPlan(value);
+    const handlePlanChange = (value) => {
+        setSelectedPlan(value);
+        //console.log(value);
+    };	
 
     const handleFocus = (e) => {
         setValues({ 
@@ -320,7 +331,7 @@ const Assinatura = () => {
                         <div className="formDiv">
                             {
                                 (!profile.subscription_id || profile.subscription_id === '') ? (
-                                <div classname="noSub">
+                                <div className="noSub">
                                     
                                     <div className="creditCard">
                                         <Cards
@@ -334,14 +345,17 @@ const Assinatura = () => {
                                     <div className='rpform'>
                                         <Form onSubmit={handleSubmit}>
 
-                                            <Form.Group>
-                                                <Form.Label>Escolha seu Plano</Form.Label>
-                                                <Form.Control as="select" value={selectedPlan} onChange={e => setSelectedPlan(e.target.value)} className="plan-select-dropdown">
-                                                    {Object.entries(plans).map(([planKey, planDetails]) => (
-                                                        <option key={planKey} value={planKey}>{planDetails.label}</option>
-                                                    ))}
-                                                </Form.Control>
-                                            </Form.Group>
+                                            <div className="plan-selection">
+                                                {Object.entries(plans).map(([planKey, planDetails], idx) => (
+                                                    <div
+                                                        key={idx}
+                                                        className={`plan-option ${selectedPlan === planKey ? 'selected' : ''}`}
+                                                        onClick={() => handlePlanChange(planKey)}
+                                                    >
+                                                        {planDetails.label}
+                                                    </div>
+                                                ))}
+                                            </div>
 
                                             {/* Card Information */}
                                             <Form.Group>
@@ -494,7 +508,7 @@ const Assinatura = () => {
                                                 id="validateButton"
                                                 type="submit"
                                             >
-                                                {loading ? 'Carregando...' : `Assinar plano ${plans[selectedPlan].label}`}
+                                                {loading ? 'Carregando...' : `Assinar plano ${plans[selectedPlan].label2}`}
                                             </Button>
                                         </Form>
                                     </div>
