@@ -39,7 +39,7 @@ export const Contact = (props) => {
           <div className="col-md-8">
             <div className="row">
               <div className="section-title">
-                <h2>Solicite um Orçamento</h2>
+                <h2>Entre em contato</h2>
                 <p>
                   Preencha o formulário abaixo para nos enviar um e-mail e nós vamos
                    entrar em contato com você o mais rápido possível.

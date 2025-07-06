@@ -11,7 +11,7 @@ export const Faq = (props) => {
   };
 
   return (
-    <div id="faq" class="text-center">
+    <div id="faq" className="text-center">
       <div className="container">
         <div className="section-title">
           <h2>Perguntas Frequentes</h2>
@@ -34,7 +34,7 @@ export const Faq = (props) => {
                     ) : (
                       <div>
                         <p>{faq.answer.introduction}</p>
-                        <div class="align-items-center"> 
+                        <div className="align-items-center"> 
                             <ul className="faq-details-list">
                             {faq.answer.details.map((detail, detailIndex) => (
                                 <li key={`detail-${detailIndex}`}>• {detail}</li>

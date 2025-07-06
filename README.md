@@ -1,1 +1,3 @@
-# COBRA AI
+# gestor IA
+
+yarn run start

@@ -3,11 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Auth0Provider
+    domain="dev-8hszlcgu5wex0ril.us.auth0.com"
+    clientId="XZzUaurIaaOVLk96BNZx3yCYohilNgYE"
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+      audience: 'https://api.gestoria.com.br/',   // 👈  the “Identifier” you set in Auth0 → APIs
+      scope: 'openid profile email'
+    }}
+  >
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Auth0Provider>,
   document.getElementById('root')
 );
 

@@ -1,43 +1,43 @@
 {
   "Header": {
-    "title": "COBRA AI",
-    "paragraph": "Automatização de cobrança e notas fiscais para psicólogos"
+    "title": "gestor IA",
+    "paragraph": "Controle financeiro: tenha um gestor na palma da sua mão."
   },
   "About": {
-    "paragraph": "Sabemos que sua hora é valiosa e que todo mês chega aquele momento chato da cobrança e da emissão de notas! A COBRA AI automatiza todo o seu fluxo de cobrança e controle, te economizando de 2h a 4h por mês!",
+    "paragraph": "Gerencie toda sua vida financeira e acompanhe a evolução da rentabilidade da sua carteira de ativos, cadastre suas metas, seus projetos e objetivos financeiros, unificando todos seus bancos.",
     "Why": [
-      "Calculo customizado do valor por paciente",
-      "Cobrança mensal  por whatsapp",
-      "Validação dos pagamentos"
+      "Visão consolidada de todas as contas bancárias em um só lugar",
+      "Acompanhamento em tempo real de receitas, despesas e investimentos",
+      "Alertas automáticos de metas e orçamentos extrapolados"
     ],
     "Why2": [
-      "Emissão das NFs",
-      "Geração de relatório"
+      "Projeções de fluxo de caixa para até 12 meses",
+      "Relatórios customizáveis para o contador ou planejamento pessoal"
     ],
-    "paragraph2": "Tudo isso confidencial, automático, sem secretária e direto na sua conta no fim do mês."
+    "paragraph2": "Tudo isso de maneira confidencial, automática e disponível a qualquer momento no seu bolso."
   },
   "Services": [
     {
-      "icon": "fa fa-calculator",
-      "name": "Cálculo customizado",
-      "text": "Com base no seu calendário, o COBRA AI entende quantas consultas cada paciente fez e as suas políticas de pagamento individuais."
+      "icon": "fa fa-university",
+      "name": "Integração bancária",
+      "text": "Conecte todas as suas contas e cartões de forma segura e veja seu saldo, transações e limites em tempo real."
     },
     {
-      "icon": "fa fa-credit-card ",
-      "name": "Cobrança e controle",
-      "text": "Conforme o seu dia de preferência, o COBRA AI envia as cobranças e sua conta bancária para o Whatsapp dos pacientes e controla se o pagamento foi feito ou não."
+      "icon": "fa fa-line-chart",
+      "name": "Rentabilidade de investimentos",
+      "text": "Acompanhe a performance da sua carteira, compare com benchmarks e receba insights para otimizar seus rendimentos."
     },
     {
-      "icon": "fa fa-book",
-      "name": "Emissão de NFs",
-      "text": "Quando cada pagamento cair, o COBRA AI emite a Nota Fiscal seguindo as políticas de pagamento individuais e envia para o paciente por Whatsapp."
+      "icon": "fa fa-bullseye",
+      "name": "Metas e projetos",
+      "text": "Defina objetivos financeiros — como reserva de emergência ou viagem — e veja o progresso mês a mês até alcançá-los."
     },
     {
-      "icon": "fa fa-bar-chart",
-      "name": "Geração de relatório",
-      "text": "Ao final do mês o COBRA AI te envia um relatório consolidado, para que seja enviado para o seu contador."
+      "icon": "fa fa-file-text",
+      "name": "Relatórios inteligentes",
+      "text": "Gere relatórios em PDF ou Excel com um clique, prontos para enviar ao contador ou analisar no detalhe."
     }
-    ],
+  ],
   "Testimonials": [
     {
       "img": "img/testimonials/01.jpg",
@@ -70,82 +70,46 @@
       "name": "Johnathan Doe"
     }
   ],
-  "Team": [
-    {
-      "img": "img/team/HENRIQUELABELLA.jpg",
-      "name": "Henrique Labella",
-      "job": "Co-Fundador Tecnologia",
-      "linkedin": "https://www.linkedin.com/in/hlabella/"
-    },
-    {
-      "img": "img/team/LEOBOCK.jpg",
-      "name": "Leonardo Bock",
-      "job": "Co-Fundador Negócios",
-      "linkedin": "https://www.linkedin.com/in/leonardo-nardini-bock-693926127/"
-    }
-  ],
   "Contact": {
-    "address": "Rua dos Pinheiros 1057, ap 1712, São Paulo, SP 05422-012 ",
-    "phone": "+11 94215-2384",
-    "email": "contato@cobraai.me"
+    "address": "Rua dos Pinheiros 1057, ap 1711, São Paulo, SP 05422-012",
+    "phone": "+1199999-9999",
+    "email": "contato@gestoria.com"
   },
   "FAQ": [
     {
       "id": 1,
-      "question": "O que são as políticas de pagamento individuais?",
-      "answer": {
-        "introduction": "Nossas políticas de pagamento individuais incluem, por paciente:",
-        "details": [
-          "Preço por consulta",
-          "Emissão de uma nota por consulta ou uma nota consolidada por mês",
-          "Carimbo e assinatura na nota",
-          "Política de retorno (Divisão de NFs)",
-          "Consulta cortesia (Sem NF)",
-          "Regras de cancelamento",
-          "Data de cobrança",
-          "Frequência de cobrança (semanal, pós sessão ou mensal)"
-        ]
-      }
+      "question": "Como o gestor IA acessa meus dados bancários?",
+      "answer": "Utilizamos conexões via Open Finance autorizadas por você. O acesso é somente leitura, garantindo que nenhuma transação seja executada sem sua permissão."
     },
     {
       "id": 2,
-      "question": "Como é a segurança dos dados dos meus pacientes?",
-      "answer": "Todas as informações são armazenadas de acordo com a LGPD e não são compartilhadas fora do ambiente do Contratante e prestador."
+      "question": "Meus dados estão seguros?",
+      "answer": "Sim. Todos os dados trafegam por conexões criptografadas (TLS 1.3) e são armazenados seguindo as diretrizes da LGPD, em servidores certificados ISO 27001."
     },
     {
       "id": 3,
-      "question": "Que dados vocês pedem para começar o serviço?",
-      "answer": {
-        "introduction": "Para iniciar o serviço, necessitamos dos seguintes dados:",
-        "details": [
-          "Acesso ao calendário.",
-          "Login do site Nota do Milhão.",
-          "Acesso ao certificado no site Nota do Milhão.",
-          "Políticas de pagamento individuais dos pacientes.",
-          "Dados necessários para a emissão de nota de cada paciente.",
-          "Número de WhatsApp de cada paciente."
-        ]
-      }
+      "question": "Quais bancos e corretoras são suportados?",
+      "answer": "Atualmente, integramos com os principais bancos e fintechs do Brasil (Itaú, Bradesco, Banco do Brasil, Nubank, Inter, C6, Santander) e com corretoras como XP, Rico e BTG Pactual. A lista cresce continuamente."
     },
     {
       "id": 4,
-      "question": "Como eu sei que o cálculo de valores por mês está correto?",
-      "answer": "É essencial que o calendário contenha todas as consultas realizadas. Além disso, é importante que as consultas canceladas sem cobrança sejam removidas do calendário. Se o calendário seguir o procedimento descrito e todos os pacientes estiverem cadastrados propriamente, os valores estarão corretos!"
+      "question": "Preciso instalar algo no meu computador ou celular?",
+      "answer": "Não. O gestor IA é 100 % web e responsivo: basta acessar o painel pelo navegador ou pelo aplicativo progressivo (PWA) disponível em iOS e Android."
     },
     {
       "id": 5,
-      "question": "Vocês estão disponíveis em que região?",
-      "answer": "Atualmente, nossos serviços estão disponíveis apenas para profissionais que emitem notas no município de São Paulo (SP)."
+      "question": "Posso cancelar quando quiser?",
+      "answer": "Sim. O serviço é pós-pago e sem fidelidade. Caso não queira continuar, basta solicitar o cancelamento antes do próximo ciclo de cobrança."
     },
     {
       "id": 6,
-      "question": "E se eu não gostar? O que eu faço?",
-      "answer": "Se você não estiver satisfeito com o serviço, basta solicitar o cancelamento e não será necessário pagar pelo mês seguinte."
+      "question": "Existe período de teste gratuito?",
+      "answer": "Sim. Oferecemos 30 dias gratuitos com acesso completo a todas as funcionalidades. Não é necessário cartão de crédito para iniciar."
     },
     {
       "id": 7,
-      "question": "Eu cobro o mês adiantado. Vocês trabalham dessa forma?",
-      "answer": "Atualmente, não cobramos o mês adiantado. Trabalhamos apenas com cobranças após a realização das consultas."
+      "question": "Quanto custa o serviço após o teste?",
+      "answer": "Após o período gratuito, o plano custa R$ 29,90/mês para contas individuais e R$ 59,90/mês para contas familiares, ambos com acesso ilimitado às funcionalidades."
     }
   ]
 }
